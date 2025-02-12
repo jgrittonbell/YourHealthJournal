@@ -46,3 +46,7 @@ health data in one place.
 * Unit Testing
     * JUnit tests to cover all testable logic
 * IDE: IntelliJ IDEA
+
+### Design
+
+* [User Stories](DesignDocuments/userStories.md)
