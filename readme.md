@@ -1,0 +1,48 @@
+# Your Health Journal
+
+This is an independent project for Madison College's Enterprise Java Class.
+
+### Problem Statement
+
+Managing nutrition and blood glucose levels is a critical yet challenging task for individuals with
+diabetes or those tracking their diet for health reasons. Existing food tracking applications often
+lack integration with continuous glucose monitoring (CGM) systems, making it difficult for users to
+correlate their food intake with blood sugar fluctuations. Additionally, manually logging food and
+nutritional data can be tedious and error-prone.
+
+This project aims to bridge that gap by developing a Java-based food journal application that seamlessly
+integrates Nutritionix API for comprehensive nutritional insights and Night Scout API
+for glucose monitoring. By enabling users to log meals through multiple methods—searching a database, scanning
+barcodes, or entering custom foods—the app will provide a streamlined experience for tracking and analyzing
+health data in one place.
+
+### Project Technologies/Techniques
+* Security/Authentication
+    * AWS Cognito
+* Database
+    * MySQL 8.x
+* ORM Framework
+    * Hibernate Version TBD
+* Dependency Management
+    * Maven
+* Web Services consumed using Java
+    * Nutritionix - https://www.nutritionix.com/
+    * NightScout - https://nightscout.github.io/
+* CSS
+    * Bootstrap or Materialize
+* Data Validation
+    * Bootstrap Validator for front end
+    * Explore Hibernate Validator?
+* Logging
+    * Log4J2
+* Hosting
+    * AWS
+* Tech I'd like to explore as part of this work
+    * Amazon Rekognition
+    * MongoDB
+    * Hibernate Validator
+    * Hibernate Search
+* Project Lombok
+* Unit Testing
+    * JUnit tests to cover all testable logic
+* IDE: IntelliJ IDEA
