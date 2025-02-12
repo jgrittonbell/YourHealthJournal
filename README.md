@@ -50,3 +50,15 @@ health data in one place.
 ### Design
 
 * [User Stories](DesignDocuments/userStories.md)
+
+---
+### ⚠️ Disclaimer
+
+This software is **not a medical device** and should **not** be used for medical decisions or as a substitute for professional healthcare advice.
+
+- Do **not** rely on this application for **real-time glucose monitoring, medical treatment decisions, or emergencies**.
+- The app is provided **"as is"**, with no guarantees of accuracy or reliability.
+- Always consult a **qualified healthcare professional** for any medical concerns.
+- This software is **not associated with or endorsed by any equipment manufacturer**, and all trademarks are those of their respective owners.
+
+For a full disclaimer, please see [DISCLAIMER.md](DISCLAIMER.md).
