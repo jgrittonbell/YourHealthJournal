@@ -8,3 +8,4 @@
 | 2/10/25 | Completed Week 3 Exercise and Challanges                   | 5     | |
 | 2/11/25 | Added ReadMe                                               | 1     | |
 | 2/11/25 | Worked on ReadMe, User Stories, Disclaimer, and Wire Frame | 3     | |
+| 2/15/25 | Watched Week 4 Videos and worked on wireframe              | 3     | |
