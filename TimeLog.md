@@ -12,3 +12,4 @@
 | 2/16/25 | Worked on getting CGM to report glucose readings             | 1     | |
 | 2/16/25 | Talked to Dan(User) about wanted features and Food Databases | 1     | |
 | 2/17/25 | Finished up some Week 4 Demos                                | 1     | |
+| 2/17/25 | Created FoodEntry Table Schema and SQL Script                | 1     | |
