@@ -1,4 +1,4 @@
-package com.grittonbell.persistence;
+package com.grittonbelldev.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;

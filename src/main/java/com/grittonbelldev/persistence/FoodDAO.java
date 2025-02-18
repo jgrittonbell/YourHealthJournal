@@ -1,6 +1,6 @@
-package com.grittonbell.persistence;
+package com.grittonbelldev.persistence;
 
-import com.grittonbell.entity.Food;
+import com.grittonbelldev.entity.Food;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;

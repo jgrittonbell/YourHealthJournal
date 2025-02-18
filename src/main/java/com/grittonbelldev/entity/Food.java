@@ -1,4 +1,4 @@
-package com.grittonbell.entity;
+package com.grittonbelldev.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
