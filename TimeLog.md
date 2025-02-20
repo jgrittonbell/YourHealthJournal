@@ -14,3 +14,7 @@
 | 2/17/25 | Finished up some Week 4 Demos                                           | 1     | |
 | 2/17/25 | Created FoodEntry Table Schema and SQL Script                           | 1     | |
 | 2/17/25 | Worked on Week 4 Exercise - Adding a table to the application using DAO | 3     | |
+| 2/18/25 | Career Fair Prep and Career fair attendence                             | 3     | |
+| 2/19/25 | Troubleshooting Tomcat                                                  | 1     | |
+| 2/19/25 | Project Planning                                                        | 1     | |
+| 2/19/25 | Project Planning                                                        | 1     | |
