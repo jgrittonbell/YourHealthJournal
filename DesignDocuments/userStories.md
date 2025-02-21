@@ -46,7 +46,7 @@ _As a user, I want to see a history of my logged meals so that I can track my ea
 #### Log Glucose Manually *  
 _As a user, I want to manually enter my blood glucose readings so that I can track my levels even if I don’t use a CGM._
 
-#### Sync Glucose Data from Dexcom Clarity
+#### Sync Glucose Data from Dexcom Clarity *
 _As a user, I want to log in to Dexcom Clarity and sync my current glucose readings from my CGM._
 
 #### Sync Glucose Data from Night Scout
@@ -64,17 +64,20 @@ _As a user, I want to see my past glucose readings so that I can identify trends
 ---
 
 ## Data Analysis & Insights
-#### Compare My Meals to My Glucose Levels *  
+#### Compare My Meals to My Glucose Levels  
 _As a user, I want to see how my food intake affects my glucose levels so that I can make informed dietary choices._
 
-#### Filter My Logged Meals by Date Range
-_As a user, I want to filter my meal logs by date range so that I can analyze my eating habits over time._
+#### Filter My Logged Food by Macronutrients *
+_As a user, I want to filter my food logs by macronutrients percentages so that I can analyze my eating habits over time._
 
-#### View Nutritional Summary for a Day
-_As a user, I want to see a daily summary of my total calories, carbs, protein, and fat intake so that I can track my nutrition goals._
+#### Set and View Goals for Daily Calorie Intake*
+_As a user, I want to see a summary of my total calorie intake so that I can track my nutrition goals._
 
-#### Receive Nutritional Recommendations (Future Feature)
-_As a user, I want to receive nutritional suggestions based on my past glucose responses so that I can maintain better blood sugar control._
+#### View Night Time Glucose Patterns
+_As a user, I want to view my nighttime glucose patterns to help identify overnight dips or spikes._
+
+#### View Percentage of Time in Range For My Glucose Levels *
+_As a user, I want to view the amount of time my glucose levels are within certain ranges._
 
 ---
 

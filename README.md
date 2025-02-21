@@ -11,7 +11,7 @@ correlate their food intake with blood sugar fluctuations. Additionally, manuall
 nutritional data can be tedious and error-prone.
 
 This project aims to bridge that gap by developing a Java-based food journal application that seamlessly
-integrates Nutritionix API for comprehensive nutritional insights and Night Scout API
+integrates Nutritionix API for comprehensive nutritional insights and Dexcom CGMs throug pydexcom API
 for glucose monitoring. By enabling users to log meals through multiple methods—searching a database, scanning
 barcodes, or entering custom foods—the app will provide a streamlined experience for tracking and analyzing
 health data in one place.
@@ -27,12 +27,13 @@ health data in one place.
     * Maven
 * Web Services consumed using Java
     * Nutritionix - https://www.nutritionix.com/
-    * NightScout - https://nightscout.github.io/
+    * pydexcom - https://github.com/gagebenne/pydexcom
 * CSS
     * Bootstrap or Materialize
 * Data Validation
     * Bootstrap Validator for front end
     * Explore Hibernate Validator?
+    * Explore Data Display Frameworks
 * Logging
     * Log4J2
 * Hosting
@@ -50,8 +51,13 @@ health data in one place.
 ### Design
 
 * [User Stories](DesignDocuments/userStories.md)
+* [Screen Design](DesignDocuments/Screens.md)
 
 ---
+
+### [Project Plan](DesignDocuments/ProjectPlan.md)
+
+#### [TimeLog](TimeLog.md)
 ### ⚠️ Disclaimer
 
 This software is **not a medical device** and should **not** be used for medical decisions or as a substitute for professional healthcare advice.

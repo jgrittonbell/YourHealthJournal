@@ -17,4 +17,5 @@
 | 2/18/25 | Career Fair Prep and Career fair attendence                             | 3     | |
 | 2/19/25 | Troubleshooting Tomcat                                                  | 1     | |
 | 2/19/25 | Project Planning                                                        | 1     | |
-| 2/19/25 | Project Planning                                                        | 1     | |
+| 2/19/25 | WireFrame                                                               | 3     | |
+| 2/20/25 | Updated ReadMe, WireFrame, and Design Documents                         | 5     | |

@@ -29,15 +29,15 @@
 
 ### Week 8 (Web Services) - API Integration
 - Implement food search (Nutritionix API)
+- Implement glucose Dexcom Clarity Sync
 - Implement manual glucose logging
-- Start integrating NightScout API for glucose tracking
 
 ### Week 9 (RESTful Web Services) - AWS Deployment and UI
 - Deploy to AWS (EC2 or Elastic Beanstalk)
 - Ensure one JSP displays data from database
 - Implement basic UI for logging meals and glucose
 - Implement barcode scanning
-- Implement "Compare Meals to Glucose" analysis
+- Implement "Data Insights" Perhaps with a data/graph framework?
 
 ### Week 10-11 (Work Weeks) - Team Project
 - Team Project
