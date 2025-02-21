@@ -25,6 +25,13 @@ class FoodDAOTest {
 
     @Test
     void update() {
+        Food foodToUpdate = foodDAO.getById(4);
+        foodToUpdate.setFoodName("Hamburger");
+        foodDAO.update(foodToUpdate);
+
+        Food retrievedFood = foodDAO.getById(4);
+        assertEquals(retrievedFood.getFoodName(), "Hamburger");
+
     }
 
     @Test
