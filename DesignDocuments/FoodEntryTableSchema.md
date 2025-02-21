@@ -7,7 +7,7 @@
 | `id`            | `BIGINT` (Primary Key, Auto-Increment) | **Yes** | Unique identifier for each food entry |
 | `user_id`       | `BIGINT` (Foreign Key) | **Yes** | Links to the user who logged the entry |
 | `food_name`     | `VARCHAR(255)` | **Yes** | Name of the food |
-| `time_eaten`    | `DATETIME` | **Yes** | Timestamp of when the food was consumed |
+| `time_eaten`    | `DATETIME DEFAULT CURRENT_TIMESTAMP` | **Yes** | Timestamp of when the food was eaten (user-defined, defaults to current time) |
 | `meal_category` | `VARCHAR(50) DEFAULT 'uncategorized'` | **No** | (Optional) Meal type (`breakfast`, `lunch`, `dinner`, `snack`) |
 | `fat`           | `DECIMAL(5,2)` | **Yes** | Total fat in grams |
 | `protein`       | `DECIMAL(5,2)` | **Yes** | Total protein in grams |
@@ -23,8 +23,6 @@
 | `iron`          | `DECIMAL(5,2)` | **No** | Iron in mg (optional) |
 | `potassium`     | `DECIMAL(5,2)` | **No** | Potassium in mg (optional) |
 | `notes`         | `TEXT` | **No** | (Optional) User comments on the meal |
-| `created_at`    | `DATETIME DEFAULT CURRENT_TIMESTAMP` | **Yes** | When the food was logged |
-| `updated_at`    | `DATETIME ON UPDATE CURRENT_TIMESTAMP` | **Yes** | Last modification timestamp |
 
 
 ### Notes:

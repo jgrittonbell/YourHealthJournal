@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 
 
 
-
+@Entity
+@Table(name = "FoodEntry")
 public class Food {
 
     @Id
@@ -22,7 +23,7 @@ public class Food {
     private String foodName;
 
     @Column(name = "time_eaten", nullable = false)
-    private LocalDateTime timeEaten;
+    private LocalDateTime timeEaten = LocalDateTime.now(); // Default to current time
 
     @Column(name = "meal_category", length = 50)
     private String mealCategory = "uncategorized";
@@ -69,198 +70,78 @@ public class Food {
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
     // Constructors
     public Food() {}
 
     public Food(Long userId, String foodName, LocalDateTime timeEaten, Double fat, Double protein, Double carbs, Double calories) {
         this.userId = userId;
         this.foodName = foodName;
-        this.timeEaten = timeEaten;
+        this.timeEaten = (timeEaten != null) ? timeEaten : LocalDateTime.now();
         this.fat = fat;
         this.protein = protein;
         this.carbs = carbs;
         this.calories = calories;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
     }
 
     // Getters and Setters
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public Long getUserId() {
-        return userId;
-    }
+    public String getFoodName() { return foodName; }
+    public void setFoodName(String foodName) { this.foodName = foodName; }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    public LocalDateTime getTimeEaten() { return timeEaten; }
+    public void setTimeEaten(LocalDateTime timeEaten) { this.timeEaten = timeEaten; }
 
-    public String getFoodName() {
-        return foodName;
-    }
+    public String getMealCategory() { return mealCategory; }
+    public void setMealCategory(String mealCategory) { this.mealCategory = mealCategory; }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
-    }
+    public Double getFat() { return fat; }
+    public void setFat(Double fat) { this.fat = fat; }
 
-    public LocalDateTime getTimeEaten() {
-        return timeEaten;
-    }
+    public Double getProtein() { return protein; }
+    public void setProtein(Double protein) { this.protein = protein; }
 
-    public void setTimeEaten(LocalDateTime timeEaten) {
-        this.timeEaten = timeEaten;
-    }
+    public Double getCarbs() { return carbs; }
+    public void setCarbs(Double carbs) { this.carbs = carbs; }
 
-    public String getMealCategory() {
-        return mealCategory;
-    }
+    public Double getCalories() { return calories; }
+    public void setCalories(Double calories) { this.calories = calories; }
 
-    public void setMealCategory(String mealCategory) {
-        this.mealCategory = mealCategory;
-    }
+    public Double getCholesterol() { return cholesterol; }
+    public void setCholesterol(Double cholesterol) { this.cholesterol = cholesterol; }
 
-    public Double getFat() {
-        return fat;
-    }
+    public Double getSodium() { return sodium; }
+    public void setSodium(Double sodium) { this.sodium = sodium; }
 
-    public void setFat(Double fat) {
-        this.fat = fat;
-    }
+    public Double getFiber() { return fiber; }
+    public void setFiber(Double fiber) { this.fiber = fiber; }
 
-    public Double getProtein() {
-        return protein;
-    }
+    public Double getSugar() { return sugar; }
+    public void setSugar(Double sugar) { this.sugar = sugar; }
 
-    public void setProtein(Double protein) {
-        this.protein = protein;
-    }
+    public Double getAddedSugar() { return addedSugar; }
+    public void setAddedSugar(Double addedSugar) { this.addedSugar = addedSugar; }
 
-    public Double getCarbs() {
-        return carbs;
-    }
+    public Double getVitaminD() { return vitaminD; }
+    public void setVitaminD(Double vitaminD) { this.vitaminD = vitaminD; }
 
-    public void setCarbs(Double carbs) {
-        this.carbs = carbs;
-    }
+    public Double getCalcium() { return calcium; }
+    public void setCalcium(Double calcium) { this.calcium = calcium; }
 
-    public Double getCalories() {
-        return calories;
-    }
+    public Double getIron() { return iron; }
+    public void setIron(Double iron) { this.iron = iron; }
 
-    public void setCalories(Double calories) {
-        this.calories = calories;
-    }
+    public Double getPotassium() { return potassium; }
+    public void setPotassium(Double potassium) { this.potassium = potassium; }
 
-    public Double getCholesterol() {
-        return cholesterol;
-    }
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 
-    public void setCholesterol(Double cholesterol) {
-        this.cholesterol = cholesterol;
-    }
-
-    public Double getSodium() {
-        return sodium;
-    }
-
-    public void setSodium(Double sodium) {
-        this.sodium = sodium;
-    }
-
-    public Double getFiber() {
-        return fiber;
-    }
-
-    public void setFiber(Double fiber) {
-        this.fiber = fiber;
-    }
-
-    public Double getSugar() {
-        return sugar;
-    }
-
-    public void setSugar(Double sugar) {
-        this.sugar = sugar;
-    }
-
-    public Double getAddedSugar() {
-        return addedSugar;
-    }
-
-    public void setAddedSugar(Double addedSugar) {
-        this.addedSugar = addedSugar;
-    }
-
-    public Double getVitaminD() {
-        return vitaminD;
-    }
-
-    public void setVitaminD(Double vitaminD) {
-        this.vitaminD = vitaminD;
-    }
-
-    public Double getCalcium() {
-        return calcium;
-    }
-
-    public void setCalcium(Double calcium) {
-        this.calcium = calcium;
-    }
-
-    public Double getIron() {
-        return iron;
-    }
-
-    public void setIron(Double iron) {
-        this.iron = iron;
-    }
-
-    public Double getPotassium() {
-        return potassium;
-    }
-
-    public void setPotassium(Double potassium) {
-        this.potassium = potassium;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    // toString method for debugging
     @Override
     public String toString() {
         return "Food{" +
@@ -283,8 +164,6 @@ public class Food {
                 ", iron=" + iron +
                 ", potassium=" + potassium +
                 ", notes='" + notes + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
