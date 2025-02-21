@@ -28,43 +28,43 @@ public class Food {
     @Column(name = "meal_category", length = 50)
     private String mealCategory = "uncategorized";
 
-    @Column(name = "fat", nullable = false, precision = 5, scale = 2)
+    @Column(name = "fat", nullable = false)
     private Double fat;
 
-    @Column(name = "protein", nullable = false, precision = 5, scale = 2)
+    @Column(name = "protein", nullable = false)
     private Double protein;
 
-    @Column(name = "carbs", nullable = false, precision = 5, scale = 2)
+    @Column(name = "carbs", nullable = false)
     private Double carbs;
 
-    @Column(name = "calories", nullable = false, precision = 6, scale = 2)
+    @Column(name = "calories", nullable = false)
     private Double calories;
 
-    @Column(name = "cholesterol", precision = 5, scale = 2)
+    @Column(name = "cholesterol")
     private Double cholesterol;
 
-    @Column(name = "sodium", precision = 5, scale = 2)
+    @Column(name = "sodium")
     private Double sodium;
 
-    @Column(name = "fiber", precision = 5, scale = 2)
+    @Column(name = "fiber")
     private Double fiber;
 
-    @Column(name = "sugar", precision = 5, scale = 2)
+    @Column(name = "sugar")
     private Double sugar;
 
-    @Column(name = "added_sugar", precision = 5, scale = 2)
+    @Column(name = "added_sugar")
     private Double addedSugar;
 
-    @Column(name = "vitamin_d", precision = 5, scale = 2)
+    @Column(name = "vitamin_d")
     private Double vitaminD;
 
-    @Column(name = "calcium", precision = 5, scale = 2)
+    @Column(name = "calcium")
     private Double calcium;
 
-    @Column(name = "iron", precision = 5, scale = 2)
+    @Column(name = "iron")
     private Double iron;
 
-    @Column(name = "potassium", precision = 5, scale = 2)
+    @Column(name = "potassium")
     private Double potassium;
 
     @Column(name = "notes", columnDefinition = "TEXT")
