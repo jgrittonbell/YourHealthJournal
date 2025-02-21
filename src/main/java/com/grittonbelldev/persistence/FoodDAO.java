@@ -18,7 +18,7 @@ public class FoodDAO {
     private final Logger logger = LogManager.getLogger(this.getClass());
     SessionFactory sessionFactory = SessionFactoryProvider.getSessionFactory();
 
-    public Food getById (int id) {
+    public Food getById (long id) {
         Session session = sessionFactory.openSession();
         Food food = session.get(Food.class, id);
         session.close();
