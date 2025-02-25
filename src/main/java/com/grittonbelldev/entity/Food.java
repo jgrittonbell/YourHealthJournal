@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
-
+import java.util.Objects;
 
 
 @Entity
@@ -141,6 +141,35 @@ public class Food {
 
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Food food = (Food) o;
+        return  Objects.equals(userId, food.userId) &&
+                Objects.equals(foodName, food.foodName) &&
+                Objects.equals(timeEaten, food.timeEaten) &&
+                Objects.equals(mealCategory, food.mealCategory) &&
+                Objects.equals(fat, food.fat) &&
+                Objects.equals(protein, food.protein) &&
+                Objects.equals(carbs, food.carbs) &&
+                Objects.equals(calories, food.calories) &&
+                Objects.equals(cholesterol, food.cholesterol) &&
+                Objects.equals(sodium, food.sodium) &&
+                Objects.equals(fiber, food.fiber) &&
+                Objects.equals(sugar, food.sugar) &&
+                Objects.equals(addedSugar, food.addedSugar) &&
+                Objects.equals(vitaminD, food.vitaminD) &&
+                Objects.equals(calcium, food.calcium) &&
+                Objects.equals(iron, food.iron) &&
+                Objects.equals(potassium, food.potassium) &&
+                Objects.equals(notes, food.notes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, foodName, timeEaten, mealCategory, fat, protein, carbs, calories, cholesterol, sodium, fiber, sugar, addedSugar, vitaminD, calcium, iron, potassium, notes);
+    }
 
     @Override
     public String toString() {
