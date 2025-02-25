@@ -5,7 +5,7 @@
 | Column Name      | Data Type          | Required | Description |
 |-----------------|------------------|----------|-------------|
 | `id`            | `BIGINT` (Primary Key, Auto-Increment) | **Yes** | Unique identifier for each food entry |
-| `user_id`       | `BIGINT` (Foreign Key) | **Yes** | Links to the user who logged the entry |
+| `user_id`       | `BIGINT` (Foreign Key) | **Yes** | Links to the user who logged the entry (references `Users.id`) |
 | `food_name`     | `VARCHAR(255)` | **Yes** | Name of the food |
 | `time_eaten`    | `DATETIME DEFAULT CURRENT_TIMESTAMP` | **Yes** | Timestamp of when the food was eaten (user-defined, defaults to current time) |
 | `meal_category` | `VARCHAR(50) DEFAULT 'uncategorized'` | **No** | (Optional) Meal type (`breakfast`, `lunch`, `dinner`, `snack`) |
@@ -24,9 +24,8 @@
 | `potassium`     | `DECIMAL(5,2)` | **No** | Potassium in mg (optional) |
 | `notes`         | `TEXT` | **No** | (Optional) User comments on the meal |
 
-
 ### Notes:
-- This schema focuses **only on manual entry** at this stage.
+- The `user_id` column is now a **foreign key** referencing the `Users` table.
+- **Cascading delete enabled**: If a user is deleted, their food entries are also removed.
 - **Food entries are editable**, allowing users to correct or delete logs.
-- The **meal category is optional**, with a default of `"uncategorized"`.
-- Additional fields like serving size, user preferences, and barcode scanning may be added in future iterations.
+- The **meal category is optional**, with a default of `'uncategorized'`.
