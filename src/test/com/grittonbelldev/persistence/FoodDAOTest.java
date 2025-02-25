@@ -7,17 +7,18 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 class FoodDAOTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
-    FoodDAO foodDAO;
+    private GenericDAO<Food> foodDAO;
 
     @BeforeEach
     void setUp() {
-        foodDAO = new FoodDAO();
+        foodDAO = new GenericDAO<>(Food.class);
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
 
@@ -25,9 +26,31 @@ class FoodDAOTest {
 
     @Test
     void getByIdSuccess() {
+        //Create the expected resulting food entity
+        Food expectedFood = new Food();
+        expectedFood.setId(4L);
+        expectedFood.setUserId(4L);
+        expectedFood.setFoodName("Cheeseburger");
+        expectedFood.setTimeEaten(LocalDateTime.of(2024, 2, 16, 19, 30, 0));
+        expectedFood.setMealCategory("dinner");
+        expectedFood.setFat(18.00);
+        expectedFood.setProtein(22.00);
+        expectedFood.setCarbs(34.00);
+        expectedFood.setCalories(450.00);
+        expectedFood.setCholesterol(65.00);
+        expectedFood.setSodium(780.00);
+        expectedFood.setFiber(3.00);
+        expectedFood.setSugar(5.00);
+        expectedFood.setAddedSugar(2.00);
+        expectedFood.setVitaminD(0.50);
+        expectedFood.setCalcium(100.00);
+        expectedFood.setIron(2.50);
+        expectedFood.setPotassium(250.00);
+        expectedFood.setNotes("Cheat meal, high in calories");
+
         Food retrievedFood = foodDAO.getById(4L);
         assertNotNull(retrievedFood);
-        assertEquals(retrievedFood.getFoodName(), "Cheeseburger");
+        assertEquals(expectedFood, retrievedFood);
     }
 
     @Test
@@ -37,30 +60,35 @@ class FoodDAOTest {
         foodDAO.update(foodToUpdate);
 
         Food retrievedFood = foodDAO.getById(4);
-        assertEquals(retrievedFood.getFoodName(), "Hamburger");
+        assertEquals("Hamburger", retrievedFood.getFoodName());
 
     }
 
     @Test
     void insert() {
-        // Create a new Food to be added
         Food foodToInsert = new Food();
         foodToInsert.setUserId(11L);
-        foodToInsert.setFoodName("Grilled Chicken");
-        foodToInsert.setFat(3.5);
-        foodToInsert.setProtein(31.0);
-        foodToInsert.setCarbs(0.0);
-        foodToInsert.setCalories(165.0);
-        long foodId = foodDAO.insert(foodToInsert);
-        assertNotEquals(-1, foodId);
-        Food retrievedFood = foodDAO.getById(foodId);
-        assertEquals("Grilled Chicken", retrievedFood.getFoodName());
-        assertEquals(3.5, retrievedFood.getFat(), 0.01);
+        foodToInsert.setFoodName("Egg White Omelette");
+        foodToInsert.setMealCategory("breakfast");
+        foodToInsert.setFat(5.0);
+        foodToInsert.setProtein(20.0);
+        foodToInsert.setCarbs(2.0);
+        foodToInsert.setCalories(120.0);
+        foodToInsert.setNotes("Low-calorie breakfast option");
+
+        Food insertedFood = foodDAO.insert(foodToInsert);
+        assertNotNull(insertedFood);
+        assertNotEquals(0, insertedFood.getId()); // Ensure ID is assigned
+        Food retrievedFoodFromInsert = foodDAO.getById(insertedFood.getId());
+
+        assertEquals(foodToInsert, retrievedFoodFromInsert);
     }
 
     @Test
     void delete() {
-        foodDAO.delete(foodDAO.getById(4));
+        Food foodToDelete = foodDAO.getById(4);
+        assertNotNull(foodToDelete);
+        foodDAO.delete(foodToDelete);
         assertNull(foodDAO.getById(4));
     }
 
@@ -73,13 +101,61 @@ class FoodDAOTest {
 
     @Test
     void getByPropertyEqual() {
-        List<Food> foods = foodDAO.getByPropertyEqual("mealCategory", "dinner" );
+        List<Food> foods = foodDAO.getByPropertyEqual("mealCategory", "dinner");
         assertEquals(3, foods.size());
+
+        //Create the expected resulting food entity
+        Food expectedFood = new Food();
+        expectedFood.setId(4L);
+        expectedFood.setUserId(4L);
+        expectedFood.setFoodName("Cheeseburger");
+        expectedFood.setTimeEaten(LocalDateTime.of(2024, 2, 16, 19, 30, 0));
+        expectedFood.setMealCategory("dinner");
+        expectedFood.setFat(18.00);
+        expectedFood.setProtein(22.00);
+        expectedFood.setCarbs(34.00);
+        expectedFood.setCalories(450.00);
+        expectedFood.setCholesterol(65.00);
+        expectedFood.setSodium(780.00);
+        expectedFood.setFiber(3.00);
+        expectedFood.setSugar(5.00);
+        expectedFood.setAddedSugar(2.00);
+        expectedFood.setVitaminD(0.50);
+        expectedFood.setCalcium(100.00);
+        expectedFood.setIron(2.50);
+        expectedFood.setPotassium(250.00);
+        expectedFood.setNotes("Cheat meal, high in calories");
+
+        assertTrue(foods.contains(expectedFood));
     }
 
     @Test
     void getByPropertyLike() {
         List<Food> foods = foodDAO.getByPropertyLike("notes", "protein" );
+
+        //Create the expected resulting food entity
+        Food expectedFood = new Food();
+        expectedFood.setId(7L);
+        expectedFood.setUserId(7L);
+        expectedFood.setFoodName("Spaghetti with Marinara Sauce");
+        expectedFood.setTimeEaten(LocalDateTime.of(2025, 2, 20, 19, 59, 3));
+        expectedFood.setMealCategory("dinner");
+        expectedFood.setFat(5.00);
+        expectedFood.setProtein(12.00);
+        expectedFood.setCarbs(50.00);
+        expectedFood.setCalories(320.00);
+        expectedFood.setCholesterol(15.00);
+        expectedFood.setSodium(600.00);
+        expectedFood.setFiber(4.00);
+        expectedFood.setSugar(8.00);
+        expectedFood.setVitaminD(0.00);
+        expectedFood.setCalcium(40.00);
+        expectedFood.setIron(3.00);
+        expectedFood.setPotassium(300.00);
+        expectedFood.setNotes("Carb-heavy meal with some protein");
+
+        assertTrue(foods.contains(expectedFood));
+
         assertEquals(4, foods.size());
     }
 }

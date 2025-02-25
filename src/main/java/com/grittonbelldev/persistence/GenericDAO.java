@@ -37,7 +37,7 @@ public class GenericDAO<T> {
      * @param id entity id to search by
      * @return an entity
      */
-    public <T>T getById(int id) {
+    public <T>T getById(long id) {
         Session session = getSession();
         T entity = (T)session.get(type, id);
         session.close();

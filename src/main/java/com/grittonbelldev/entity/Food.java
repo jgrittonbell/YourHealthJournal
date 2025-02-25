@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
@@ -23,7 +24,7 @@ public class Food {
     private String foodName;
 
     @Column(name = "time_eaten", nullable = false)
-    private LocalDateTime timeEaten = LocalDateTime.now(); // Default to current time
+    private LocalDateTime timeEaten = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); // Default to current time
 
     @Column(name = "meal_category", length = 50)
     private String mealCategory = "uncategorized";
@@ -95,7 +96,11 @@ public class Food {
     public void setFoodName(String foodName) { this.foodName = foodName; }
 
     public LocalDateTime getTimeEaten() { return timeEaten; }
-    public void setTimeEaten(LocalDateTime timeEaten) { this.timeEaten = timeEaten; }
+
+    // Setter ensures time is set to YYYY-MM-DD HH:MM:SS with no Nano Seconds
+    public void setTimeEaten(LocalDateTime timeEaten) {
+        this.timeEaten = (timeEaten != null) ? timeEaten.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+    }
 
     public String getMealCategory() { return mealCategory; }
     public void setMealCategory(String mealCategory) { this.mealCategory = mealCategory; }
