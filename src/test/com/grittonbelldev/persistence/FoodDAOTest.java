@@ -18,6 +18,7 @@ class FoodDAOTest {
 
     @BeforeEach
     void setUp() {
+        logger.info("🚀 Log4j2 is working! This should appear in log files.");
         foodDAO = new GenericDAO<>(Food.class);
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
@@ -67,8 +68,9 @@ class FoodDAOTest {
     @Test
     void insert() {
         Food foodToInsert = new Food();
-        foodToInsert.setUserId(11L);
+        foodToInsert.setUserId(4L);
         foodToInsert.setFoodName("Egg White Omelette");
+        foodToInsert.setTimeEaten(LocalDateTime.of(2024, 2, 16, 19, 30, 0));
         foodToInsert.setMealCategory("breakfast");
         foodToInsert.setFat(5.0);
         foodToInsert.setProtein(20.0);
@@ -135,27 +137,25 @@ class FoodDAOTest {
 
         //Create the expected resulting food entity
         Food expectedFood = new Food();
-        expectedFood.setId(7L);
-        expectedFood.setUserId(7L);
-        expectedFood.setFoodName("Spaghetti with Marinara Sauce");
-        expectedFood.setTimeEaten(LocalDateTime.of(2025, 2, 20, 19, 59, 3));
+        expectedFood.setId(10L);
+        expectedFood.setUserId(10L);
+        expectedFood.setFoodName("Salmon with Steamed Broccoli");
+        expectedFood.setTimeEaten(LocalDateTime.of(2024, 2, 13, 19, 0, 0));
         expectedFood.setMealCategory("dinner");
-        expectedFood.setFat(5.00);
-        expectedFood.setProtein(12.00);
-        expectedFood.setCarbs(50.00);
-        expectedFood.setCalories(320.00);
-        expectedFood.setCholesterol(15.00);
-        expectedFood.setSodium(600.00);
-        expectedFood.setFiber(4.00);
-        expectedFood.setSugar(8.00);
-        expectedFood.setVitaminD(0.00);
-        expectedFood.setCalcium(40.00);
-        expectedFood.setIron(3.00);
-        expectedFood.setPotassium(300.00);
-        expectedFood.setNotes("Carb-heavy meal with some protein");
+        expectedFood.setFat(15.00);
+        expectedFood.setProtein(35.00);
+        expectedFood.setCarbs(10.00);
+        expectedFood.setCalories(380.00);
+        expectedFood.setCholesterol(80.00);
+        expectedFood.setSodium(400.00);
+        expectedFood.setFiber(5.00); expectedFood.setSugar(1.00);
+        expectedFood.setAddedSugar(null);
+        expectedFood.setVitaminD(2.00); expectedFood.setCalcium(180.00); expectedFood.setIron(1.80); expectedFood.setPotassium(400.00);
+        expectedFood.setNotes("High-protein dinner with omega-3");
 
-        assertTrue(foods.contains(expectedFood));
+        assertEquals(foods.get(3), expectedFood);
 
         assertEquals(4, foods.size());
     }
+
 }
