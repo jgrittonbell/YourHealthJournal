@@ -1,6 +1,7 @@
 package com.grittonbelldev.persistence;
 
 import com.grittonbelldev.entity.Food;
+import com.grittonbelldev.entity.User;
 import com.grittonbelldev.util.Database;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,11 +16,13 @@ class FoodDAOTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
     private GenericDAO<Food> foodDAO;
+    private GenericDAO<User> userDAO;
 
     @BeforeEach
     void setUp() {
-        logger.info("🚀 Log4j2 is working! This should appear in log files.");
+        logger.info("Log4j2 is working! This should appear in log files.");
         foodDAO = new GenericDAO<>(Food.class);
+        userDAO = new GenericDAO<>(User.class);
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
 
@@ -27,10 +30,13 @@ class FoodDAOTest {
 
     @Test
     void getByIdSuccess() {
+        //Create the expected User
+        User expectedUser = userDAO.getById(4);
+
         //Create the expected resulting food entity
         Food expectedFood = new Food();
         expectedFood.setId(4L);
-        expectedFood.setUserId(4L);
+        expectedFood.setUser(expectedUser);
         expectedFood.setFoodName("Cheeseburger");
         expectedFood.setTimeEaten(LocalDateTime.of(2024, 2, 16, 19, 30, 0));
         expectedFood.setMealCategory("dinner");
@@ -67,8 +73,10 @@ class FoodDAOTest {
 
     @Test
     void insert() {
+        //Create user to assocate with food
+        User insertedUser = userDAO.getById(4);
         Food foodToInsert = new Food();
-        foodToInsert.setUserId(4L);
+        foodToInsert.setUser(insertedUser);
         foodToInsert.setFoodName("Egg White Omelette");
         foodToInsert.setTimeEaten(LocalDateTime.of(2024, 2, 16, 19, 30, 0));
         foodToInsert.setMealCategory("breakfast");
@@ -94,6 +102,8 @@ class FoodDAOTest {
         assertNull(foodDAO.getById(4));
     }
 
+
+
     @Test
     void getAll() {
         List<Food> foods = foodDAO.getAll();
@@ -106,10 +116,11 @@ class FoodDAOTest {
         List<Food> foods = foodDAO.getByPropertyEqual("mealCategory", "dinner");
         assertEquals(3, foods.size());
 
+        User insertedUser = userDAO.getById(4);
         //Create the expected resulting food entity
         Food expectedFood = new Food();
         expectedFood.setId(4L);
-        expectedFood.setUserId(4L);
+        expectedFood.setUser(insertedUser);
         expectedFood.setFoodName("Cheeseburger");
         expectedFood.setTimeEaten(LocalDateTime.of(2024, 2, 16, 19, 30, 0));
         expectedFood.setMealCategory("dinner");
@@ -135,10 +146,11 @@ class FoodDAOTest {
     void getByPropertyLike() {
         List<Food> foods = foodDAO.getByPropertyLike("notes", "protein" );
 
+        User insertedUser = userDAO.getById(10);
         //Create the expected resulting food entity
         Food expectedFood = new Food();
         expectedFood.setId(10L);
-        expectedFood.setUserId(10L);
+        expectedFood.setUser(insertedUser);
         expectedFood.setFoodName("Salmon with Steamed Broccoli");
         expectedFood.setTimeEaten(LocalDateTime.of(2024, 2, 13, 19, 0, 0));
         expectedFood.setMealCategory("dinner");

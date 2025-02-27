@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +26,9 @@ public class User {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Food> foodEntries = new ArrayList<>();
 
     // Constructors
     public User() {}
@@ -47,6 +52,19 @@ public class User {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = (createdAt != null) ? createdAt.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+    }
+
+    public List<Food> getFoodEntries() { return foodEntries; }
+    public void setFoodEntries(List<Food> foodEntries) { this.foodEntries = foodEntries; }
+
+    public void addFoodEntry(Food food) {
+        foodEntries.add(food);
+        food.setUser(this);
+    }
+
+    public void removeFoodEntry(Food food) {
+        foodEntries.remove(food);
+        food.setUser(null);
     }
 
     @Override

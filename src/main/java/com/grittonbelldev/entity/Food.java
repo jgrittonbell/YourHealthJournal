@@ -17,8 +17,9 @@ public class Food {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "food_name", nullable = false, length = 255)
     private String foodName;
@@ -74,10 +75,10 @@ public class Food {
     // Constructors
     public Food() {}
 
-    public Food(Long userId, String foodName, LocalDateTime timeEaten, Double fat, Double protein, Double carbs, Double calories) {
-        this.userId = userId;
+    public Food(User user, String foodName, LocalDateTime timeEaten, Double fat, Double protein, Double carbs, Double calories) {
+        this.user = user;
         this.foodName = foodName;
-        this.timeEaten = (timeEaten != null) ? timeEaten : LocalDateTime.now();
+        this.timeEaten = (timeEaten != null) ? timeEaten.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now();
         this.fat = fat;
         this.protein = protein;
         this.carbs = carbs;
@@ -89,8 +90,8 @@ public class Food {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public String getFoodName() { return foodName; }
     public void setFoodName(String foodName) { this.foodName = foodName; }
@@ -151,7 +152,7 @@ public class Food {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Food food = (Food) o;
-        return  Objects.equals(userId, food.userId) &&
+        return  Objects.equals(user, food.user) &&
                 Objects.equals(foodName, food.foodName) &&
                 Objects.equals(timeEaten, food.timeEaten) &&
                 Objects.equals(mealCategory, food.mealCategory) &&
@@ -173,14 +174,14 @@ public class Food {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, foodName, timeEaten, mealCategory, fat, protein, carbs, calories, cholesterol, sodium, fiber, sugar, addedSugar, vitaminD, calcium, iron, potassium, notes);
+        return Objects.hash(id, user, foodName, timeEaten, mealCategory, fat, protein, carbs, calories, cholesterol, sodium, fiber, sugar, addedSugar, vitaminD, calcium, iron, potassium, notes);
     }
 
     @Override
     public String toString() {
         return "Food{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", foodName='" + foodName + '\'' +
                 ", timeEaten=" + timeEaten +
                 ", mealCategory='" + mealCategory + '\'' +
