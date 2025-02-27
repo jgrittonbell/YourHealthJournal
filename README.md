@@ -11,7 +11,7 @@ correlate their food intake with blood sugar fluctuations. Additionally, manuall
 nutritional data can be tedious and error-prone.
 
 This project aims to bridge that gap by developing a Java-based food journal application that seamlessly
-integrates Nutritionix API for comprehensive nutritional insights and Dexcom CGMs throug pydexcom API
+integrates Nutritionix API for comprehensive nutritional insights and Dexcom CGMs through pydexcom API
 for glucose monitoring. By enabling users to log meals through multiple methods—searching a database, scanning
 barcodes, or entering custom foods—the app will provide a streamlined experience for tracking and analyzing
 health data in one place.
