@@ -1,10 +1,7 @@
 # Screen Design
 
-### Login/Signup
+### Login/Signup/Dashboard
 ![Login/Signup](wireframes/LoginSignup.png)
-
-### Dashboard
-![Dashboard](wireframes/Dashboard.png)
 
 ### Food Journal
 ![Food Journal](wireframes/Food.png)

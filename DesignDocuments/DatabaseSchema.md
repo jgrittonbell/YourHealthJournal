@@ -1,3 +1,5 @@
+![Entity Relationship Diagram](ERD.png)
+
 ## Users Table
 
 | Column Name   | Data Type          | Required | Description |
