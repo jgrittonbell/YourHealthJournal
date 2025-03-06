@@ -32,6 +32,9 @@
 | 3/4/25  | Completed AWS tutorial Videos and uploaded project                      | 3     |      |
 | 3/5/25  | Trouble shooting Tomcat/maven                                           | 2     |      |
 | 3/5/25  | Finished Designing the database and updated scripts                     | 3     |      |
+| 3/5/25  | Created Java Entities for each Database Entity                          | 3     |      |
+| 3/6/25  | Troubleshooting Log4j2 not working and met with Paula who solved it     | 1     |      |
+| 3/6/25  | Created junit DAO Tests                                                 | 3     |      |
 
 
 
