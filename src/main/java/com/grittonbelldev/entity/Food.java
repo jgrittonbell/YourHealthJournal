@@ -2,14 +2,13 @@ package com.grittonbelldev.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-//TODO move this over to the meal entity
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
 @Entity
-@Table(name = "FoodEntry")
+@Table(name = "Food")
 public class Food {
 
     @Id
@@ -19,9 +18,6 @@ public class Food {
 
     @Column(name = "food_name", nullable = false, length = 255)
     private String foodName;
-    //TODO move this over to the meal entity
-//    @Column(name = "time_eaten", nullable = false)
-//    private LocalDateTime timeEaten = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); // Default to current time
 
     @Column(name = "fat", nullable = false)
     private Double fat;
@@ -83,15 +79,6 @@ public class Food {
 
     public String getFoodName() { return foodName; }
     public void setFoodName(String foodName) { this.foodName = foodName; }
-
-    //TODO move this over to the meal entity
-//    public LocalDateTime getTimeEaten() { return timeEaten; }
-
-    // Setter ensures time is set to YYYY-MM-DD HH:MM:SS with no Nano Seconds
-//    public void setTimeEaten(LocalDateTime timeEaten) {
-//        this.timeEaten = (timeEaten != null) ? timeEaten.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-//    }
-
 
     public Double getFat() { return fat; }
     public void setFat(Double fat) { this.fat = fat; }

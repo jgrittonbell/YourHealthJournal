@@ -19,6 +19,10 @@
 
         <mapping class="com.grittonbelldev.entity.Food"/>
         <mapping class="com.grittonbelldev.entity.User"/>
+        <mapping class="com.grittonbelldev.entity.FavoriteItem"/>
+        <mapping class="com.grittonbelldev.entity.FoodMealJournal"/>
+        <mapping class="com.grittonbelldev.entity.Meal"/>
+        <mapping class="com.grittonbelldev.entity.GlucoseReading"/>
 
     </session-factory>
 

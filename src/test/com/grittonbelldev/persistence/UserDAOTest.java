@@ -1,12 +1,9 @@
 package com.grittonbelldev.persistence;
 
-import com.grittonbelldev.entity.Food;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.util.Database;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,119 +13,83 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDAOTest {
-
     private final Logger logger = LogManager.getLogger(this.getClass());
     private GenericDAO<User> userDAO;
-    private GenericDAO<Food> foodDAO;
 
     @BeforeEach
     void setUp() {
         logger.info("Log4j2 is working! This should appear in log files.");
         userDAO = new GenericDAO<>(User.class);
-        foodDAO = new GenericDAO<>(Food.class);
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
     }
 
     @Test
     void getByIdSuccess() {
-        // Create the expected resulting user entity
-        User expectedUser = new User();
-        expectedUser.setId(4L);
-        expectedUser.setFullName("Emily White");
-        expectedUser.setEmail("emily.white@example.com");
-        expectedUser.setCreatedAt(null);
+        User expectedUser = new User("John Doe", "john.doe@example.com", null);
+        expectedUser.setId(1L);
 
-
-        User retrievedUser = userDAO.getById(4L);
+        User retrievedUser = userDAO.getById(1L);
         assertNotNull(retrievedUser);
         assertEquals(expectedUser, retrievedUser);
     }
 
     @Test
     void updateSuccess() {
-        User userToUpdate = userDAO.getById(4);
-        userToUpdate.setFullName("Emily Johnson");
+        User userToUpdate = userDAO.getById(1);
+        userToUpdate.setFullName("Johnathan Doe");
         userDAO.update(userToUpdate);
 
-        User retrievedUser = userDAO.getById(4);
-        assertEquals("Emily Johnson", retrievedUser.getFullName());
+        User retrievedUser = userDAO.getById(1);
+        assertEquals("Johnathan Doe", retrievedUser.getFullName());
     }
 
     @Test
     void insert() {
-        User userToInsert = new User();
-        userToInsert.setFullName("Michael Anderson");
-        userToInsert.setEmail("michael.anderson@example.com");
-        userToInsert.setCreatedAt(LocalDateTime.of(2024, 2, 18, 9, 15, 0));
+        User userToInsert = new User("Michael Anderson", "michael.anderson@example.com",
+                LocalDateTime.of(2024, 2, 18, 9, 15, 0));
 
         User insertedUser = userDAO.insert(userToInsert);
         assertNotNull(insertedUser);
         assertNotEquals(0, insertedUser.getId()); // Ensure ID is assigned
-        User retrievedUserFromInsert = userDAO.getById(insertedUser.getId());
 
+        User retrievedUserFromInsert = userDAO.getById(insertedUser.getId());
         assertEquals(userToInsert, retrievedUserFromInsert);
     }
 
     @Test
     void delete() {
-        User userToDelete = userDAO.getById(4);
+        User userToDelete = userDAO.getById(3);
         assertNotNull(userToDelete);
         userDAO.delete(userToDelete);
-        assertNull(userDAO.getById(4));
-    }
-
-    @Test
-    void deleteWithFood() {
-        Food foodToDelete = foodDAO.getById(4);
-
-        User userToDelete = userDAO.getById(4);
-
-        userDAO.delete(userToDelete);
-        assertNull(userDAO.getById(4));
-        assertNull(foodDAO.getById(4));
-
-
+        assertNull(userDAO.getById(3));
     }
 
     @Test
     void getAll() {
         List<User> users = userDAO.getAll();
-        assertEquals(10, users.size());
+        assertEquals(3, users.size()); // Updated to match new dataset
     }
 
     @Test
     void getByPropertyEqual() {
-        List<User> users = userDAO.getByPropertyEqual("email", "emily.white@example.com");
+        List<User> users = userDAO.getByPropertyEqual("email", "jane.smith@example.com");
         assertEquals(1, users.size());
 
-        // Create the expected resulting user entity
-        User expectedUser = new User();
-        expectedUser.setId(4L);
-        expectedUser.setFullName("Emily White");
-        expectedUser.setEmail("emily.white@example.com");
-        expectedUser.setCreatedAt(null);
+        User expectedUser = new User("Jane Smith", "jane.smith@example.com", null);
+        expectedUser.setId(2L);
 
-        assertEquals(expectedUser.getId(), users.get(0).getId());
-        assertEquals(expectedUser.getFullName(), users.get(0).getFullName());
-        assertEquals(expectedUser.getEmail(), users.get(0).getEmail());
+        assertEquals(expectedUser, users.get(0));
     }
 
     @Test
     void getByPropertyLike() {
-        List<User> users = userDAO.getByPropertyLike("fullName", "Michael");
+        List<User> users = userDAO.getByPropertyLike("fullName", "John");
 
-        // Create the expected resulting user entity
-        User expectedUser = new User();
-        expectedUser.setId(3L);
-        expectedUser.setFullName("Michael Brown");
-        expectedUser.setEmail("michael.brown@example.com");
-        expectedUser.setCreatedAt(LocalDateTime.of(2024, 2, 18, 9, 15, 0));
+        User expectedUser = new User("John Doe", "john.doe@example.com", null);
+        expectedUser.setId(1L);
 
         assertEquals(1, users.size());
-        assertEquals(expectedUser.getId(), users.get(0).getId());
-        assertEquals(expectedUser.getFullName(), users.get(0).getFullName());
-        assertEquals(expectedUser.getEmail(), users.get(0).getEmail());
+        assertEquals(expectedUser, users.get(0));
     }
-
 }
