@@ -80,7 +80,7 @@ id BIGINT AUTO_INCREMENT PRIMARY KEY,
 user_id BIGINT NOT NULL,
 glucose_level DECIMAL(5,2) NOT NULL,
 measurement_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-measurement_source VARCHAR(50) NOT NULL, -- More flexible than ENUM
+measurement_source VARCHAR(50) NOT NULL,
 notes TEXT NULL,
 FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
