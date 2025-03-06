@@ -5,10 +5,9 @@ This is an independent project for Madison College's Enterprise Java Class.
 ### Problem Statement
 
 Managing nutrition and blood glucose levels is a critical yet challenging task for individuals with
-diabetes or those tracking their diet for health reasons. Existing food tracking applications often
-lack integration with continuous glucose monitoring (CGM) systems, making it difficult for users to
-correlate their food intake with blood sugar fluctuations. Additionally, manually logging food and
-nutritional data can be tedious and error-prone.
+diabetes. Existing food tracking applications often lack integration with continuous glucose monitoring (CGM) systems,
+making it difficult for users to correlate their food intake with blood sugar fluctuations.
+Additionally, manually logging food and nutritional data can be tedious and error-prone.
 
 This project aims to bridge that gap by developing a Java-based food journal application that seamlessly
 integrates Nutritionix API for comprehensive nutritional insights and Dexcom CGMs through pydexcom API
