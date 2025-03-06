@@ -45,7 +45,7 @@ class UserDAOTest {
     }
 
     @Test
-    void insert() {
+    void insertSuccess() {
         User userToInsert = new User("Michael Anderson", "michael.anderson@example.com",
                 LocalDateTime.of(2024, 2, 18, 9, 15, 0));
 
@@ -58,7 +58,7 @@ class UserDAOTest {
     }
 
     @Test
-    void delete() {
+    void deleteSuccess() {
         User userToDelete = userDAO.getById(3);
         assertNotNull(userToDelete);
         userDAO.delete(userToDelete);
@@ -72,7 +72,7 @@ class UserDAOTest {
     }
 
     @Test
-    void getByPropertyEqual() {
+    void getByPropertyEqualSuccess() {
         List<User> users = userDAO.getByPropertyEqual("email", "jane.smith@example.com");
         assertEquals(1, users.size());
 
@@ -83,7 +83,7 @@ class UserDAOTest {
     }
 
     @Test
-    void getByPropertyLike() {
+    void getByPropertyLikeSuccess() {
         List<User> users = userDAO.getByPropertyLike("fullName", "John");
 
         User expectedUser = new User("John Doe", "john.doe@example.com", null);

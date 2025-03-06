@@ -59,7 +59,7 @@ class FoodDAOTest {
     }
 
     @Test
-    void insert() {
+    void insertSuccess() {
         Food foodToInsert = new Food();
         foodToInsert.setFoodName("Egg White Omelette");
         foodToInsert.setFat(5.0);
@@ -77,7 +77,7 @@ class FoodDAOTest {
     }
 
     @Test
-    void delete() {
+    void deleteSuccess() {
         Food foodToDelete = foodDAO.getById(3);
         assertNotNull(foodToDelete);
         foodDAO.delete(foodToDelete);
@@ -91,7 +91,7 @@ class FoodDAOTest {
     }
 
     @Test
-    void getByPropertyEqual() {
+    void getByPropertyEqualSuccess() {
         List<Food> foods = foodDAO.getByPropertyEqual("foodName", "Salmon with Steamed Broccoli");
         assertEquals(1, foods.size());
 
@@ -117,7 +117,7 @@ class FoodDAOTest {
     }
 
     @Test
-    void getByPropertyLike() {
+    void getByPropertyLikeSuccess() {
         List<Food> foods = foodDAO.getByPropertyLike("notes", "protein");
 
         // Foods expected to be found with "protein" in the notes
@@ -126,7 +126,6 @@ class FoodDAOTest {
 
         for (Food food : foods) {
             assertTrue(List.of(expectedFoodNames).contains(food.getFoodName()));
-            System.out.println(food.getFoodName());
         }
     }
 }
