@@ -34,7 +34,7 @@ health data in one place.
     * Bootstrap Validator for front end
     * Explore Hibernate Validator?
     * Explore Data Display Frameworks
-* Logging
+* Log[target](target)ging
     * Log4J2
 * Hosting
     * AWS
@@ -52,6 +52,7 @@ health data in one place.
 
 * [User Stories](DesignDocuments/userStories.md)
 * [Screen Design](DesignDocuments/Screens.md)
+* [Database Schema](DesignDocuments/DatabaseSchema.md)
 
 ---
 
