@@ -28,7 +28,13 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Food> foodEntries = new ArrayList<>();
+    private List<Meal> meals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GlucoseReading> glucoseReadings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FavoriteItem> favoriteItems = new ArrayList<>();
 
     // Constructors
     public User() {}
@@ -54,19 +60,46 @@ public class User {
         this.createdAt = (createdAt != null) ? createdAt.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     }
 
-    public List<Food> getFoodEntries() { return foodEntries; }
-    public void setFoodEntries(List<Food> foodEntries) { this.foodEntries = foodEntries; }
+    public List<Meal> getMeals() { return meals; }
+    public void setMeals(List<Meal> meals) { this.meals = meals; }
 
-    public void addFoodEntry(Food food) {
-        foodEntries.add(food);
-        food.setUser(this);
+    public void addMeal(Meal meal) {
+        meals.add(meal);
+        meal.setUser(this);
     }
 
-    public void removeFoodEntry(Food food) {
-        foodEntries.remove(food);
-        food.setUser(null);
+    public void removeMeal(Meal meal) {
+        meals.remove(meal);
+        meal.setUser(null);
     }
 
+    public List<GlucoseReading> getGlucoseReadings() { return glucoseReadings; }
+    public void setGlucoseReadings(List<GlucoseReading> glucoseReadings) { this.glucoseReadings = glucoseReadings; }
+
+    public void addGlucoseReading(GlucoseReading reading) {
+        glucoseReadings.add(reading);
+        reading.setUser(this);
+    }
+
+    public void removeGlucoseReading(GlucoseReading reading) {
+        glucoseReadings.remove(reading);
+        reading.setUser(null);
+    }
+
+    public List<FavoriteItem> getFavoriteItems() { return favoriteItems; }
+    public void setFavoriteItems(List<FavoriteItem> favoriteItems) { this.favoriteItems = favoriteItems; }
+
+    public void addFavoriteItem(FavoriteItem favoriteItem) {
+        favoriteItems.add(favoriteItem);
+        favoriteItem.setUser(this);
+    }
+
+    public void removeFavoriteItem(FavoriteItem favoriteItem) {
+        favoriteItems.remove(favoriteItem);
+        favoriteItem.setUser(null);
+    }
+
+    // Equals, HashCode, and ToString
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
