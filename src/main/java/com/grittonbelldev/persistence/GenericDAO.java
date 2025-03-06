@@ -58,7 +58,7 @@ public class GenericDAO<T> {
     }
 
     /**
-     * Insert int.
+     * Insert an entity.
      *
      * @param entity the entity to be inserted
      * @return id the id of the entity that was inserted

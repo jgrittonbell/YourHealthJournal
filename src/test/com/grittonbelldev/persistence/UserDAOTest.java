@@ -1,5 +1,7 @@
 package com.grittonbelldev.persistence;
 
+import com.grittonbelldev.entity.Food;
+import com.grittonbelldev.entity.Meal;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.util.Database;
 import org.apache.logging.log4j.LogManager;
@@ -15,13 +17,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDAOTest {
     private final Logger logger = LogManager.getLogger(this.getClass());
     private GenericDAO<User> userDAO;
+    private GenericDAO<Meal> mealDAO;
+    private GenericDAO<Food> foodDAO;
 
     @BeforeEach
     void setUp() {
         logger.info("Log4j2 is working! This should appear in log files.");
         userDAO = new GenericDAO<>(User.class);
+        mealDAO = new GenericDAO<>(Meal.class);
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
+        foodDAO = new GenericDAO<>(Food.class);
     }
 
     @Test
@@ -63,6 +69,31 @@ class UserDAOTest {
         assertNotNull(userToDelete);
         userDAO.delete(userToDelete);
         assertNull(userDAO.getById(3));
+    }
+
+    @Test
+    void deleteUserAndCheckMealsDeletedButFoodsRemain() {
+        // Step 1: Retrieve an existing user (User ID 1 - John Doe)
+        User userToDelete = userDAO.getById(1);
+        assertNotNull(userToDelete);
+
+        // Step 2: Verify meals exist for this user before deletion
+        List<Meal> userMeals = mealDAO.getByPropertyEqual("user", userToDelete);
+        assertFalse(userMeals.isEmpty(), "User should have meals before deletion");
+
+        // Step 3: Delete the user
+        userDAO.delete(userToDelete);
+
+        // Step 4: Verify the user no longer exists
+        assertNull(userDAO.getById(1));
+
+        // Step 5: Verify the meals linked to this user are also deleted
+        List<Meal> mealsAfterDeletion = mealDAO.getByPropertyEqual("user", userToDelete);
+        assertTrue(mealsAfterDeletion.isEmpty(), "Meals should be deleted when user is deleted");
+
+        // Step 6: Ensure food items remain in the database (they should not be deleted)
+        List<Food> allFoods = foodDAO.getAll();
+        assertFalse(allFoods.isEmpty(), "Food items should remain in the database");
     }
 
     @Test

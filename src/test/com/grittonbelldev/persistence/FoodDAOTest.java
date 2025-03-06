@@ -17,7 +17,8 @@ class FoodDAOTest {
 
     @BeforeEach
     void setUp() {
-        logger.info("Log4j2 is working! This should appear in log files.");
+        logger.error("Log4j2 is working! This should appear in log files.");
+        System.out.println("This before each is working is working! This should appear in the console.");
         foodDAO = new GenericDAO<>(Food.class);
         Database database = Database.getInstance();
         database.runSQL("cleanDB.sql");
