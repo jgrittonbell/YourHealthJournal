@@ -27,4 +27,11 @@
 | 2/25/25 | Worked on Week 5 exercise and did lots of IDE debugging                 | 5     | |
 | 2/26/25 | Met with Matt Cherry and had a good discussion on our projects          | 1.5   | |
 | 2/26/25 | Did a pull on Matts Note-Finder Project and completed the feedback form | 1.5   | |
-| 2/26/25 | Did a pull on Matts Note-Finder Project and completed the feedback form | 1.5   | |
+| 2/28/25 | Talked about user needs/wants with Dan(User)                            | 1.5   | |
+| 3/2/25  | Troubleshooting log4j2 and watching AWS videos                          | 3     |      |
+| 3/4/25  | Completed AWS tutorial Videos and uploaded project                      | 3     |      |
+| 3/5/25  | Trouble shooting Tomcat/maven                                           | 2     |      |
+| 3/5/25  | Finished Designing the database and updated scripts                     | 3     |      |
+
+
+
