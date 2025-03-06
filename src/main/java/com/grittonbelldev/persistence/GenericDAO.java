@@ -113,7 +113,7 @@ public class GenericDAO<T> {
      * @param value the value to match
      * @return list of matching entities
      */
-    public List<T> getByPropertyEqual(String propertyName, String value) {
+    public List<T> getByPropertyEqual(String propertyName, Object value) {
         Session session = getSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
