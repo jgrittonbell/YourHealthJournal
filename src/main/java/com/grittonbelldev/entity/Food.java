@@ -2,7 +2,7 @@ package com.grittonbelldev.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-
+//TODO move this over to the meal entity
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -17,18 +17,11 @@ public class Food {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     @Column(name = "food_name", nullable = false, length = 255)
     private String foodName;
-
-    @Column(name = "time_eaten", nullable = false)
-    private LocalDateTime timeEaten = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); // Default to current time
-
-    @Column(name = "meal_category", length = 50)
-    private String mealCategory = "uncategorized";
+    //TODO move this over to the meal entity
+//    @Column(name = "time_eaten", nullable = false)
+//    private LocalDateTime timeEaten = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); // Default to current time
 
     @Column(name = "fat", nullable = false)
     private Double fat;
@@ -75,10 +68,8 @@ public class Food {
     // Constructors
     public Food() {}
 
-    public Food(User user, String foodName, LocalDateTime timeEaten, Double fat, Double protein, Double carbs, Double calories) {
-        this.user = user;
+    public Food(String foodName, Double fat, Double protein, Double carbs, Double calories) {
         this.foodName = foodName;
-        this.timeEaten = (timeEaten != null) ? timeEaten.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now();
         this.fat = fat;
         this.protein = protein;
         this.carbs = carbs;
@@ -90,21 +81,17 @@ public class Food {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
     public String getFoodName() { return foodName; }
     public void setFoodName(String foodName) { this.foodName = foodName; }
 
-    public LocalDateTime getTimeEaten() { return timeEaten; }
+    //TODO move this over to the meal entity
+//    public LocalDateTime getTimeEaten() { return timeEaten; }
 
     // Setter ensures time is set to YYYY-MM-DD HH:MM:SS with no Nano Seconds
-    public void setTimeEaten(LocalDateTime timeEaten) {
-        this.timeEaten = (timeEaten != null) ? timeEaten.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-    }
+//    public void setTimeEaten(LocalDateTime timeEaten) {
+//        this.timeEaten = (timeEaten != null) ? timeEaten.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+//    }
 
-    public String getMealCategory() { return mealCategory; }
-    public void setMealCategory(String mealCategory) { this.mealCategory = mealCategory; }
 
     public Double getFat() { return fat; }
     public void setFat(Double fat) { this.fat = fat; }
@@ -148,14 +135,14 @@ public class Food {
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
 
+    // Equals, HashCode, and ToString
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Food food = (Food) o;
-        return  Objects.equals(user, food.user) &&
+        return Objects.equals(id, food.id) &&
                 Objects.equals(foodName, food.foodName) &&
-                Objects.equals(timeEaten, food.timeEaten) &&
-                Objects.equals(mealCategory, food.mealCategory) &&
                 Objects.equals(fat, food.fat) &&
                 Objects.equals(protein, food.protein) &&
                 Objects.equals(carbs, food.carbs) &&
@@ -174,17 +161,14 @@ public class Food {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, foodName, timeEaten, mealCategory, fat, protein, carbs, calories, cholesterol, sodium, fiber, sugar, addedSugar, vitaminD, calcium, iron, potassium, notes);
+        return Objects.hash(id, foodName, fat, protein, carbs, calories, cholesterol, sodium, fiber, sugar, addedSugar, vitaminD, calcium, iron, potassium, notes);
     }
 
     @Override
     public String toString() {
         return "Food{" +
                 "id=" + id +
-                ", user=" + user +
                 ", foodName='" + foodName + '\'' +
-                ", timeEaten=" + timeEaten +
-                ", mealCategory='" + mealCategory + '\'' +
                 ", fat=" + fat +
                 ", protein=" + protein +
                 ", carbs=" + carbs +
