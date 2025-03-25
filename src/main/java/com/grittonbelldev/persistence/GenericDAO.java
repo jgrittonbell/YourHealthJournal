@@ -1,5 +1,6 @@
 package com.grittonbelldev.persistence;
 
+import com.grittonbelldev.util.HibernateUtil;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,7 @@ public class GenericDAO<T> {
      * @return session
      */
     private Session getSession() {
-        return SessionFactoryProvider.getSessionFactory().openSession();
+        return HibernateUtil.getSessionFactory().openSession();
     }
 
     /**

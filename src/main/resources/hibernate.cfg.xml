@@ -5,11 +5,11 @@
 <!--suppress ALL -->
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql:awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/yourhealthjournal</property>
+        <property name="connection.url">url</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
-        <property name="connection.username">root</property>
-        <property name="connection.password">Sqlpanther090!</property>
+        <property name="connection.username">username</property>
+        <property name="connection.password">password</property>
 
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
