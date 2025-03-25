@@ -1,0 +1,227 @@
+[DEBUG] 2025-03-25 01:50:45.336 [RMI TCP Connection(2)-127.0.0.1] IntegratorServiceImpl - Adding Integrator [org.hibernate.boot.beanvalidation.BeanValidationIntegrator].
+[DEBUG] 2025-03-25 01:50:45.345 [RMI TCP Connection(2)-127.0.0.1] IntegratorServiceImpl - Adding Integrator [org.hibernate.cache.internal.CollectionCacheInvalidator].
+[INFO ] 2025-03-25 01:50:45.377 [RMI TCP Connection(2)-127.0.0.1] Version - HHH000412: Hibernate ORM core version 6.4.3.Final
+[DEBUG] 2025-03-25 01:50:45.378 [RMI TCP Connection(2)-127.0.0.1] Environment - HHH000206: 'hibernate.properties' not found
+[DEBUG] 2025-03-25 01:50:45.413 [RMI TCP Connection(2)-127.0.0.1] LocalXmlResourceResolver - Checking public/system identifiers `-//Hibernate/Hibernate Configuration DTD//EN`/`http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd` as DTD references
+[DEBUG] 2025-03-25 01:50:45.418 [RMI TCP Connection(2)-127.0.0.1] JaxbCfgProcessor - cfg.xml document did not define namespaces; wrapping in custom event reader to introduce namespace information
+[DEBUG] 2025-03-25 01:50:45.614 [RMI TCP Connection(2)-127.0.0.1] factory - Ignoring CDI for resolving IdentifierGenerator instances as extended or delayed CDI support was enabled
+[DEBUG] 2025-03-25 01:50:45.620 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [uuid2] -> [org.hibernate.id.UUIDGenerator]
+[DEBUG] 2025-03-25 01:50:45.620 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [guid] -> [org.hibernate.id.GUIDGenerator]
+[DEBUG] 2025-03-25 01:50:45.621 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [uuid] -> [org.hibernate.id.UUIDHexGenerator]
+[DEBUG] 2025-03-25 01:50:45.621 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [uuid.hex] -> [org.hibernate.id.UUIDHexGenerator]
+[DEBUG] 2025-03-25 01:50:45.621 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [assigned] -> [org.hibernate.id.Assigned]
+[DEBUG] 2025-03-25 01:50:45.622 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [identity] -> [org.hibernate.id.IdentityGenerator]
+[DEBUG] 2025-03-25 01:50:45.623 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [select] -> [org.hibernate.id.SelectGenerator]
+[DEBUG] 2025-03-25 01:50:45.624 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+[DEBUG] 2025-03-25 01:50:45.624 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [increment] -> [org.hibernate.id.IncrementGenerator]
+[DEBUG] 2025-03-25 01:50:45.625 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [foreign] -> [org.hibernate.id.ForeignGenerator]
+[DEBUG] 2025-03-25 01:50:45.625 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [enhanced-sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+[DEBUG] 2025-03-25 01:50:45.626 [RMI TCP Connection(2)-127.0.0.1] factory - Registering IdentifierGenerator strategy [enhanced-table] -> [org.hibernate.id.enhanced.TableGenerator]
+[DEBUG] 2025-03-25 01:50:45.634 [RMI TCP Connection(2)-127.0.0.1] RegionFactoryInitiator - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+[INFO ] 2025-03-25 01:50:45.635 [RMI TCP Connection(2)-127.0.0.1] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BasicTypeReference@7613c8a3
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BasicTypeReference@7613c8a3
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Boolean -> org.hibernate.type.BasicTypeReference@7613c8a3
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration numeric_boolean -> org.hibernate.type.BasicTypeReference@5c8ccd25
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration org.hibernate.type.NumericBooleanConverter -> org.hibernate.type.BasicTypeReference@5c8ccd25
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration true_false -> org.hibernate.type.BasicTypeReference@3ad7ffce
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration org.hibernate.type.TrueFalseConverter -> org.hibernate.type.BasicTypeReference@3ad7ffce
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration yes_no -> org.hibernate.type.BasicTypeReference@55e9d52d
+[DEBUG] 2025-03-25 01:50:45.743 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration org.hibernate.type.YesNoConverter -> org.hibernate.type.BasicTypeReference@55e9d52d
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.BasicTypeReference@3d5749e3
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.BasicTypeReference@3d5749e3
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Byte -> org.hibernate.type.BasicTypeReference@3d5749e3
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration binary -> org.hibernate.type.BasicTypeReference@7884e89
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration byte[] -> org.hibernate.type.BasicTypeReference@7884e89
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration [B -> org.hibernate.type.BasicTypeReference@7884e89
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration binary_wrapper -> org.hibernate.type.BasicTypeReference@224e839
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration wrapper-binary -> org.hibernate.type.BasicTypeReference@224e839
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration image -> org.hibernate.type.BasicTypeReference@19ff05ed
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration blob -> org.hibernate.type.BasicTypeReference@1e604f60
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.sql.Blob -> org.hibernate.type.BasicTypeReference@1e604f60
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_blob -> org.hibernate.type.BasicTypeReference@5bd9a623
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_blob_wrapper -> org.hibernate.type.BasicTypeReference@7e19f841
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration short -> org.hibernate.type.BasicTypeReference@1f284a02
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration short -> org.hibernate.type.BasicTypeReference@1f284a02
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Short -> org.hibernate.type.BasicTypeReference@1f284a02
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration integer -> org.hibernate.type.BasicTypeReference@3af0dc8
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration int -> org.hibernate.type.BasicTypeReference@3af0dc8
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Integer -> org.hibernate.type.BasicTypeReference@3af0dc8
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration long -> org.hibernate.type.BasicTypeReference@15515b20
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration long -> org.hibernate.type.BasicTypeReference@15515b20
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Long -> org.hibernate.type.BasicTypeReference@15515b20
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration float -> org.hibernate.type.BasicTypeReference@243b723b
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration float -> org.hibernate.type.BasicTypeReference@243b723b
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Float -> org.hibernate.type.BasicTypeReference@243b723b
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration double -> org.hibernate.type.BasicTypeReference@799e44e4
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration double -> org.hibernate.type.BasicTypeReference@799e44e4
+[DEBUG] 2025-03-25 01:50:45.744 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Double -> org.hibernate.type.BasicTypeReference@799e44e4
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration big_integer -> org.hibernate.type.BasicTypeReference@224c752
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.math.BigInteger -> org.hibernate.type.BasicTypeReference@224c752
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration big_decimal -> org.hibernate.type.BasicTypeReference@1d33146d
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.math.BigDecimal -> org.hibernate.type.BasicTypeReference@1d33146d
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration character -> org.hibernate.type.BasicTypeReference@62e6075a
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration char -> org.hibernate.type.BasicTypeReference@62e6075a
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Character -> org.hibernate.type.BasicTypeReference@62e6075a
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration character_nchar -> org.hibernate.type.BasicTypeReference@69d4c686
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration string -> org.hibernate.type.BasicTypeReference@4dee82b9
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.String -> org.hibernate.type.BasicTypeReference@4dee82b9
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration nstring -> org.hibernate.type.BasicTypeReference@487b6715
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration characters -> org.hibernate.type.BasicTypeReference@1a756597
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration char[] -> org.hibernate.type.BasicTypeReference@1a756597
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration [C -> org.hibernate.type.BasicTypeReference@1a756597
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration wrapper-characters -> org.hibernate.type.BasicTypeReference@555a60a9
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration text -> org.hibernate.type.BasicTypeReference@6c98dbf1
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration ntext -> org.hibernate.type.BasicTypeReference@7f485ab8
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration clob -> org.hibernate.type.BasicTypeReference@4e20c11b
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.sql.Clob -> org.hibernate.type.BasicTypeReference@4e20c11b
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration nclob -> org.hibernate.type.BasicTypeReference@48f9af5e
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.sql.NClob -> org.hibernate.type.BasicTypeReference@48f9af5e
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_clob -> org.hibernate.type.BasicTypeReference@6214b2e3
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_clob_char_array -> org.hibernate.type.BasicTypeReference@5f34a983
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_clob_character_array -> org.hibernate.type.BasicTypeReference@17d49367
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_nclob -> org.hibernate.type.BasicTypeReference@12d25d9c
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_nclob_character_array -> org.hibernate.type.BasicTypeReference@5516768f
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration materialized_nclob_char_array -> org.hibernate.type.BasicTypeReference@2f94b51f
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration Duration -> org.hibernate.type.BasicTypeReference@1ce84421
+[DEBUG] 2025-03-25 01:50:45.745 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.Duration -> org.hibernate.type.BasicTypeReference@1ce84421
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration LocalDateTime -> org.hibernate.type.BasicTypeReference@1c56d49d
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.LocalDateTime -> org.hibernate.type.BasicTypeReference@1c56d49d
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration LocalDate -> org.hibernate.type.BasicTypeReference@7a127b96
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.LocalDate -> org.hibernate.type.BasicTypeReference@7a127b96
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration LocalTime -> org.hibernate.type.BasicTypeReference@70241586
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.LocalTime -> org.hibernate.type.BasicTypeReference@70241586
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetDateTime -> org.hibernate.type.BasicTypeReference@2e338eef
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.OffsetDateTime -> org.hibernate.type.BasicTypeReference@2e338eef
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@46b4588
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@6dcc5058
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetTime -> org.hibernate.type.BasicTypeReference@3d94e042
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.OffsetTime -> org.hibernate.type.BasicTypeReference@3d94e042
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetTimeUtc -> org.hibernate.type.BasicTypeReference@f6255e9
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetTimeWithTimezone -> org.hibernate.type.BasicTypeReference@51fb0688
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration OffsetTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@5e3ad27f
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration ZonedDateTime -> org.hibernate.type.BasicTypeReference@4436af0a
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.ZonedDateTime -> org.hibernate.type.BasicTypeReference@4436af0a
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration ZonedDateTimeWithTimezone -> org.hibernate.type.BasicTypeReference@59667778
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration ZonedDateTimeWithoutTimezone -> org.hibernate.type.BasicTypeReference@5020e59a
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration date -> org.hibernate.type.BasicTypeReference@58816ccb
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.sql.Date -> org.hibernate.type.BasicTypeReference@58816ccb
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration time -> org.hibernate.type.BasicTypeReference@293ed62e
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.sql.Time -> org.hibernate.type.BasicTypeReference@293ed62e
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration timestamp -> org.hibernate.type.BasicTypeReference@4309a9c6
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.sql.Timestamp -> org.hibernate.type.BasicTypeReference@4309a9c6
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.Date -> org.hibernate.type.BasicTypeReference@4309a9c6
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration calendar -> org.hibernate.type.BasicTypeReference@14529808
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.Calendar -> org.hibernate.type.BasicTypeReference@14529808
+[DEBUG] 2025-03-25 01:50:45.746 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.GregorianCalendar -> org.hibernate.type.BasicTypeReference@14529808
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration calendar_date -> org.hibernate.type.BasicTypeReference@47e6497d
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration calendar_time -> org.hibernate.type.BasicTypeReference@18366809
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration instant -> org.hibernate.type.BasicTypeReference@167fb550
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.Instant -> org.hibernate.type.BasicTypeReference@167fb550
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration uuid -> org.hibernate.type.BasicTypeReference@166dfd4f
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.BasicTypeReference@166dfd4f
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration pg-uuid -> org.hibernate.type.BasicTypeReference@166dfd4f
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration uuid-binary -> org.hibernate.type.BasicTypeReference@63b5e35e
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration uuid-char -> org.hibernate.type.BasicTypeReference@4868a901
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration class -> org.hibernate.type.BasicTypeReference@23564069
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Class -> org.hibernate.type.BasicTypeReference@23564069
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration currency -> org.hibernate.type.BasicTypeReference@5a2856c9
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration Currency -> org.hibernate.type.BasicTypeReference@5a2856c9
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.Currency -> org.hibernate.type.BasicTypeReference@5a2856c9
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration locale -> org.hibernate.type.BasicTypeReference@16cbe1c1
+[DEBUG] 2025-03-25 01:50:45.747 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.Locale -> org.hibernate.type.BasicTypeReference@16cbe1c1
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration serializable -> org.hibernate.type.BasicTypeReference@1be662b8
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.io.Serializable -> org.hibernate.type.BasicTypeReference@1be662b8
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration timezone -> org.hibernate.type.BasicTypeReference@aa23ca5
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.util.TimeZone -> org.hibernate.type.BasicTypeReference@aa23ca5
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration ZoneOffset -> org.hibernate.type.BasicTypeReference@1224bd26
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.time.ZoneOffset -> org.hibernate.type.BasicTypeReference@1224bd26
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration url -> org.hibernate.type.BasicTypeReference@5ba8934a
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.net.URL -> org.hibernate.type.BasicTypeReference@5ba8934a
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration vector -> org.hibernate.type.BasicTypeReference@7373c925
+[DEBUG] 2025-03-25 01:50:45.748 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration row_version -> org.hibernate.type.BasicTypeReference@682f94fa
+[DEBUG] 2025-03-25 01:50:45.753 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration object -> org.hibernate.type.JavaObjectType@53e11acf
+[DEBUG] 2025-03-25 01:50:45.753 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration java.lang.Object -> org.hibernate.type.JavaObjectType@53e11acf
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration null -> org.hibernate.type.NullType@4e30eee5
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_date -> org.hibernate.type.BasicTypeReference@5993d813
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_time -> org.hibernate.type.BasicTypeReference@617ee066
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_timestamp -> org.hibernate.type.BasicTypeReference@502ed4e9
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_calendar -> org.hibernate.type.BasicTypeReference@19a05fcf
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_calendar_date -> org.hibernate.type.BasicTypeReference@5e345fa8
+[DEBUG] 2025-03-25 01:50:45.754 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_calendar_time -> org.hibernate.type.BasicTypeReference@485ff9d8
+[DEBUG] 2025-03-25 01:50:45.755 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_binary -> org.hibernate.type.BasicTypeReference@6ef0e5a6
+[DEBUG] 2025-03-25 01:50:45.755 [RMI TCP Connection(2)-127.0.0.1] BasicTypeRegistry - Adding type registration imm_serializable -> org.hibernate.type.BasicTypeReference@75359190
+[INFO ] 2025-03-25 01:50:45.785 [RMI TCP Connection(2)-127.0.0.1] c3p0 - HHH010002: C3P0 using driver: com.mysql.cj.jdbc.Driver at URL: jdbc:mysql:awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/yourhealthjournal
+[INFO ] 2025-03-25 01:50:45.785 [RMI TCP Connection(2)-127.0.0.1] c3p0 - HHH10001001: Connection properties: {password=****, user=root}
+[INFO ] 2025-03-25 01:50:45.785 [RMI TCP Connection(2)-127.0.0.1] c3p0 - HHH10001003: Autocommit mode: false
+[INFO ] 2025-03-25 01:50:45.860 [RMI TCP Connection(2)-127.0.0.1] c3p0 - HHH10001007: JDBC isolation level: <unknown>
+[WARN ] 2025-03-25 01:51:16.094 [RMI TCP Connection(2)-127.0.0.1] JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+java.lang.NullPointerException: null
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:107) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:223) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:191) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:129) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:449) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:101) [hibernate-core-6.4.3.Final.jar:6.4.3.Final]
+	at com.grittonbelldev.util.HibernateUtil.<clinit>(HibernateUtil.java:54) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:32) [classes/:?]
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143) [servlet-api.jar:4.0.FR]
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:984) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:941) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:838) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4193) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4494) [catalina.jar:9.0.98]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:599) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:571) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:603) [catalina.jar:9.0.98]
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1751) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:453) [catalina.jar:9.0.98]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:407) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at com.sun.jmx.remote.security.MBeanServerAccessController.invoke(MBeanServerAccessController.java:468) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1466) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1406) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:827) [?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:200) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:197) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:389) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[DEBUG] 2025-03-25 01:51:16.102 [RMI TCP Connection(2)-127.0.0.1] BootstrapServiceRegistryImpl - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries

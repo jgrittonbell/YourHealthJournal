@@ -1,7 +1,10 @@
 package com.grittonbelldev.util;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,30 +22,50 @@ public class HibernateUtil {
     // The application's single shared SessionFactory instance
     private static final SessionFactory sessionFactory;
 
+    // This holds the configuration registry that manages Hibernate services and settings
+    // including database connections, dialects, mapping, etc.
+    private static StandardServiceRegistry registry;
+
     // Static initializer block to configure and build the SessionFactory when the class is loaded
     static {
         try {
-            // Load the default Hibernate configuration from hibernate.cfg.xml
-            Configuration configuration = new Configuration();
-            configuration.configure("hibernate.cfg.xml");
+            // Create registry with configuration
+            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().configure();
 
-            // Override database connection properties with environment variables, if set
-            // These allow secure deployment on platforms like AWS without storing credentials in code
-            configuration.setProperty("hibernate.connection.url", System.getenv("mySQLURL"));
-            configuration.setProperty("hibernate.connection.username", System.getenv("mySQLUsername"));
-            configuration.setProperty("hibernate.connection.password", System.getenv("mySQLPassword"));
+            // Override connection properties from environment variables
+            String dbUrl = System.getenv("mySQLURL");
+            String dbUser = System.getenv("mySQLUsername");
+            String dbPass = System.getenv("mySQLPassword");
 
-            // Build the SessionFactory using the updated configuration
-            sessionFactory = configuration.buildSessionFactory();
-            logger.info("Hibernate SessionFactory initialized successfully.");
+            if (dbUrl != null) builder.applySetting("hibernate.connection.url", dbUrl);
+            if (dbUser != null) builder.applySetting("hibernate.connection.username", dbUser);
+            if (dbPass != null) builder.applySetting("hibernate.connection.password", dbPass);
 
-        } catch (Throwable ex) {
-            // Log and rethrow fatal errors during Hibernate initialization
-            // This prevents the application from running in an uninitialized state
-            logger.error("Initial SessionFactory creation failed: {}", ex.getMessage(), ex);
-            throw new ExceptionInInitializerError(ex);
+            // This builds the registry, applying any settings from hibernate.cfg.xml and overrides
+            // It's required for creating MetadataSources in newer Hibernate versions
+            registry = builder.build();
+
+            // MetadataSources loads all entity classes and mappings from the registry
+            // and is the starting point for constructing the Hibernate Metadata model
+            MetadataSources sources = new MetadataSources(registry);
+
+            // Metadata contains all the entity bindings and configuration needed by Hibernate
+            // This is required before creating the actual SessionFactory
+            Metadata metadata = sources.getMetadataBuilder().build();
+
+            // Build SessionFactory
+            sessionFactory = metadata.getSessionFactoryBuilder().build();
+            logger.info("Hibernate SessionFactory created with registry/bootstrap config.");
+
+        } catch (Exception e) {
+            logger.error("Hibernate initialization failed: {}", e.getMessage(), e);
+            if (registry != null) {
+                StandardServiceRegistryBuilder.destroy(registry);
+            }
+            throw new ExceptionInInitializerError(e);
         }
     }
+
 
     /**
      * Provides access to the singleton SessionFactory instance used throughout the application.
