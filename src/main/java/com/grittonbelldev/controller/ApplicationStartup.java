@@ -33,8 +33,8 @@ public class ApplicationStartup extends HttpServlet {
             logger.info("Hibernate SessionFactory initialized successfully.");
 
             // Log the DB connection info (excluding sensitive data like the password)
-            String dbUrl = System.getenv("DB_URL");
-            String dbUser = System.getenv("DB_USER");
+            String dbUrl = System.getenv("mySQLURL");
+            String dbUser = System.getenv("mySQLUsername");
 
             // Only log the values if environment variables have been set (not using the default placeholders)
             logger.info("DB URL: {}", !"url".equals(dbUrl) ? dbUrl : "not set");

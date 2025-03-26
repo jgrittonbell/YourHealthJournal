@@ -41,6 +41,13 @@ public class HibernateUtil {
             if (dbUser != null) builder.applySetting("hibernate.connection.username", dbUser);
             if (dbPass != null) builder.applySetting("hibernate.connection.password", dbPass);
 
+
+            //Logging Connnection Properties for Testing Meta Data Error
+            logger.info("Using DB URL: {}", dbUrl);
+            logger.info("Using DB User: {}", dbUser);
+            logger.info("Dialect fallback: org.hibernate.dialect.MySQL8Dialect");
+
+
             // This builds the registry, applying any settings from hibernate.cfg.xml and overrides
             // It's required for creating MetadataSources in newer Hibernate versions
             registry = builder.build();
@@ -58,6 +65,8 @@ public class HibernateUtil {
             logger.info("Hibernate SessionFactory created with registry/bootstrap config.");
 
         } catch (Exception e) {
+
+            //TODO keep debugging Hibernate
             logger.error("Hibernate initialization failed: {}", e.getMessage(), e);
             if (registry != null) {
                 StandardServiceRegistryBuilder.destroy(registry);
