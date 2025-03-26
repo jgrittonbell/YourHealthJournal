@@ -21,6 +21,9 @@
   <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
   <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
   <hibernate-version>6.4.3.Final</hibernate-version>
+  <amazon-secrets-version>2.31.8</amazon-secrets-version>
+  <jersey-version>2.29.1</jersey-version>
+  <jackson-version>2.10.0</jackson-version>
 </properties>
 
 <dependencies>
@@ -89,6 +92,52 @@
     <groupId>org.hibernate</groupId>
     <artifactId>hibernate-c3p0</artifactId>
     <version>${hibernate-version}</version>
+  </dependency>
+
+  <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/secretsmanager -->
+  <dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>secretsmanager</artifactId>
+    <version>${amazon-secrets-version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>core</artifactId>
+  </dependency>
+
+  <!--Jersey Dependencies-->
+  <dependency>
+    <groupId>org.glassfish.jersey.core</groupId>
+    <artifactId>jersey-client</artifactId>
+    <version>${jersey-version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>org.glassfish.jersey.inject</groupId>
+    <artifactId>jersey-hk2</artifactId>
+    <version>${jersey-version}</version>
+  </dependency>
+
+  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+  <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>${jackson-version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-annotations</artifactId>
+    <version>${jackson-version}</version>
+  </dependency>
+
+  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+
+  <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>${jackson-version}</version>
   </dependency>
 
 </dependencies>
