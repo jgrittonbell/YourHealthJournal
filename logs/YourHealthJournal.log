@@ -6,3 +6,51 @@
 [INFO ] 2025-03-25 21:49:16.123 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
 [INFO ] 2025-03-25 21:49:16.123 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
 [INFO ] 2025-03-25 22:46:09.601 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-26 15:12:52.755 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 15:12:52.756 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-26 15:12:52.756 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
+[INFO ] 2025-03-26 16:17:11.223 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-26 16:17:24.266 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 16:17:24.267 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-26 16:17:24.267 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
+[INFO ] 2025-03-26 16:17:53.502 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-26 16:22:06.912 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 16:22:06.912 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-26 16:22:06.912 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
+[INFO ] 2025-03-26 16:33:45.312 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-26 16:38:42.289 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 16:38:42.289 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-26 16:38:42.289 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
+[INFO ] 2025-03-26 17:34:11.334 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-26 17:34:24.252 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 17:34:24.253 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-26 17:34:24.253 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
+[INFO ] 2025-03-26 17:35:28.974 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-26 17:35:38.765 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 17:35:38.766 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-26 17:35:38.766 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
+[INFO ] 2025-03-26 17:44:53.504 [main] ApplicationStartup - Hibernate SessionFactory closed.
