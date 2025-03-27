@@ -1,12 +1,14 @@
 package com.grittonbelldev.controller;
 
 import com.grittonbelldev.util.HibernateUtil;
+import com.grittonbelldev.util.SecretsManagerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import java.util.Map;
 
 /**
  * This servlet is automatically loaded when the web application starts.
@@ -28,22 +30,22 @@ public class ApplicationStartup extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            // Force Hibernate to initialize by accessing the SessionFactory
+            // Force Hibernate initialization
             HibernateUtil.getSessionFactory();
             logger.info("Hibernate SessionFactory initialized successfully.");
 
-            // Log the DB connection info (excluding sensitive data like the password)
-            String dbUrl = System.getenv("mySQLURL");
-            String dbUser = System.getenv("mySQLUsername");
+            // Load Cognito secrets
+            //TODO ADD Cognito stuff
+            Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjSecrets");
+            String clientId = secrets.get("COGNITO_CLIENT_ID");
+            String clientSecret = secrets.get("COGNITO_CLIENT_SECRET");
 
-            // Only log the values if environment variables have been set (not using the default placeholders)
-            logger.info("DB URL: {}", !"url".equals(dbUrl) ? dbUrl : "not set");
-            logger.info("DB User: {}", !"username".equals(dbUser) ? dbUser : "not set");
+            logger.info("Cognito Client ID: {}", clientId != null ? clientId : "not set");
+            logger.info("Cognito Client Secret: {}", clientSecret != null ? "[set]" : "not set");
 
         } catch (Exception e) {
-            // Log and rethrow if initialization fails to stop the application from continuing in an unstable state
-            logger.error("Error initializing Hibernate: {}", e.getMessage(), e);
-            throw new ServletException("Hibernate initialization failed", e);
+            logger.error("Error initializing application: {}", e.getMessage(), e);
+            throw new ServletException("Startup failed", e);
         }
     }
 

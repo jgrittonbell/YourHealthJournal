@@ -7,6 +7,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.grittonbelldev.util.SecretsManagerUtil;
+import java.util.Map;
 
 /**
  * Utility class responsible for creating and managing a singleton instance of the Hibernate SessionFactory.
@@ -32,14 +34,27 @@ public class HibernateUtil {
             // Create registry with configuration
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().configure();
 
-            // Override connection properties from environment variables
-            String dbUrl = System.getenv("mySQLURL");
-            String dbUser = System.getenv("mySQLUsername");
-            String dbPass = System.getenv("mySQLPassword");
+            // Load secrets from AWS Secrets Manager
+            Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjSecrets");
+
+            String dbUrl = secrets.get("mySQLURL");
+            String dbUser = secrets.get("mySQLUsername");
+            String dbPass = secrets.get("mySQLPassword");
+
+
+            //Save for if we end up going back to env variables
+            //Override connection properties from environment variables
+            /*
+             String dbUrl = System.getenv("mySQLURL");
+             String dbUser = System.getenv("mySQLUsername");
+             String dbPass = System.getenv("mySQLPassword");
+            */
 
             if (dbUrl != null) builder.applySetting("hibernate.connection.url", dbUrl);
             if (dbUser != null) builder.applySetting("hibernate.connection.username", dbUser);
             if (dbPass != null) builder.applySetting("hibernate.connection.password", dbPass);
+
+
 
 
             //Logging Connnection Properties for Testing Meta Data Error
