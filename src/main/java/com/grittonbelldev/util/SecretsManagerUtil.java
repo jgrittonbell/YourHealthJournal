@@ -70,8 +70,8 @@ public class SecretsManagerUtil {
         fallback.put("mySQLURL", System.getenv("mySQLURL"));
         fallback.put("mySQLUsername", System.getenv("mySQLUsername"));
         fallback.put("mySQLPassword", System.getenv("mySQLPassword"));
-        fallback.put("cognitoClientID", System.getenv("COGNITO_CLIENT_ID"));
-        fallback.put("cognitoClientSecret", System.getenv("COGNITO_CLIENT_SECRET"));
+        fallback.put("cognitoClientID", System.getenv("cognitoClientID"));
+        fallback.put("cognitoClientSecret", System.getenv("cognitoClientSecret"));
         return fallback;
     }
 }
