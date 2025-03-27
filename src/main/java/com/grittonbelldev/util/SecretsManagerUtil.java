@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Collections;
 import java.util.Map;
-
+//TODO Add comments explaining how this works
 public class SecretsManagerUtil {
 
     private static final Region REGION = Region.US_EAST_2; // Change if needed
@@ -29,14 +29,17 @@ public class SecretsManagerUtil {
             if (response.secretString() != null) {
                 return MAPPER.readValue(response.secretString(), Map.class);
             } else {
+                //TODO Changes to use logger
                 System.err.println("Secret string is null");
                 return Collections.emptyMap();
             }
 
         } catch (SecretsManagerException e) {
+            //TODO Changes to use logger
             System.err.println("AWS Secrets Manager error: " + e.awsErrorDetails().errorMessage());
             return Collections.emptyMap();
         } catch (Exception e) {
+            //TODO Changes to use logger
             System.err.println("Failed to fetch or parse secret: " + e.getMessage());
             return Collections.emptyMap();
         }
