@@ -37,6 +37,7 @@ import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(
@@ -94,7 +95,10 @@ public class Auth extends HttpServlet {
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
                 userName = validate(tokenResponse);
-                req.setAttribute("userName", userName);
+
+                HttpSession session = req.getSession(true);
+                session.setAttribute("username", userName);
+
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 req.setAttribute("errorMessage", "Authentication failed. Please try again.");

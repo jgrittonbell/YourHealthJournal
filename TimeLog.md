@@ -46,6 +46,7 @@
 | 3/26/25 | Worked on Adding SecretsManager Functionality to YHJ                        | 8     |       |
 | 3/27/25 | Got SecretsManager Functionality working on YHJ!!!!                         | 3     |       |
 | 3/27/25 | Worked on adding a cognito Login landing page to YHJ                        | 6     |       |
+| 3/27/25 | Added index.jsp and an Filter Package with AuthFilter to secure YHJ         | 2     |       |
 
 
 
