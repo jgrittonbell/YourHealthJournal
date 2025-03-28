@@ -34,6 +34,7 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoader 
      */
     @Override
     public void init() throws ServletException {
+        super.init();
         initializeHibernateSessionFactory();
         loadAndStoreCognitoProperties();
     }
