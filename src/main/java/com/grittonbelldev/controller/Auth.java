@@ -6,8 +6,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.matc.auth.*;
-import edu.matc.util.PropertiesLoader;
+import com.grittonbelldev.auth.*;
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,7 +47,7 @@ import java.util.stream.Collectors;
  * Inspired by: https://stackoverflow.com/questions/52144721/how-to-get-access-token-using-client-credentials-using-java-code
  */
 
-public class Auth extends HttpServlet implements PropertiesLoader {
+public class Auth extends HttpServlet {
     String CLIENT_ID;
     String CLIENT_SECRET;
     String OAUTH_URL;

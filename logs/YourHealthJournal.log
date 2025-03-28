@@ -1,85 +1,5 @@
-[INFO ] 2025-03-25 21:49:13.477 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-25 21:49:13.477 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-25 21:49:13.477 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-25 21:49:16.121 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-25 21:49:16.123 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-25 21:49:16.123 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-25 21:49:16.123 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-25 22:46:09.601 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 15:12:52.755 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 15:12:52.756 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 15:12:52.756 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 15:12:55.495 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 16:17:11.223 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 16:17:24.266 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 16:17:24.267 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 16:17:24.267 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 16:17:26.874 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 16:17:53.502 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 16:22:06.912 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 16:22:06.912 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 16:22:06.912 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 16:22:09.778 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 16:33:45.312 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 16:38:42.289 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 16:38:42.289 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 16:38:42.289 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 16:38:45.062 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 17:34:11.334 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 17:34:24.252 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 17:34:24.253 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 17:34:24.253 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 17:34:26.907 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 17:35:28.974 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 17:35:38.765 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 17:35:38.766 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 17:35:38.766 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 17:35:41.451 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 17:44:53.504 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 17:45:04.245 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 17:45:04.246 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 17:45:04.246 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 17:45:06.890 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 17:45:06.890 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 17:45:06.890 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 17:45:06.890 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 17:50:11.529 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 18:07:04.938 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 18:07:04.938 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 18:07:04.938 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 18:07:07.583 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 18:07:07.583 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 18:07:07.583 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 18:07:07.583 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 18:07:25.823 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-26 18:53:35.577 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 18:53:35.577 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
-[INFO ] 2025-03-26 18:53:35.577 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-26 18:53:38.338 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-26 18:53:38.338 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-26 18:53:38.338 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
-[INFO ] 2025-03-26 18:53:38.338 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - DB User: root
-[INFO ] 2025-03-26 19:59:42.781 [main] ApplicationStartup - Hibernate SessionFactory closed.
-[INFO ] 2025-03-27 12:22:27.291 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
-[ERROR] 2025-03-27 12:22:29.376 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+[INFO ] 2025-03-27 19:50:09.321 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
+[ERROR] 2025-03-27 19:50:11.421 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
 software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
 	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:130) ~[sdk-core-2.31.8.jar:?]
 	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:130) ~[auth-2.31.8.jar:?]
@@ -105,7 +25,8 @@ software.amazon.awssdk.core.exception.SdkClientException: Unable to load credent
 	at software.amazon.awssdk.services.secretsmanager.DefaultSecretsManagerClient.getSecretValue(DefaultSecretsManagerClient.java:1129) ~[secretsmanager-2.31.8.jar:?]
 	at com.grittonbelldev.util.SecretsManagerUtil.getSecretAsMap(SecretsManagerUtil.java:51) [classes/:?]
 	at com.grittonbelldev.util.HibernateUtil.<clinit>(HibernateUtil.java:38) [classes/:?]
-	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:34) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.initializeHibernateSessionFactory(ApplicationStartup.java:82) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:38) [classes/:?]
 	at javax.servlet.GenericServlet.init(GenericServlet.java:143) [servlet-api.jar:4.0.FR]
 	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:984) [catalina.jar:9.0.98]
 	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:941) [catalina.jar:9.0.98]
@@ -156,14 +77,14 @@ software.amazon.awssdk.core.exception.SdkClientException: Unable to load credent
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
 	at java.lang.Thread.run(Thread.java:834) [?:?]
-[WARN ] 2025-03-27 12:22:29.381 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
-[INFO ] 2025-03-27 12:22:29.381 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: null
-[INFO ] 2025-03-27 12:22:29.381 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: null
-[INFO ] 2025-03-27 12:22:29.381 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
-[INFO ] 2025-03-27 12:23:01.054 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
-[INFO ] 2025-03-27 12:23:01.054 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
-[INFO ] 2025-03-27 12:23:01.058 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
-[ERROR] 2025-03-27 12:23:03.067 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+[WARN ] 2025-03-27 19:50:11.427 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
+[INFO ] 2025-03-27 19:50:11.427 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-27 19:50:11.427 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-27 19:50:11.427 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-27 19:50:13.946 [RMI TCP Connection(2)-127.0.0.1] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-27 19:50:13.946 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Hibernate SessionFactory initialized successfully.
+[INFO ] 2025-03-27 19:50:13.950 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
+[ERROR] 2025-03-27 19:50:15.965 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
 software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
 	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:130) ~[sdk-core-2.31.8.jar:?]
 	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:130) ~[auth-2.31.8.jar:?]
@@ -188,6 +109,7 @@ software.amazon.awssdk.core.exception.SdkClientException: Unable to load credent
 	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:53) ~[aws-core-2.31.8.jar:?]
 	at software.amazon.awssdk.services.secretsmanager.DefaultSecretsManagerClient.getSecretValue(DefaultSecretsManagerClient.java:1129) ~[secretsmanager-2.31.8.jar:?]
 	at com.grittonbelldev.util.SecretsManagerUtil.getSecretAsMap(SecretsManagerUtil.java:51) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.loadAndStoreCognitoProperties(ApplicationStartup.java:50) [classes/:?]
 	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:39) [classes/:?]
 	at javax.servlet.GenericServlet.init(GenericServlet.java:143) [servlet-api.jar:4.0.FR]
 	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:984) [catalina.jar:9.0.98]
@@ -239,7 +161,8 @@ software.amazon.awssdk.core.exception.SdkClientException: Unable to load credent
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
 	at java.lang.Thread.run(Thread.java:834) [?:?]
-[WARN ] 2025-03-27 12:23:03.068 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
-[INFO ] 2025-03-27 12:23:03.068 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito Client ID: not set
-[INFO ] 2025-03-27 12:23:03.068 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito Client Secret: not set
-[INFO ] 2025-03-27 13:34:24.468 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[WARN ] 2025-03-27 19:50:15.965 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
+[INFO ] 2025-03-27 19:50:15.966 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito Client ID: 17maovn490jgjo4sahig56bs9b
+[INFO ] 2025-03-27 19:50:15.966 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito Client Secret: [set]
+[INFO ] 2025-03-27 19:50:15.966 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Application Startup: Cognito properties loaded.
+[INFO ] 2025-03-27 20:17:35.527 [main] ApplicationStartup - Hibernate SessionFactory closed.

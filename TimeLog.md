@@ -43,7 +43,9 @@
 | 3/24/25 | Completed Week 8 Activities and watched videos                              | 4     |       |
 | 3/24/25 | Researched AWS Secrets and created Secrets for the YourHealthJournal        | 2     |       |
 | 3/25/25 | Implemented System Environment Variables instead of Hardcoded Values in YHJ | 2     |       |
-| 3/26/25 | Added SecretsManager Functionality to YHJ                                   | 8     |       |
+| 3/26/25 | Worked on Adding SecretsManager Functionality to YHJ                        | 8     |       |
+| 3/27/25 | Got SecretsManager Functionality working on YHJ!!!!                         | 3     |       |
+| 3/27/25 | Worked on adding a cognito Login landing page to YHJ                        | 4     |       |
 
 
 

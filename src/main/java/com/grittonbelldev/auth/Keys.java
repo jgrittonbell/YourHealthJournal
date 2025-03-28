@@ -1,7 +1,8 @@
-package edu.matc.auth;
+package com.grittonbelldev.auth;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Keys{
 

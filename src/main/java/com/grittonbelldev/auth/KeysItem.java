@@ -1,4 +1,4 @@
-package edu.matc.auth;
+package com.grittonbelldev.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
