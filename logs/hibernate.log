@@ -1309,3 +1309,7 @@
 [DEBUG] 2025-03-28 15:59:43.847 [RMI TCP Connection(2)-127.0.0.1] SessionFactoryRegistry - Registering SessionFactory: 75650bcd-35ed-47ce-a0e9-560a10bced53 (<unnamed>)
 [DEBUG] 2025-03-28 15:59:43.847 [RMI TCP Connection(2)-127.0.0.1] SessionFactoryRegistry - Not binding SessionFactory to JNDI, no JNDI name configured
 [DEBUG] 2025-03-28 15:59:43.847 [RMI TCP Connection(2)-127.0.0.1] SessionFactoryImpl - Instantiated SessionFactory
+[DEBUG] 2025-03-28 16:03:25.031 [main] SessionFactoryImpl - HHH000031: Closing
+[DEBUG] 2025-03-28 16:03:25.032 [main] TypeConfiguration$Scope - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@403f0a22] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@2ef4c5]
+[DEBUG] 2025-03-28 16:03:25.033 [main] AbstractServiceRegistryImpl - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+[DEBUG] 2025-03-28 16:03:25.034 [main] BootstrapServiceRegistryImpl - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
