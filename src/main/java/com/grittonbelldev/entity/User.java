@@ -14,12 +14,14 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    private Long id;
+    @Column(name = "cognitoId", nullable = false, updatable = false, unique = true)
+    private String cognitoId;
 
-    @Column(name = "full_name", nullable = false, length = 100)
-    private String fullName;
+    @Column(name = "firstName", nullable = false, length = 100)
+    private String firstName;
+
+    @Column(name = "lastName", nullable = false, length = 100)
+    private String lastName;
 
     @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
@@ -39,18 +41,29 @@ public class User {
     // Constructors
     public User() {}
 
-    public User(String fullName, String email, LocalDateTime createdAt) {
-        this.fullName = fullName;
+    public User(String firstName, String lastName, String email, LocalDateTime createdAt) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.createdAt = (createdAt != null) ? createdAt.truncatedTo(ChronoUnit.SECONDS) : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        this.createdAt = (createdAt != null)
+                ? createdAt.truncatedTo(ChronoUnit.SECONDS)
+                : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getCognitoId() {
+        return cognitoId;
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setCognitoId(String cognitoId) {
+        this.cognitoId = cognitoId;
+    }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
@@ -104,22 +117,24 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(fullName, user.fullName) &&
+        return Objects.equals(cognitoId, user.cognitoId) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(createdAt, user.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName, email, createdAt);
+        return Objects.hash(cognitoId, firstName, lastName, email, createdAt);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
+                "cognitoId='" + cognitoId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
