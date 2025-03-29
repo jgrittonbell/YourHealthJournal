@@ -7,6 +7,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grittonbelldev.auth.*;
+import com.grittonbelldev.entity.User;
+import com.grittonbelldev.persistence.GenericDAO;
 import org.apache.commons.io.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -75,43 +77,60 @@ public class Auth extends HttpServlet {
     }
 
     /**
-     * Gets the auth code from the request and exchanges it for a token containing user info.
-     * @param req servlet request
-     * @param resp servlet response
-     * @throws ServletException
-     * @throws IOException
+     * Handles the redirect from Cognito with an authorization code.
+     * Exchanges the code for tokens, verifies the ID token, and determines whether the user
+     * exists in the application's database. If the user is new, forwards to a registration flow.
+     *
+     * @param req  HTTP request containing Cognito's auth code
+     * @param resp HTTP response used for redirection or rendering views
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if a network or IO error occurs
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String authCode = req.getParameter("code");
-        String userName = null;
 
+        // If no authorization code is present, something went wrong in the Cognito login
         if (authCode == null) {
             req.setAttribute("errorMessage", "Invalid login attempt. Please try again.");
             req.getRequestDispatcher("error.jsp").forward(req, resp);
             return;
-        } else {
-            HttpRequest authRequest = buildAuthRequest(authCode);
-            try {
-                TokenResponse tokenResponse = getToken(authRequest);
-                userName = validate(tokenResponse);
-
-                HttpSession session = req.getSession(true);
-                session.setAttribute("username", userName);
-
-            } catch (IOException e) {
-                logger.error("Error getting or validating the token: " + e.getMessage(), e);
-                req.setAttribute("errorMessage", "Authentication failed. Please try again.");
-                req.getRequestDispatcher("error.jsp").forward(req, resp);
-            } catch (InterruptedException e) {
-                logger.error("Error getting token from Cognito oauth url " + e.getMessage(), e);
-                req.setAttribute("errorMessage", "Authentication failed. Please try again.");
-                req.getRequestDispatcher("error.jsp").forward(req, resp);
-            }
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-        dispatcher.forward(req, resp);
 
+        try {
+            // Step 1: Exchange the auth code for tokens
+            HttpRequest authRequest = buildAuthRequest(authCode);
+            TokenResponse tokenResponse = getToken(authRequest);
+
+            // Step 2: Verify and decode the ID token
+            DecodedJWT jwt = validate(tokenResponse);
+
+            // Step 3: Extract user details from the verified token
+            String cognitoId = jwt.getClaim("sub").asString(); // Unique ID from Cognito
+            String email = jwt.getClaim("email").asString();
+
+            // Step 4: Look up the user in the database by Cognito ID
+            GenericDAO<User> userDao = new GenericDAO<>(User.class);
+            User user = userDao.getById(cognitoId);
+
+            HttpSession session = req.getSession(true);
+            session.setAttribute("cognitoId", cognitoId); // Store Cognito ID for later use
+            session.setAttribute("email", email);
+
+            if (user != null) {
+                // Existing user found — store in session and forward to home page
+                session.setAttribute("user", user);
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
+            } else {
+                // No user found — forward to registration servlet to collect details
+                req.getRequestDispatcher("/registerUser").forward(req, resp);
+            }
+
+        } catch (IOException | InterruptedException e) {
+            logger.error("Error during authentication: " + e.getMessage(), e);
+            req.setAttribute("errorMessage", "Authentication failed. Please try again.");
+            req.getRequestDispatcher("error.jsp").forward(req, resp);
+        }
     }
 
     /**
@@ -140,64 +159,62 @@ public class Auth extends HttpServlet {
     }
 
     /**
-     * Get values out of the header to verify the token is legit. If it is legit, get the claims from it, such
-     * as username.
-     * @param tokenResponse
-     * @return
-     * @throws IOException
+     * Verifies the ID token received from Cognito, checks its signature,
+     * and returns the decoded JWT so user details can be extracted by the caller.
+     *
+     * @param tokenResponse The response from Cognito's /oauth2/token endpoint
+     * @return Decoded and verified JWT containing user claims
+     * @throws IOException If token cannot be verified or public key cannot be generated
      */
-    private String validate(TokenResponse tokenResponse) throws IOException {
+    private DecodedJWT validate(TokenResponse tokenResponse) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
-        // Header should have kid and alg- https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-id-token.html
-        // Get the key ID (kid) from the JWT header
+        // Parse the JWT header to extract the key ID (kid)
+        CognitoTokenHeader tokenHeader = mapper.readValue(
+                CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(),
+                CognitoTokenHeader.class
+        );
         String keyId = tokenHeader.getKid();
 
-        // Find the matching key from JWKS using the kid
+        // Find the matching key in the JWKS using the key ID (kid)
         KeysItem matchingKey = jwks.getKeys().stream()
-            .filter(key -> key.getKid().equals(keyId))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No matching key found in JWKS for kid: " + keyId));
+                .filter(key -> key.getKid().equals(keyId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No matching key found in JWKS for kid: " + keyId));
 
-        // Convert the modulus (n) and exponent (e) from base64 to BigInteger
+        // Decode the modulus (n) and exponent (e) from Base64 to BigInteger
         BigInteger modulus = new BigInteger(1, org.apache.commons.codec.binary.Base64.decodeBase64(matchingKey.getN()));
         BigInteger exponent = new BigInteger(1, org.apache.commons.codec.binary.Base64.decodeBase64(matchingKey.getE()));
 
-        // Create a public key
+        // Generate RSA public key from the decoded values
         PublicKey publicKey;
         try {
             publicKey = KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(modulus, exponent));
-        } catch (InvalidKeySpecException e) {
-            logger.error("Invalid KeySpec during public key creation", e);
-            throw new IOException("Failed to create public key: invalid spec");
-        } catch (NoSuchAlgorithmException e) {
-            logger.error("NoSuchAlgorithmException during public key creation", e);
-            throw new IOException("Failed to create public key: algorithm not found");
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+            logger.error("Error generating public key for JWT validation", e);
+            throw new IOException("Public key generation failed", e);
         }
 
-        // get an algorithm instance
+        // Build a verifier to ensure the token is:
+        // - signed using RSA
+        // - issued by the correct Cognito User Pool
+        // - an ID token (not access or refresh)
         Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) publicKey, null);
-
-        // Verify ISS field of the token to make sure it's from the Cognito source
-        String iss = String.format("https://cognito-idp.%s.amazonaws.com/%s", REGION, POOL_ID);
+        String issuer = String.format("https://cognito-idp.%s.amazonaws.com/%s", REGION, POOL_ID);
 
         JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer(iss)
-                .withClaim("token_use", "id") // make sure you're verifying id token
+                .withIssuer(issuer)
+                .withClaim("token_use", "id")
                 .build();
 
-        // Verify the token
+        // Perform the verification (throws exception if invalid)
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
-        String userName = jwt.getClaim("cognito:username").asString();
-        logger.debug("here's the username: " + userName);
 
+        // Log useful values for debugging
+        logger.debug("here's the username: " + jwt.getClaim("cognito:username").asString());
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
-        // TODO decide what you want to do with the info!
-        // for now, I'm just returning username for display back to the browser
-
-        return userName;
+        return jwt;
     }
 
     /** Create the auth url and use it to build the request.
