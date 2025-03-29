@@ -2032,3 +2032,111 @@ software.amazon.awssdk.core.exception.SdkClientException: Unable to load credent
 [DEBUG] 2025-03-28 15:59:58.173 [http-nio-8080-exec-5] Auth - here's the username: d15b85b0-a041-700c-cedc-d4d4d5ba3864
 [DEBUG] 2025-03-28 15:59:58.173 [http-nio-8080-exec-5] Auth - here are all the available claims: {at_hash=com.auth0.jwt.impl.JsonNodeClaim@11228dca, sub=com.auth0.jwt.impl.JsonNodeClaim@2ece4ce7, email_verified=com.auth0.jwt.impl.JsonNodeClaim@2a6ef6ae, iss=com.auth0.jwt.impl.JsonNodeClaim@501d7127, cognito:username=com.auth0.jwt.impl.JsonNodeClaim@55d4ea33, origin_jti=com.auth0.jwt.impl.JsonNodeClaim@9212d1a, aud=com.auth0.jwt.impl.JsonNodeClaim@54276116, token_use=com.auth0.jwt.impl.JsonNodeClaim@6f08b6fc, auth_time=com.auth0.jwt.impl.JsonNodeClaim@1dff5c5c, exp=com.auth0.jwt.impl.JsonNodeClaim@1d36fb04, iat=com.auth0.jwt.impl.JsonNodeClaim@72760665, jti=com.auth0.jwt.impl.JsonNodeClaim@5863e181, email=com.auth0.jwt.impl.JsonNodeClaim@3f195b6d}
 [INFO ] 2025-03-28 16:03:25.034 [main] ApplicationStartup - Hibernate SessionFactory closed.
+[INFO ] 2025-03-29 17:19:04.411 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:04.417 [main] Database - Loaded properties file '/database.properties'.
+[INFO ] 2025-03-29 17:19:04.866 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:06.134 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:06.266 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:06.524 [main] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
+[ERROR] 2025-03-29 17:19:08.568 [main] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:130) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:130) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.internal.LazyAwsCredentialsProvider.resolveCredentials(LazyAwsCredentialsProvider.java:45) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.resolveCredentials(DefaultCredentialsProvider.java:129) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProvider.resolveIdentity(AwsCredentialsProvider.java:54) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.lambda$trySelectAuthScheme$4(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.util.MetricUtils.reportDuration(MetricUtils.java:80) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.trySelectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.selectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:81) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.beforeExecution(SecretsManagerAuthSchemeInterceptor.java:61) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.lambda$beforeExecution$1(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at java.util.ArrayList.forEach(ArrayList.java:1541) ~[?:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.beforeExecution(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.runInitialInterceptors(AwsExecutionContextBuilder.java:254) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:144) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsSyncClientHandler.java:67) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.lambda$execute$1(BaseSyncClientHandler.java:76) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.measureApiCallSuccess(BaseSyncClientHandler.java:182) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.execute(BaseSyncClientHandler.java:74) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.client.handler.SdkSyncClientHandler.execute(SdkSyncClientHandler.java:45) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:53) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.DefaultSecretsManagerClient.getSecretValue(DefaultSecretsManagerClient.java:1129) ~[secretsmanager-2.31.8.jar:?]
+	at com.grittonbelldev.util.SecretsManagerUtil.getSecretAsMap(SecretsManagerUtil.java:51) [classes/:?]
+	at com.grittonbelldev.util.HibernateUtil.<clinit>(HibernateUtil.java:38) [classes/:?]
+	at com.grittonbelldev.persistence.GenericDAO.getSession(GenericDAO.java:32) [classes/:?]
+	at com.grittonbelldev.persistence.GenericDAO.getAll(GenericDAO.java:97) [classes/:?]
+	at com.grittonbelldev.persistence.UserDAOTest.getAll(UserDAOTest.java:96) [test-classes/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:389) [junit-platform-commons-1.0.0.jar:1.0.0]
+	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:115) [junit-jupiter-engine-5.0.0.jar:5.0.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:167) [junit-jupiter-engine-5.0.0.jar:5.0.0]
+	at org.junit.jupiter.engine.execution.ThrowableCollector.execute(ThrowableCollector.java:40) [junit-jupiter-engine-5.0.0.jar:5.0.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:163) [junit-jupiter-engine-5.0.0.jar:5.0.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:110) [junit-jupiter-engine-5.0.0.jar:5.0.0]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:57) [junit-jupiter-engine-5.0.0.jar:5.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(HierarchicalTestExecutor.java:83) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(SingleTestExecutor.java:66) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:77) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$null$2(HierarchicalTestExecutor.java:92) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) [?:?]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177) [?:?]
+	at java.util.Iterator.forEachRemaining(Iterator.java:133) [?:?]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801) [?:?]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484) [?:?]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474) [?:?]
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) [?:?]
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) [?:?]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) [?:?]
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497) [?:?]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(HierarchicalTestExecutor.java:92) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(SingleTestExecutor.java:66) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:77) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$null$2(HierarchicalTestExecutor.java:92) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) [?:?]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177) [?:?]
+	at java.util.Iterator.forEachRemaining(Iterator.java:133) [?:?]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801) [?:?]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484) [?:?]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474) [?:?]
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) [?:?]
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) [?:?]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) [?:?]
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497) [?:?]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(HierarchicalTestExecutor.java:92) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(SingleTestExecutor.java:66) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:77) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:51) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:43) [junit-platform-engine-1.0.0.jar:1.0.0]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:170) [junit-platform-launcher-1.0.0.jar:1.0.0]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:154) [junit-platform-launcher-1.0.0.jar:1.0.0]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:90) [junit-platform-launcher-1.0.0.jar:1.0.0]
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57) [junit5-rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38) [junit-rt.jar:?]
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11) [idea_rt.jar:?]
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232) [junit-rt.jar:?]
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55) [junit-rt.jar:?]
+[WARN ] 2025-03-29 17:19:08.569 [main] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
+[INFO ] 2025-03-29 17:19:08.569 [main] HibernateUtil - Using DB URL: jdbc:mysql://awseb-e-mee3mppqez-stack-awsebrdsdatabase-p5kvbeihguiy.cr288w4aoup0.us-east-2.rds.amazonaws.com:3306/YourHealthJournal
+[INFO ] 2025-03-29 17:19:08.569 [main] HibernateUtil - Using DB User: root
+[INFO ] 2025-03-29 17:19:08.569 [main] HibernateUtil - Dialect fallback: org.hibernate.dialect.MySQL8Dialect
+[INFO ] 2025-03-29 17:19:09.516 [main] HibernateUtil - Hibernate SessionFactory created with registry/bootstrap config.
+[INFO ] 2025-03-29 17:19:09.778 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:09.910 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:10.143 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:10.273 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:10.486 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:10.617 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:10.620 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:10.763 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:10.767 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:10.890 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:19:10.893 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:19:11.013 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-03-29 17:22:29.014 [main] UserDAOTest - Log4j2 is working! This should appear in log files.
+[INFO ] 2025-03-29 17:22:29.021 [main] Database - Loaded properties file '/database.properties'.
+[INFO ] 2025-03-29 17:22:29.355 [main] Database - Database.disconnect()... Connection closed
