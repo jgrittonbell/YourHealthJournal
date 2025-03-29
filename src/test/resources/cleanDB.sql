@@ -10,8 +10,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 -- Create the Users table
 CREATE TABLE Users (
-id BIGINT AUTO_INCREMENT PRIMARY KEY,
-full_name VARCHAR(100) NOT NULL,
+cognito_id VARCHAR(255) PRIMARY KEY,
+first_name VARCHAR(100) NOT NULL,
+last_name VARCHAR(100) NOT NULL,
 email VARCHAR(255) UNIQUE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -39,11 +40,11 @@ notes TEXT
 -- Create the Meal table (Replaces logging food entries directly)
 CREATE TABLE Meal (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id BIGINT NOT NULL,
+user_id VARCHAR(255) NOT NULL,
 meal_name VARCHAR(255) NOT NULL,
 time_eaten DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 is_favorite BOOLEAN DEFAULT FALSE,
-FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE
 );
 
 -- Create the FoodMealJournal table (Links Food to Meals for Many-to-Many)
@@ -59,25 +60,25 @@ FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE CASCADE
 -- Create the FavoriteItems table (Stores user favorites for meals & foods)
 CREATE TABLE FavoriteItems (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id BIGINT NOT NULL,
+user_id VARCHAR(255) NOT NULL,
 meal_id BIGINT NULL,
 food_id BIGINT NULL,
 is_favorite BOOLEAN NOT NULL DEFAULT TRUE,
-FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
-FOREIGN KEY (meal_id) REFERENCES Meal(id) ON DELETE CASCADE, -- Removes favorite meals if deleted
-FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE SET NULL, -- Keeps favorite foods but removes reference
-CONSTRAINT unique_favorite UNIQUE (user_id, meal_id, food_id) -- Prevents duplicate favorites
+FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE,
+FOREIGN KEY (meal_id) REFERENCES Meal(id) ON DELETE CASCADE,
+FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE SET NULL,
+CONSTRAINT unique_favorite UNIQUE (user_id, meal_id, food_id)
 );
 
 -- Create the GlucoseReading table (Tracks glucose readings for each user)
 CREATE TABLE GlucoseReading (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id BIGINT NOT NULL,
+user_id VARCHAR(255) NOT NULL,
 glucose_level DECIMAL(5,2) NOT NULL,
 measurement_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 measurement_source VARCHAR(50) NOT NULL,
 notes TEXT NULL,
-FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE
 );
 
 
