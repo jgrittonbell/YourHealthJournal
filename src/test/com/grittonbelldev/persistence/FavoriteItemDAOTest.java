@@ -46,7 +46,7 @@ class FavoriteItemDAOTest {
 
     @Test
     void insertSuccess() {
-        User user = userDAO.getById(1);
+        User user = userDAO.getById("user-001");
         Meal meal = mealDAO.getById(2);
         assertNotNull(user);
         assertNotNull(meal);
@@ -83,7 +83,7 @@ class FavoriteItemDAOTest {
     }
 
     @Test
-    void deleteFavoriteItemButKeepMealAndFood() {
+    void deleteFavoriteItemDoesNotCascadeMealOrFood() {
         FavoriteItem favoriteToDelete = favoriteItemDAO.getById(1);
         assertNotNull(favoriteToDelete);
 

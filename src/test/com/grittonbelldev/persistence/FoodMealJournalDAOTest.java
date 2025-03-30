@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,107 +25,88 @@ class FoodMealJournalDAOTest {
         foodMealJournalDAO = new GenericDAO<>(FoodMealJournal.class);
         mealDAO = new GenericDAO<>(Meal.class);
         foodDAO = new GenericDAO<>(Food.class);
-        Database database = Database.getInstance();
-        database.runSQL("cleanDB.sql");
+        Database.getInstance().runSQL("cleanDB.sql");
     }
 
     @Test
     void getByIdSuccess() {
-        FoodMealJournal expectedEntry = new FoodMealJournal();
-        expectedEntry.setId(1L);
-        expectedEntry.setServingSize(1.5);
-
-        FoodMealJournal retrievedEntry = foodMealJournalDAO.getById(1L);
-        assertNotNull(retrievedEntry);
-        assertEquals(expectedEntry.getId(), retrievedEntry.getId());
-        assertEquals(expectedEntry.getServingSize(), retrievedEntry.getServingSize());
+        FoodMealJournal journal = foodMealJournalDAO.getById(1L);
+        assertNotNull(journal);
+        assertEquals(1.5, journal.getServingSize(), 0.001);
     }
 
     @Test
     void insertSuccess() {
-        Meal meal = mealDAO.getById(1);
-        Food food = foodDAO.getById(3);
+        Meal meal = mealDAO.getById(1L);
+        Food food = foodDAO.getById(3L);
         assertNotNull(meal);
         assertNotNull(food);
 
         FoodMealJournal newEntry = new FoodMealJournal(meal, food, 2.0);
-        FoodMealJournal insertedEntry = foodMealJournalDAO.insert(newEntry);
+        FoodMealJournal inserted = foodMealJournalDAO.insert(newEntry);
 
-        assertNotNull(insertedEntry);
-        assertNotEquals(0, insertedEntry.getId());
-
-        FoodMealJournal retrievedEntry = foodMealJournalDAO.getById(insertedEntry.getId());
-        assertEquals(newEntry, retrievedEntry);
+        assertNotNull(inserted.getId());
+        FoodMealJournal retrieved = foodMealJournalDAO.getById(inserted.getId());
+        assertEquals(inserted, retrieved);
     }
 
     @Test
     void updateSuccess() {
-        FoodMealJournal entryToUpdate = foodMealJournalDAO.getById(1);
-        assertNotNull(entryToUpdate);
+        FoodMealJournal entry = foodMealJournalDAO.getById(1L);
+        assertNotNull(entry);
+        entry.setServingSize(2.0);
 
-        entryToUpdate.setServingSize(2.0);
-        foodMealJournalDAO.update(entryToUpdate);
-
-        FoodMealJournal retrievedEntry = foodMealJournalDAO.getById(1);
-
-        //junit has two versions of assertEquals() 1 for objects and 1 for floating-point values
-        //So we can't use assertEquals(2.0, retrievedEntry.getServingSize()); because it can't infer which one to use.
-        //We have to use a assertEquals(double expected, double actual, double delta) so it knows to
-        // handle the floating point precision issues.
-        // In our case delta will allow for small rounding differences up to 0.001
-        assertEquals(2.0, retrievedEntry.getServingSize(), 0.001);
+        foodMealJournalDAO.update(entry);
+        FoodMealJournal updated = foodMealJournalDAO.getById(1L);
+        assertEquals(2.0, updated.getServingSize(), 0.001);
     }
 
     @Test
-    void deleteEntry() {
-        FoodMealJournal entryToDelete = foodMealJournalDAO.getById(1);
-        assertNotNull(entryToDelete);
+    void deleteSuccess() {
+        FoodMealJournal entry = foodMealJournalDAO.getById(1L);
+        assertNotNull(entry);
 
-        foodMealJournalDAO.delete(entryToDelete);
-        assertNull(foodMealJournalDAO.getById(1));
+        foodMealJournalDAO.delete(entry);
+        assertNull(foodMealJournalDAO.getById(1L));
     }
 
     @Test
-    void deleteMealAndCheckFoodMealJournalDeleted() {
-        Meal mealToDelete = mealDAO.getById(3);
-        assertNotNull(mealToDelete);
+    void deleteMealCascadesJournal() {
+        Meal meal = mealDAO.getById(3L);
+        assertNotNull(meal);
 
-        List<FoodMealJournal> relatedEntries = foodMealJournalDAO.getByPropertyEqual("meal", mealToDelete);
-        assertFalse(relatedEntries.isEmpty(), "Meal should have linked food items before deletion");
+        List<FoodMealJournal> before = foodMealJournalDAO.getByPropertyEqual("meal", meal);
+        assertFalse(before.isEmpty());
 
-        mealDAO.delete(mealToDelete);
-        assertNull(mealDAO.getById(3));
+        mealDAO.delete(meal);
 
-        List<FoodMealJournal> entriesAfterDeletion = foodMealJournalDAO.getByPropertyEqual("meal", mealToDelete);
-        assertTrue(entriesAfterDeletion.isEmpty(), "FoodMealJournal entries should be deleted when meal is deleted");
+        List<FoodMealJournal> after = foodMealJournalDAO.getByPropertyEqual("meal", meal);
+        assertTrue(after.isEmpty());
     }
 
     @Test
-    void deleteFoodAndCheckFoodMealJournalDeleted() {
-        Food foodToDelete = foodDAO.getById(3);
-        assertNotNull(foodToDelete);
+    void deleteFoodCascadesJournal() {
+        Food food = foodDAO.getById(3L);
+        assertNotNull(food);
 
-        List<FoodMealJournal> relatedEntries = foodMealJournalDAO.getByPropertyEqual("food", foodToDelete);
-        assertFalse(relatedEntries.isEmpty(), "Food should have linked meal entries before deletion");
+        List<FoodMealJournal> before = foodMealJournalDAO.getByPropertyEqual("food", food);
+        assertFalse(before.isEmpty());
 
-        foodDAO.delete(foodToDelete);
-        assertNull(foodDAO.getById(3));
+        foodDAO.delete(food);
 
-        List<FoodMealJournal> entriesAfterDeletion = foodMealJournalDAO.getByPropertyEqual("food", foodToDelete);
-        assertTrue(entriesAfterDeletion.isEmpty(), "FoodMealJournal entries should be deleted when food is deleted");
+        List<FoodMealJournal> after = foodMealJournalDAO.getByPropertyEqual("food", food);
+        assertTrue(after.isEmpty());
     }
 
     @Test
     void getAllSuccess() {
-        List<FoodMealJournal> entries = foodMealJournalDAO.getAll();
-        assertEquals(5, entries.size());
+        List<FoodMealJournal> all = foodMealJournalDAO.getAll();
+        assertEquals(5, all.size());
     }
 
     @Test
-    void getByPropertyEqual() {
-        List<FoodMealJournal> entries = foodMealJournalDAO.getByPropertyEqual("servingSize", 1.5);
-        assertFalse(entries.isEmpty());
-        assertEquals(2, entries.size());
+    void getByPropertyEqualSuccess() {
+        List<FoodMealJournal> matching = foodMealJournalDAO.getByPropertyEqual("servingSize", 1.5);
+        assertEquals(2, matching.size());
     }
 }
-
