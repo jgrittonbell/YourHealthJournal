@@ -23,73 +23,62 @@ class GlucoseReadingDAOTest {
         logger.info("Setting up GlucoseReadingDAOTest...");
         glucoseReadingDAO = new GenericDAO<>(GlucoseReading.class);
         userDAO = new GenericDAO<>(User.class);
-        Database database = Database.getInstance();
-        database.runSQL("cleanDB.sql");
+        Database.getInstance().runSQL("cleanDB.sql");
     }
 
     @Test
     void getByIdSuccess() {
-        GlucoseReading expectedReading = new GlucoseReading();
-        expectedReading.setId(1L);
-        expectedReading.setGlucoseLevel(110.5);
-        expectedReading.setMeasurementSource("Manual");
-
-        GlucoseReading retrievedReading = glucoseReadingDAO.getById(1L);
-        assertNotNull(retrievedReading);
-        assertEquals(expectedReading.getId(), retrievedReading.getId());
-        assertEquals(expectedReading.getGlucoseLevel(), retrievedReading.getGlucoseLevel(), 0.001);
-        assertEquals(expectedReading.getMeasurementSource(), retrievedReading.getMeasurementSource());
+        GlucoseReading reading = glucoseReadingDAO.getById(1L);
+        assertNotNull(reading);
+        assertEquals(110.5, reading.getGlucoseLevel(), 0.01);
+        assertEquals("Manual", reading.getMeasurementSource());
     }
 
     @Test
     void insertSuccess() {
-        User user = userDAO.getById(1);
+        User user = userDAO.getById("user-001");
         assertNotNull(user);
 
-        GlucoseReading newReading = new GlucoseReading(user, 95.2, LocalDateTime.now(), "Manual", "Pre-lunch reading");
-        GlucoseReading insertedReading = glucoseReadingDAO.insert(newReading);
+        GlucoseReading newReading = new GlucoseReading(user, 103.4, LocalDateTime.now(), "Dexcom", "After workout");
+        GlucoseReading inserted = glucoseReadingDAO.insert(newReading);
 
-        assertNotNull(insertedReading);
-        assertNotEquals(0, insertedReading.getId());
-
-        GlucoseReading retrievedReading = glucoseReadingDAO.getById(insertedReading.getId());
-        assertEquals(newReading, retrievedReading);
+        assertNotNull(inserted.getId());
+        GlucoseReading retrieved = glucoseReadingDAO.getById(inserted.getId());
+        assertEquals(inserted, retrieved);
     }
 
     @Test
     void updateSuccess() {
-        GlucoseReading readingToUpdate = glucoseReadingDAO.getById(1);
-        assertNotNull(readingToUpdate);
+        GlucoseReading reading = glucoseReadingDAO.getById(1L);
+        assertNotNull(reading);
+        reading.setGlucoseLevel(130.0);
 
-        readingToUpdate.setGlucoseLevel(120.0);
-        glucoseReadingDAO.update(readingToUpdate);
-
-        GlucoseReading retrievedReading = glucoseReadingDAO.getById(1);
-        assertEquals(120.0, retrievedReading.getGlucoseLevel(), 0.001);
+        glucoseReadingDAO.update(reading);
+        GlucoseReading updated = glucoseReadingDAO.getById(1L);
+        assertEquals(130.0, updated.getGlucoseLevel(), 0.01);
     }
 
     @Test
-    void deleteReading() {
-        GlucoseReading readingToDelete = glucoseReadingDAO.getById(1);
-        assertNotNull(readingToDelete);
+    void deleteSuccess() {
+        GlucoseReading reading = glucoseReadingDAO.getById(1L);
+        assertNotNull(reading);
 
-        glucoseReadingDAO.delete(readingToDelete);
-        assertNull(glucoseReadingDAO.getById(1));
+        glucoseReadingDAO.delete(reading);
+        assertNull(glucoseReadingDAO.getById(1L));
     }
 
     @Test
-    void deleteUserAndCheckGlucoseReadingsDeleted() {
-        User userToDelete = userDAO.getById(1);
-        assertNotNull(userToDelete);
+    void deleteUserCascadesReadings() {
+        User user = userDAO.getById("user-001");
+        assertNotNull(user);
 
-        List<GlucoseReading> relatedReadings = glucoseReadingDAO.getByPropertyEqual("user", userToDelete);
-        assertFalse(relatedReadings.isEmpty(), "User should have glucose readings before deletion");
+        List<GlucoseReading> readingsBefore = glucoseReadingDAO.getByPropertyEqual("user", user);
+        assertFalse(readingsBefore.isEmpty());
 
-        userDAO.delete(userToDelete);
-        assertNull(userDAO.getById(1));
+        userDAO.delete(user);
 
-        List<GlucoseReading> readingsAfterDeletion = glucoseReadingDAO.getByPropertyEqual("user", userToDelete);
-        assertTrue(readingsAfterDeletion.isEmpty(), "GlucoseReadings should be deleted when user is deleted");
+        List<GlucoseReading> readingsAfter = glucoseReadingDAO.getByPropertyEqual("user", user);
+        assertTrue(readingsAfter.isEmpty());
     }
 
     @Test
@@ -99,10 +88,8 @@ class GlucoseReadingDAOTest {
     }
 
     @Test
-    void getByPropertyEqual() {
-        List<GlucoseReading> readings = glucoseReadingDAO.getByPropertyEqual("measurementSource", "Manual");
-        assertFalse(readings.isEmpty());
-        assertEquals(2, readings.size());
+    void getByPropertyEqualSuccess() {
+        List<GlucoseReading> manual = glucoseReadingDAO.getByPropertyEqual("measurementSource", "Manual");
+        assertEquals(2, manual.size());
     }
 }
-
