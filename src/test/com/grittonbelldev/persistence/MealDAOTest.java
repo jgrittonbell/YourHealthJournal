@@ -33,7 +33,7 @@ class MealDAOTest {
     @Test
     void getByIdSuccess() {
         Meal expectedMeal = new Meal();
-        User expectedUser = userDAO.getById(3L);
+        User expectedUser = userDAO.getById("user-003");
         expectedMeal.setId(3L);
         expectedMeal.setUser(expectedUser);
         expectedMeal.setMealName("Omega-3 Rich Dinner");
@@ -48,7 +48,7 @@ class MealDAOTest {
 
     @Test
     void insertSuccess() {
-        User user = userDAO.getById(1);
+        User user = userDAO.getById("user-001");
         assertNotNull(user);
 
         Meal mealToInsert = new Meal(user, "Late Night Snack", LocalDateTime.now(), false);
@@ -100,7 +100,7 @@ class MealDAOTest {
         assertEquals(1, meals.size());
 
         Meal expectedMeal = new Meal();
-        User expectedUser = userDAO.getById(1L);
+        User expectedUser = userDAO.getById("user-001");
         expectedMeal.setId(1L);
         expectedMeal.setUser(expectedUser);
         expectedMeal.setMealName("Healthy Breakfast");
