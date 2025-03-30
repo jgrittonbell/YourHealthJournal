@@ -17,7 +17,7 @@ public class GlucoseReading {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "cognito_id", nullable = false)
     private User user;
 
     @Column(name = "glucose_level", nullable = false)

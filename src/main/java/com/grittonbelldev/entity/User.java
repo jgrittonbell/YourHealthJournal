@@ -14,13 +14,13 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @Column(name = "cognitoId", nullable = false, updatable = false, unique = true)
+    @Column(name = "cognito_id", nullable = false, updatable = false, unique = true)
     private String cognitoId;
 
-    @Column(name = "firstName", nullable = false, length = 100)
+    @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false, length = 100)
+    @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
     @Column(name = "email", nullable = false, unique = true, length = 255)

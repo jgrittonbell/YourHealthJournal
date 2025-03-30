@@ -51,7 +51,7 @@ public class GenericDAO<T> {
      * @param entity The entity to be updated
      */
     public void update(T entity) {
-        Session session = getSession();
+        Session session = SessionFactoryProvider.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.merge(entity);// Merge method is only for updates
         transaction.commit();
@@ -65,7 +65,7 @@ public class GenericDAO<T> {
      * @return id the id of the entity that was inserted
      */
     public T insert(T entity) {
-        Session session = getSession();
+        Session session = SessionFactoryProvider.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.persist(entity);
         transaction.commit();
@@ -80,7 +80,7 @@ public class GenericDAO<T> {
      * @param entity entity to be deleted
      */
     public void delete(T entity) {
-        Session session = getSession();
+        Session session = SessionFactoryProvider.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.delete(entity);
         transaction.commit();
@@ -94,7 +94,7 @@ public class GenericDAO<T> {
      */
     public List<T> getAll() {
 
-        Session session = getSession();
+        Session session = SessionFactoryProvider.getSessionFactory().openSession();
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
@@ -115,7 +115,7 @@ public class GenericDAO<T> {
      * @return list of matching entities
      */
     public List<T> getByPropertyEqual(String propertyName, Object value) {
-        Session session = getSession();
+        Session session = SessionFactoryProvider.getSessionFactory().openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
@@ -137,7 +137,7 @@ public class GenericDAO<T> {
      * @return list of matching entities
      */
     public List<T> getByPropertyLike(String propertyName, String value) {
-        Session session = getSession();
+        Session session = SessionFactoryProvider.getSessionFactory().openSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);

@@ -19,7 +19,7 @@ public class Meal {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "cognito_id", nullable = false)
     private User user;
 
     @Column(name = "meal_name", nullable = false, length = 255)
