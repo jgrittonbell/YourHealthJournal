@@ -23,6 +23,10 @@
   <hibernate-version>6.4.3.Final</hibernate-version>
   <jersey-version>2.29.1</jersey-version>
   <jackson-version>2.10.0</jackson-version>
+  <aws-sdk-version>2.31.8</aws-sdk-version>
+  <java-jwt-version>3.4.1</java-jwt-version>
+  <json-version>20250107</json-version>
+  <commons-io-version>2.18.0</commons-io-version>
 </properties>
 
 <dependencies>
@@ -131,33 +135,35 @@
   <dependency>
     <groupId>software.amazon.awssdk</groupId>
     <artifactId>aws-core</artifactId>
-    <version>2.31.8</version>
+    <version>${aws-sdk-version}</version>
   </dependency>
 
   <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/secretsmanager -->
   <dependency>
     <groupId>software.amazon.awssdk</groupId>
     <artifactId>secretsmanager</artifactId>
-    <version>2.31.8</version>
+    <version>${aws-sdk-version}</version>
   </dependency>
 
   <!-- for parsing access token -->
-  <!-- TODO add versions to properties element rather than hard-coding -->
+  <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
   <dependency>
     <groupId>com.auth0</groupId>
     <artifactId>java-jwt</artifactId>
-    <version>3.4.1</version>
+    <version>${java-jwt-version}</version>
   </dependency>
+
+  <!-- https://mvnrepository.com/artifact/org.json/json -->
   <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>
-    <version>20170516</version>
+    <version>${json-version}</version>
   </dependency>
   <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
   <dependency>
     <groupId>commons-io</groupId>
     <artifactId>commons-io</artifactId>
-    <version>2.11.0</version>
+    <version>${commons-io-version}</version>
   </dependency>
 
 </dependencies>

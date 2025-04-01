@@ -1364,3 +1364,7 @@
 [DEBUG] 2025-03-31 21:02:26.598 [http-nio-8080-exec-8] entity - (EntityResultInitializer) Done materializing entityInstance : com.grittonbelldev.entity.User#d15b85b0-a041-700c-cedc-d4d4d5ba3864
 [DEBUG] 2025-03-31 21:02:26.598 [http-nio-8080-exec-8] loading - Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@284b4a3d
 [DEBUG] 2025-03-31 21:02:26.598 [http-nio-8080-exec-8] LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+[DEBUG] 2025-03-31 21:24:55.317 [main] SessionFactoryImpl - HHH000031: Closing
+[DEBUG] 2025-03-31 21:24:55.317 [main] TypeConfiguration$Scope - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@294a6b8e] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@471ca93b]
+[DEBUG] 2025-03-31 21:24:55.318 [main] AbstractServiceRegistryImpl - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+[DEBUG] 2025-03-31 21:24:55.319 [main] BootstrapServiceRegistryImpl - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
