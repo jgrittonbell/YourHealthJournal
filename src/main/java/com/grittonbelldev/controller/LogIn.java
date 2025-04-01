@@ -31,6 +31,10 @@ public class LogIn extends HttpServlet{
         clientId = (String) context.getAttribute("client.id");
         loginUrl = (String) context.getAttribute("loginURL");
         redirectUrl = (String) context.getAttribute("redirectURL");
+        logger.info("Attempting to use login servlet and below is the client id and the login URL and the redirect URL:");
+        logger.info("Client ID: {}", clientId);
+        logger.info("Login URL: {}", loginUrl);
+        logger.info("Redirect URL: {}", redirectUrl);
     }
 
     /**
@@ -48,6 +52,7 @@ public class LogIn extends HttpServlet{
             return;
         }
         String url = loginUrl + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirectUrl;
+        logger.info("Here is the redirect URL: {}", url);
         resp.sendRedirect(url);
     }
 }

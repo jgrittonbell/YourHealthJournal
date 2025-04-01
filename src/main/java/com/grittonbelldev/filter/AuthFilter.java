@@ -25,12 +25,16 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
+        //String contextPath = req.getContextPath(); //This might be used in prod
         String path = req.getRequestURI();
+        //String relativePath = path.substring(contextPath.length()); // This might be used in prod
 
-        boolean loggedIn = session != null && session.getAttribute("username") != null;
+        boolean loggedIn = session != null && session.getAttribute("user") != null;
 
         boolean isPublicPath =
-                path.contains("/logIn") ||
+                        path.equals("/") ||
+                        path.endsWith("/YourHealthJournal_war/") || //TODO remove this for prod --For local use only
+                        path.contains("/logIn") ||
                         path.contains("/auth") ||
                         path.contains("/error.jsp") ||
                         path.contains("/css/") ||

@@ -1,35 +1,26 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="includes/head.jsp" />
 
-<html>
-  <c:import url="includes/head.jsp" />
-<body>
-<main class="container mt-4">
-  <h1 class="mb-3">Your Foods</h1>
+<div class="container mt-5">
+  <h2>Welcome to YourHealthJournal</h2>
+  <p>Please complete your registration by providing the following information:</p>
 
-  <table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-    <tr>
-      <th>Name</th>
-      <th>Calories</th>
-      <th>Protein (g)</th>
-      <th>Carbs (g)</th>
-      <th>Fat (g)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="food" items="${foods}">
-      <tr>
-        <td>${food.foodName}</td>
-        <td>${food.calories}</td>
-        <td>${food.protein}</td>
-        <td>${food.carbs}</td>
-        <td>${food.fat}</td>
-      </tr>
-    </c:forEach>
-    </tbody>
-  </table>
-</main>
-<c:import url="includes/footer.jsp" />
-</body>
-</html>
+  <form action="registerUser" method="post">
+    <input type="hidden" name="cognitoId" value="${sessionScope.cognitoId}" />
+    <input type="hidden" name="email" value="${sessionScope.email}" />
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name:</label>
+      <input type="text" class="form-control" name="firstName" id="firstName" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name:</label>
+      <input type="text" class="form-control" name="lastName" id="lastName" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+<jsp:include page="includes/footer.jsp" />

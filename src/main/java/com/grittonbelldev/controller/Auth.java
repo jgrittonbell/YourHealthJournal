@@ -88,7 +88,9 @@ public class Auth extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Auth servlet triggered. Checking for auth code...");
         String authCode = req.getParameter("code");
+
 
         // If no authorization code is present, something went wrong in the Cognito login
         if (authCode == null) {
@@ -110,6 +112,8 @@ public class Auth extends HttpServlet {
             String email = jwt.getClaim("email").asString();
 
             // Step 4: Look up the user in the database by Cognito ID
+            logger.info("Cognito ID from token: {}", cognitoId);
+
             GenericDAO<User> userDao = new GenericDAO<>(User.class);
             User user = userDao.getById(cognitoId);
 
@@ -119,15 +123,17 @@ public class Auth extends HttpServlet {
 
             if (user != null) {
                 // Existing user found — store in session and forward to home page
+                logger.info("User logged in.");
                 session.setAttribute("user", user);
-                req.getRequestDispatcher("index.jsp").forward(req, resp);
+                req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
             } else {
+                logger.info("No User Found.");
                 // No user found — forward to registration servlet to collect details
                 req.getRequestDispatcher("/registerUser").forward(req, resp);
             }
 
         } catch (IOException | InterruptedException e) {
-            logger.error("Error during authentication: " + e.getMessage(), e);
+            logger.error("Error during authentication: {}", e.getMessage(), e);
             req.setAttribute("errorMessage", "Authentication failed. Please try again.");
             req.getRequestDispatcher("error.jsp").forward(req, resp);
         }
