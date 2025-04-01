@@ -48,7 +48,9 @@
 | 3/27/25 | Worked on adding a cognito Login landing page to YHJ                              | 6     |       |
 | 3/27/25 | Added index.jsp and an Filter Package with AuthFilter to secure YHJ               | 2     |       |
 | 3/29/25 | Worked to connected cognito with the DAO, database etc with lots of debugging     | 8     |       |
-| 3/29/25 | Still trying to connect cognito with the DAO, database etc with lots of debugging | 4     |       |
+| 3/30/25 | Debugging Tomcat not starting and intellij issues                                 | 4     |       |
+| 3/31/25 | Still trying to connect cognito with the DAO, database etc with lots of debugging | 4     |       |
+| 3/31/25 | Week 9 Activity not working did lots of reading debugging                         | 2     |       |
 
 
 
