@@ -1409,3 +1409,46 @@
 [DEBUG] 2025-04-07 15:00:39.423 [http-nio-8080-exec-8] results - Extracted JDBC value [15] - [null]
 [DEBUG] 2025-04-07 15:00:39.423 [http-nio-8080-exec-8] entity - (EntityResultInitializer) Done materializing entityInstance : com.grittonbelldev.entity.Food#1
 [DEBUG] 2025-04-07 15:00:39.423 [http-nio-8080-exec-8] loading - Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@7f326ac4
+[DEBUG] 2025-04-07 15:03:03.614 [http-nio-8080-exec-2] TransactionImpl - On TransactionImpl creation, JpaCompliance#isJpaTransactionComplianceEnabled == false
+[DEBUG] 2025-04-07 15:03:03.614 [http-nio-8080-exec-2] TransactionImpl - begin
+[DEBUG] 2025-04-07 15:03:03.614 [http-nio-8080-exec-2] ActionQueue - Executing identity-insert immediately
+[DEBUG] 2025-04-07 15:03:03.615 [http-nio-8080-exec-2] SQL - insert into Food (added_sugar,calcium,calories,carbs,cholesterol,fat,fiber,food_name,iron,notes,potassium,protein,sodium,sugar,vitamin_d) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] IdentifierGeneratorHelper - Natively generated identity (com.grittonbelldev.entity.Food) : 2
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] ResourceRegistryStandardImpl - HHH000387: ResultSet's statement was not registered
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] ResourceRegistryStandardImpl - Exception clearing maxRows/queryTimeout [You can't operate on a closed Statement!!!]
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] TransactionImpl - committing
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] AbstractFlushingEventListener - Processing flush-time cascades
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] AbstractFlushingEventListener - Dirty checking collections
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] AbstractFlushingEventListener - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] AbstractFlushingEventListener - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] EntityPrinter - Listing entities:
+[DEBUG] 2025-04-07 15:03:03.616 [http-nio-8080-exec-2] EntityPrinter - com.grittonbelldev.entity.Food{fiber=null, calcium=null, notes=null, potassium=null, carbs=5.0, vitaminD=null, calories=100.0, addedSugar=null, sodium=null, foodName=Eggs, protein=50.0, fat=20.0, cholesterol=null, iron=null, id=2, sugar=null}
+[DEBUG] 2025-04-07 15:03:03.617 [http-nio-8080-exec-2] LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+[DEBUG] 2025-04-07 15:03:03.617 [http-nio-8080-exec-2] LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+[DEBUG] 2025-04-07 15:03:03.617 [http-nio-8080-exec-2] exec - Skipping reading Query result cache data: cache-enabled = false, cache-mode = IGNORE
+[DEBUG] 2025-04-07 15:03:03.617 [http-nio-8080-exec-2] results - Initializer list:
+	  com.grittonbelldev.entity.Food -> EntityResultInitializer(com.grittonbelldev.entity.Food)@403588429 (SingleTableEntityPersister(com.grittonbelldev.entity.Food))
+
+[DEBUG] 2025-04-07 15:03:03.617 [http-nio-8080-exec-2] SQL - select f1_0.id,f1_0.added_sugar,f1_0.calcium,f1_0.calories,f1_0.carbs,f1_0.cholesterol,f1_0.fat,f1_0.fiber,f1_0.food_name,f1_0.iron,f1_0.notes,f1_0.potassium,f1_0.protein,f1_0.sodium,f1_0.sugar,f1_0.vitamin_d from Food f1_0 where f1_0.id=?
+[DEBUG] 2025-04-07 15:03:03.618 [http-nio-8080-exec-2] entity - (EntityResultInitializer) Hydrated EntityKey (com.grittonbelldev.entity.Food): 2
+[DEBUG] 2025-04-07 15:03:03.618 [http-nio-8080-exec-2] results - Extracted JDBC value [1] - [null]
+[DEBUG] 2025-04-07 15:03:03.618 [http-nio-8080-exec-2] results - Extracted JDBC value [2] - [null]
+[DEBUG] 2025-04-07 15:03:03.618 [http-nio-8080-exec-2] results - Extracted JDBC value [3] - [100.0]
+[DEBUG] 2025-04-07 15:03:03.618 [http-nio-8080-exec-2] results - Extracted JDBC value [4] - [5.0]
+[DEBUG] 2025-04-07 15:03:03.618 [http-nio-8080-exec-2] results - Extracted JDBC value [5] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [6] - [20.0]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [7] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [8] - [Eggs]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [9] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [10] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [11] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [12] - [50.0]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [13] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [14] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] results - Extracted JDBC value [15] - [null]
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] entity - (EntityResultInitializer) Done materializing entityInstance : com.grittonbelldev.entity.Food#2
+[DEBUG] 2025-04-07 15:03:03.619 [http-nio-8080-exec-2] loading - Calling top-level assembler (0 / 1) : org.hibernate.sql.results.graph.entity.internal.EntityAssembler@5a5b4b86
+[DEBUG] 2025-04-07 15:09:31.849 [main] SessionFactoryImpl - HHH000031: Closing
+[DEBUG] 2025-04-07 15:09:31.850 [main] TypeConfiguration$Scope - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@71529963] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@7df78b51]
+[DEBUG] 2025-04-07 15:09:31.851 [main] AbstractServiceRegistryImpl - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+[DEBUG] 2025-04-07 15:09:31.852 [main] BootstrapServiceRegistryImpl - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
