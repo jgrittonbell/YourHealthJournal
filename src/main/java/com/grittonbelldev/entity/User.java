@@ -14,7 +14,10 @@ import java.util.Objects;
 public class User {
 
     @Id
-    @Column(name = "cognito_id", nullable = false, updatable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "cognito_id", nullable = false, unique = true)
     private String cognitoId;
 
     @Column(name = "first_name", nullable = false, length = 100)
@@ -41,13 +44,21 @@ public class User {
     // Constructors
     public User() {}
 
-    public User(String firstName, String lastName, String email, LocalDateTime createdAt) {
+    public User(String cognitoId, String firstName, String lastName, String email) {
+        this.cognitoId = cognitoId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.createdAt = (createdAt != null)
-                ? createdAt.truncatedTo(ChronoUnit.SECONDS)
-                : LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        this.createdAt = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+    }
+
+    //Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCognitoId() {
@@ -115,24 +126,22 @@ public class User {
     // Equals, HashCode, and ToString
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(cognitoId, user.cognitoId) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(createdAt, user.createdAt);
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cognitoId, firstName, lastName, email, createdAt);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "cognitoId='" + cognitoId + '\'' +
+                "id=" + id +
+                ", cognitoId='" + cognitoId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
