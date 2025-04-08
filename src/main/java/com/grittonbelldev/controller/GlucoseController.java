@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @WebServlet("/glucose")
 public class GlucoseController extends HttpServlet {
@@ -20,7 +21,9 @@ public class GlucoseController extends HttpServlet {
         String action = req.getParameter("action");
 
         if ("create".equalsIgnoreCase(action)) {
-            req.getRequestDispatcher("/glucose/glucoseForm.jsp").forward(req, resp);
+            req.getRequestDispatcher("glucoseForm.jsp").forward(req, resp);
+        } else if ("list".equalsIgnoreCase(action)) {
+            listGlucoseReadings(req, resp);
         } else {
             resp.sendRedirect("dashboard.jsp");
         }
@@ -48,6 +51,16 @@ public class GlucoseController extends HttpServlet {
         GlucoseReading reading = new GlucoseReading(user, glucoseLevel, LocalDateTime.now(), measurementSource, notes);
         glucoseDao.insert(reading);
 
-        resp.sendRedirect("dashboard.jsp");
+        HttpSession session = req.getSession();
+        session.setAttribute("glucoseSuccess", true);
+
+        resp.sendRedirect("glucose?action=list");
+    }
+
+    private void listGlucoseReadings(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String cognitoId = (String) req.getSession().getAttribute("cognitoId");
+        List<GlucoseReading> readings = glucoseDao.getByPropertyEqual("user.id", cognitoId);
+        req.setAttribute("readings", readings);
+        req.getRequestDispatcher("glucoseList.jsp").forward(req, resp);
     }
 }

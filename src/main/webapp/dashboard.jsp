@@ -14,6 +14,7 @@
       </form>
 
       <form action="glucose?action=create" method="get" style="display:inline;">
+        <input type="hidden" name="action" value="create">
         <button type="submit" class="btn btn-secondary">Add Glucose Reading</button>
       </form>
     </c:when>
