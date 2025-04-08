@@ -14,7 +14,6 @@ import java.util.List;
 @WebServlet("/glucose")
 public class GlucoseController extends HttpServlet {
     private final GenericDAO<GlucoseReading> glucoseDao = new GenericDAO<>(GlucoseReading.class);
-    private final GenericDAO<User> userDao = new GenericDAO<>(User.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,8 +40,11 @@ public class GlucoseController extends HttpServlet {
     }
 
     private void insertGlucose(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String cognitoId = (String) req.getSession().getAttribute("cognitoId");
-        User user = userDao.getById(cognitoId);
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
 
         double glucoseLevel = Double.parseDouble(req.getParameter("glucoseLevel"));
         String measurementSource = req.getParameter("measurementSource");
@@ -58,8 +60,20 @@ public class GlucoseController extends HttpServlet {
     }
 
     private void listGlucoseReadings(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String cognitoId = (String) req.getSession().getAttribute("cognitoId");
-        List<GlucoseReading> readings = glucoseDao.getByPropertyEqual("user.id", cognitoId);
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
+
+        List<GlucoseReading> readings = glucoseDao.getByPropertyEqual("user.id", user.getId());
+
+        HttpSession session = req.getSession();
+        if (session.getAttribute("glucoseSuccess") != null) {
+            req.setAttribute("glucoseSuccess", true);
+            session.removeAttribute("glucoseSuccess");
+        }
+
         req.setAttribute("readings", readings);
         req.getRequestDispatcher("glucoseList.jsp").forward(req, resp);
     }
