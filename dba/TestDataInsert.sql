@@ -1,7 +1,7 @@
--- Use the YourHealthJournal database
+-- Use the test database if needed
 USE YourHealthJournal_test;
 
--- Insert Users
+-- Insert Users (id is auto-generated)
 INSERT INTO Users (cognito_id, first_name, last_name, email, created_at) VALUES
 ('user-001', 'John', 'Doe', 'john.doe@example.com', NOW()),
 ('user-002', 'Jane', 'Smith', 'jane.smith@example.com', NOW()),
@@ -15,30 +15,30 @@ INSERT INTO Food (food_name, fat, protein, carbs, calories, cholesterol, sodium,
 ('Avocado Toast', 14.00, 5.00, 18.00, 200.00, 0.00, 150.00, 7.00, 2.00, NULL, 0.00, 20.00, 0.90, 300.00, 'Good fats and fiber'),
 ('Greek Yogurt with Honey', 4.00, 10.00, 18.00, 150.00, 5.00, 55.00, 0.00, 14.00, 10.00, 2.00, 110.00, 0.80, 160.00, 'Protein-rich snack with probiotics');
 
--- Insert Meals
+-- Insert Meals (user_id = 1, 2, 3 manually match to Users inserted in order)
 INSERT INTO Meal (user_id, meal_name, time_eaten, is_favorite) VALUES
-('user-001', 'Healthy Breakfast', '2024-02-17 08:00:00', TRUE),
-('user-002', 'Protein-Packed Lunch', '2024-02-17 12:30:00', FALSE),
-('user-003', 'Omega-3 Rich Dinner', '2024-02-17 19:00:00', TRUE);
+(1, 'Healthy Breakfast', '2024-02-17 08:00:00', TRUE),
+(2, 'Protein-Packed Lunch', '2024-02-17 12:30:00', FALSE),
+(3, 'Omega-3 Rich Dinner', '2024-02-17 19:00:00', TRUE);
 
--- Insert FoodMealJournal (Linking foods to meals with serving sizes)
+-- Insert FoodMealJournal
 INSERT INTO FoodMealJournal (meal_id, food_id, serving_size) VALUES
-(1, 2, 1.5), -- Oatmeal with Banana in Healthy Breakfast
-(1, 4, 2.0), -- Avocado Toast in Healthy Breakfast
-(2, 1, 1.0), -- Grilled Chicken Breast in Protein-Packed Lunch
-(2, 5, 1.5), -- Greek Yogurt with Honey in Protein-Packed Lunch
-(3, 3, 1.0); -- Salmon with Steamed Broccoli in Omega-3 Rich Dinner
+(1, 2, 1.5),
+(1, 4, 2.0),
+(2, 1, 1.0),
+(2, 5, 1.5),
+(3, 3, 1.0);
 
--- Insert Favorite Items (Users favoriting meals and foods)
+-- Insert FavoriteItems
 INSERT INTO FavoriteItems (user_id, meal_id, food_id, is_favorite) VALUES
-('user-001', 1, NULL, TRUE), -- User 1 favorited Healthy Breakfast
-('user-001', NULL, 3, TRUE), -- User 1 favorited Salmon
-('user-002', NULL, 5, TRUE), -- User 2 favorited Greek Yogurt
-('user-003', 3, NULL, TRUE); -- User 3 favorited Omega-3 Rich Dinner
+(1, 1, NULL, TRUE),
+(1, NULL, 3, TRUE),
+(2, NULL, 5, TRUE),
+(3, 3, NULL, TRUE);
 
--- Insert Glucose Readings
+-- Insert GlucoseReadings
 INSERT INTO GlucoseReading (user_id, glucose_level, measurement_time, measurement_source, notes) VALUES
-('user-001', 110.5, '2024-02-17 07:45:00', 'Manual', 'Before breakfast'),
-('user-001', 145.2, '2024-02-17 12:15:00', 'Dexcom', 'Post-lunch spike'),
-('user-002', 98.0, '2024-02-17 18:50:00', 'Nightscout', 'Before dinner'),
-('user-003', 120.3, '2024-02-17 22:30:00', 'Manual', 'Bedtime reading');
+(1, 110.5, '2024-02-17 07:45:00', 'Manual', 'Before breakfast'),
+(1, 145.2, '2024-02-17 12:15:00', 'Dexcom', 'Post-lunch spike'),
+(2, 98.0, '2024-02-17 18:50:00', 'Nightscout', 'Before dinner'),
+(3, 120.3, '2024-02-17 22:30:00', 'Manual', 'Bedtime reading');

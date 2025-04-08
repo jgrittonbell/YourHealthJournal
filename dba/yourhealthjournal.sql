@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS YourHealthJournal;
 CREATE DATABASE YourHealthJournal;
 USE YourHealthJournal;
 
--- Drop tables if they exist (in reverse dependency order to prevent foreign key issues)
+-- Disable FK checks to allow clean drops
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS GlucoseReading;
 DROP TABLE IF EXISTS FavoriteItems;
@@ -15,14 +15,15 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 -- Create the Users table
 CREATE TABLE Users (
-cognito_id VARCHAR(255) PRIMARY KEY,
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+cognito_id VARCHAR(255) NOT NULL UNIQUE,
 first_name VARCHAR(100) NOT NULL,
 last_name VARCHAR(100) NOT NULL,
 email VARCHAR(255) UNIQUE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create the Food table (Stores food items and their nutrition details)
+-- Create the Food table
 CREATE TABLE Food (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 food_name VARCHAR(255) NOT NULL,
@@ -42,17 +43,17 @@ potassium DECIMAL(5,2),
 notes TEXT
 );
 
--- Create the Meal table (Replaces logging food entries directly)
+-- Create the Meal table
 CREATE TABLE Meal (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255) NOT NULL,
+user_id BIGINT NOT NULL,
 meal_name VARCHAR(255) NOT NULL,
 time_eaten DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 is_favorite BOOLEAN DEFAULT FALSE,
-FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- Create the FoodMealJournal table (Links Food to Meals for Many-to-Many)
+-- Create the FoodMealJournal table
 CREATE TABLE FoodMealJournal (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 meal_id BIGINT NOT NULL,
@@ -62,26 +63,26 @@ FOREIGN KEY (meal_id) REFERENCES Meal(id) ON DELETE CASCADE,
 FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE CASCADE
 );
 
--- Create the FavoriteItems table (Stores user favorites for meals & foods)
+-- Create the FavoriteItems table
 CREATE TABLE FavoriteItems (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255) NOT NULL,
+user_id BIGINT NOT NULL,
 meal_id BIGINT NULL,
 food_id BIGINT NULL,
 is_favorite BOOLEAN NOT NULL DEFAULT TRUE,
-FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE,
+FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
 FOREIGN KEY (meal_id) REFERENCES Meal(id) ON DELETE CASCADE,
 FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE SET NULL,
 CONSTRAINT unique_favorite UNIQUE (user_id, meal_id, food_id)
 );
 
--- Create the GlucoseReading table (Tracks glucose readings for each user)
+-- Create the GlucoseReading table
 CREATE TABLE GlucoseReading (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255) NOT NULL,
+user_id BIGINT NOT NULL,
 glucose_level DECIMAL(5,2) NOT NULL,
 measurement_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 measurement_source VARCHAR(50) NOT NULL,
 notes TEXT NULL,
-FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );

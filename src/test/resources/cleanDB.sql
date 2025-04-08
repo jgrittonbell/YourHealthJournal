@@ -10,14 +10,15 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 -- Create the Users table
 CREATE TABLE Users (
-cognito_id VARCHAR(255) PRIMARY KEY,
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+cognito_id VARCHAR(255) NOT NULL UNIQUE,
 first_name VARCHAR(100) NOT NULL,
 last_name VARCHAR(100) NOT NULL,
 email VARCHAR(255) UNIQUE NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create the Food table (Stores food items and their nutrition details)
+-- Create the Food table
 CREATE TABLE Food (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 food_name VARCHAR(255) NOT NULL,
@@ -37,17 +38,17 @@ potassium DECIMAL(5,2),
 notes TEXT
 );
 
--- Create the Meal table (Replaces logging food entries directly)
+-- Create the Meal table
 CREATE TABLE Meal (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255) NOT NULL,
+user_id BIGINT NOT NULL,
 meal_name VARCHAR(255) NOT NULL,
 time_eaten DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 is_favorite BOOLEAN DEFAULT FALSE,
-FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- Create the FoodMealJournal table (Links Food to Meals for Many-to-Many)
+-- Create the FoodMealJournal table
 CREATE TABLE FoodMealJournal (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 meal_id BIGINT NOT NULL,
@@ -57,35 +58,33 @@ FOREIGN KEY (meal_id) REFERENCES Meal(id) ON DELETE CASCADE,
 FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE CASCADE
 );
 
--- Create the FavoriteItems table (Stores user favorites for meals & foods)
+-- Create the FavoriteItems table
 CREATE TABLE FavoriteItems (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255) NOT NULL,
+user_id BIGINT NOT NULL,
 meal_id BIGINT NULL,
 food_id BIGINT NULL,
 is_favorite BOOLEAN NOT NULL DEFAULT TRUE,
-FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE,
+FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
 FOREIGN KEY (meal_id) REFERENCES Meal(id) ON DELETE CASCADE,
 FOREIGN KEY (food_id) REFERENCES Food(id) ON DELETE SET NULL,
 CONSTRAINT unique_favorite UNIQUE (user_id, meal_id, food_id)
 );
 
--- Create the GlucoseReading table (Tracks glucose readings for each user)
+-- Create the GlucoseReading table
 CREATE TABLE GlucoseReading (
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-user_id VARCHAR(255) NOT NULL,
+user_id BIGINT NOT NULL,
 glucose_level DECIMAL(5,2) NOT NULL,
 measurement_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 measurement_source VARCHAR(50) NOT NULL,
 notes TEXT NULL,
-FOREIGN KEY (user_id) REFERENCES Users(cognito_id) ON DELETE CASCADE
+FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
-
 
 -- INSERT TEST DATA
 
--- Insert Users
--- Insert Users
+-- Insert Users (id is auto-generated)
 INSERT INTO Users (cognito_id, first_name, last_name, email, created_at) VALUES
 ('user-001', 'John', 'Doe', 'john.doe@example.com', NOW()),
 ('user-002', 'Jane', 'Smith', 'jane.smith@example.com', NOW()),
@@ -99,30 +98,30 @@ INSERT INTO Food (food_name, fat, protein, carbs, calories, cholesterol, sodium,
 ('Avocado Toast', 14.00, 5.00, 18.00, 200.00, 0.00, 150.00, 7.00, 2.00, NULL, 0.00, 20.00, 0.90, 300.00, 'Good fats and fiber'),
 ('Greek Yogurt with Honey', 4.00, 10.00, 18.00, 150.00, 5.00, 55.00, 0.00, 14.00, 10.00, 2.00, 110.00, 0.80, 160.00, 'Protein-rich snack with probiotics');
 
--- Insert Meals
+-- Insert Meals (user_id = 1, 2, 3 manually match to Users inserted in order)
 INSERT INTO Meal (user_id, meal_name, time_eaten, is_favorite) VALUES
-('user-001', 'Healthy Breakfast', '2024-02-17 08:00:00', TRUE),
-('user-002', 'Protein-Packed Lunch', '2024-02-17 12:30:00', FALSE),
-('user-003', 'Omega-3 Rich Dinner', '2024-02-17 19:00:00', TRUE);
+(1, 'Healthy Breakfast', '2024-02-17 08:00:00', TRUE),
+(2, 'Protein-Packed Lunch', '2024-02-17 12:30:00', FALSE),
+(3, 'Omega-3 Rich Dinner', '2024-02-17 19:00:00', TRUE);
 
--- Insert FoodMealJournal (Linking foods to meals with serving sizes)
+-- Insert FoodMealJournal
 INSERT INTO FoodMealJournal (meal_id, food_id, serving_size) VALUES
-(1, 2, 1.5), -- Oatmeal with Banana in Healthy Breakfast
-(1, 4, 2.0), -- Avocado Toast in Healthy Breakfast
-(2, 1, 1.0), -- Grilled Chicken Breast in Protein-Packed Lunch
-(2, 5, 1.5), -- Greek Yogurt with Honey in Protein-Packed Lunch
-(3, 3, 1.0); -- Salmon with Steamed Broccoli in Omega-3 Rich Dinner
+(1, 2, 1.5),
+(1, 4, 2.0),
+(2, 1, 1.0),
+(2, 5, 1.5),
+(3, 3, 1.0);
 
--- Insert Favorite Items (Users favoriting meals and foods)
+-- Insert FavoriteItems
 INSERT INTO FavoriteItems (user_id, meal_id, food_id, is_favorite) VALUES
-('user-001', 1, NULL, TRUE), -- User 1 favorited Healthy Breakfast
-('user-001', NULL, 3, TRUE), -- User 1 favorited Salmon
-('user-002', NULL, 5, TRUE), -- User 2 favorited Greek Yogurt
-('user-003', 3, NULL, TRUE); -- User 3 favorited Omega-3 Rich Dinner
+(1, 1, NULL, TRUE),
+(1, NULL, 3, TRUE),
+(2, NULL, 5, TRUE),
+(3, 3, NULL, TRUE);
 
--- Insert Glucose Readings
+-- Insert GlucoseReadings
 INSERT INTO GlucoseReading (user_id, glucose_level, measurement_time, measurement_source, notes) VALUES
-('user-001', 110.5, '2024-02-17 07:45:00', 'Manual', 'Before breakfast'),
-('user-001', 145.2, '2024-02-17 12:15:00', 'Dexcom', 'Post-lunch spike'),
-('user-002', 98.0, '2024-02-17 18:50:00', 'Nightscout', 'Before dinner'),
-('user-003', 120.3, '2024-02-17 22:30:00', 'Manual', 'Bedtime reading');
+(1, 110.5, '2024-02-17 07:45:00', 'Manual', 'Before breakfast'),
+(1, 145.2, '2024-02-17 12:15:00', 'Dexcom', 'Post-lunch spike'),
+(2, 98.0, '2024-02-17 18:50:00', 'Nightscout', 'Before dinner'),
+(3, 120.3, '2024-02-17 22:30:00', 'Manual', 'Bedtime reading');
