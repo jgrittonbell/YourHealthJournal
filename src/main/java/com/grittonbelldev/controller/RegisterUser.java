@@ -44,8 +44,8 @@ public class RegisterUser extends HttpServlet {
             return;
         }
 
-        // Check for existing user (by Cognito ID or email)
-        if (userDao.getById(cognitoId) != null) {
+        // Check for existing user (by Cognito ID)
+        if (!userDao.getByPropertyEqual("cognitoId", cognitoId).isEmpty()) {
             logger.warn("Attempt to register existing Cognito ID: {}", cognitoId);
             req.setAttribute("errorMessage", "User already exists.");
             req.getRequestDispatcher("registerUser.jsp").forward(req, resp);
@@ -53,8 +53,7 @@ public class RegisterUser extends HttpServlet {
         }
 
         // Create and insert the new user
-        User newUser = new User(firstName, lastName, email, LocalDateTime.now());
-        newUser.setCognitoId(cognitoId);
+        User newUser = new User(cognitoId, firstName, lastName, email);
         userDao.insert(newUser);
 
         logger.info("Successfully registered user: {} ({})", email, cognitoId);

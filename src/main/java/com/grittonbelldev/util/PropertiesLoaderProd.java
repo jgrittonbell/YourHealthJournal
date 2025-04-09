@@ -10,7 +10,7 @@ import java.util.Properties;
  * @author Eric Knapp
  *
  */
-public interface PropertiesLoader {
+public interface PropertiesLoaderProd {
 
     /**
      * This default method will load a properties file into a Properties instance

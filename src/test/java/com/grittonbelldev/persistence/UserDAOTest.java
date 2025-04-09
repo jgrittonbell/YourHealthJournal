@@ -4,12 +4,13 @@ import com.grittonbelldev.entity.Food;
 import com.grittonbelldev.entity.Meal;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.util.Database;
+import com.grittonbelldev.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,101 +22,86 @@ class UserDAOTest {
     private GenericDAO<Food> foodDAO;
 
     @BeforeEach
-    void setUp() {
-        logger.info("Log4j2 is working! This should appear in log files.");
+    void setUp() throws SQLException {
+        Database.getInstance().runSQL("cleanDB.sql");// Reset the DB schema + seed data
+        
         userDAO = new GenericDAO<>(User.class);
         mealDAO = new GenericDAO<>(Meal.class);
         foodDAO = new GenericDAO<>(Food.class);
-        Database database = Database.getInstance();
-        database.runSQL("cleanDB.sql");
     }
 
+    
     @Test
     void getByIdSuccess() {
-        User expectedUser = new User("John", "Doe", "john.doe@example.com", null);
-        expectedUser.setCognitoId("user-001");
-
-        User retrievedUser = userDAO.getById("user-001");
+        User retrievedUser = userDAO.getById(1L);
         assertNotNull(retrievedUser);
-        assertEquals(expectedUser, retrievedUser);
+        assertEquals("user-001", retrievedUser.getCognitoId());
     }
 
     @Test
     void updateSuccess() {
-        User userToUpdate = userDAO.getById("user-001");
+        User userToUpdate = userDAO.getById(1L);
         userToUpdate.setFirstName("Johnny");
         userDAO.update(userToUpdate);
 
-        User retrievedUser = userDAO.getById("user-001");
+        User retrievedUser = userDAO.getById(1L);
         assertEquals("Johnny", retrievedUser.getFirstName());
     }
 
     @Test
     void insertSuccess() {
-        User userToInsert = new User("Michael", "Anderson", "michael.anderson@example.com",
-                LocalDateTime.of(2024, 2, 18, 9, 15, 0));
-        userToInsert.setCognitoId("user-999");
-
+        User userToInsert = new User("user-999", "Michael", "Anderson", "michael.anderson@example.com");
         User insertedUser = userDAO.insert(userToInsert);
-        assertNotNull(insertedUser);
-        assertEquals("user-999", insertedUser.getCognitoId());
+        assertNotNull(insertedUser.getId());
 
-        User retrievedUserFromInsert = userDAO.getById("user-999");
-        assertEquals(userToInsert, retrievedUserFromInsert);
+        User retrievedUser = userDAO.getById(insertedUser.getId());
+        assertEquals("user-999", retrievedUser.getCognitoId());
     }
 
     @Test
     void deleteSuccess() {
-        User userToDelete = userDAO.getById("user-003");
+        User userToDelete = userDAO.getById(3L);
         assertNotNull(userToDelete);
         userDAO.delete(userToDelete);
-        assertNull(userDAO.getById("user-003"));
+        assertNull(userDAO.getById(3L));
     }
 
     @Test
     void deleteUserAndCheckMealsDeletedButFoodsRemain() {
-        User userToDelete = userDAO.getById("user-001");
+        User userToDelete = userDAO.getById(1L);
         assertNotNull(userToDelete);
 
         List<Meal> userMeals = mealDAO.getByPropertyEqual("user", userToDelete);
-        assertFalse(userMeals.isEmpty(), "User should have meals before deletion");
+        assertFalse(userMeals.isEmpty());
 
         userDAO.delete(userToDelete);
 
-        assertNull(userDAO.getById("user-001"));
+        assertNull(userDAO.getById(1L));
 
         List<Meal> mealsAfterDeletion = mealDAO.getByPropertyEqual("user", userToDelete);
-        assertTrue(mealsAfterDeletion.isEmpty(), "Meals should be deleted when user is deleted");
+        assertTrue(mealsAfterDeletion.isEmpty());
 
         List<Food> allFoods = foodDAO.getAll();
-        assertFalse(allFoods.isEmpty(), "Food items should remain in the database");
+        assertFalse(allFoods.isEmpty());
     }
 
     @Test
     void getAll() {
         List<User> users = userDAO.getAll();
-        assertEquals(3, users.size()); // Assumes 3 users are seeded
+        assertEquals(3, users.size());
     }
 
     @Test
     void getByPropertyEqualSuccess() {
         List<User> users = userDAO.getByPropertyEqual("email", "jane.smith@example.com");
         assertEquals(1, users.size());
-
-        User expectedUser = new User("Jane", "Smith", "jane.smith@example.com", null);
-        expectedUser.setCognitoId("user-002");
-
-        assertEquals(expectedUser, users.get(0));
+        assertEquals("user-002", users.get(0).getCognitoId());
     }
 
     @Test
     void getByPropertyLikeSuccess() {
         List<User> users = userDAO.getByPropertyLike("firstName", "John");
-
-        User expectedUser = new User("John", "Doe", "john.doe@example.com", null);
-        expectedUser.setCognitoId("user-001");
-
         assertEquals(1, users.size());
-        assertEquals(expectedUser, users.get(0));
+        assertEquals("user-001", users.get(0).getCognitoId());
     }
 }

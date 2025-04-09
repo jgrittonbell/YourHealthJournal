@@ -1,7 +1,7 @@
 package com.grittonbelldev.controller;
 
 import com.grittonbelldev.util.HibernateUtil;
-import com.grittonbelldev.util.PropertiesLoader;
+import com.grittonbelldev.util.PropertiesLoaderProd;
 import com.grittonbelldev.util.SecretsManagerUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +21,7 @@ import java.util.Properties;
  * This class also ensures that resources are released properly when the application shuts down.
  */
 @WebServlet(name = "ApplicationStartup", urlPatterns = {}, loadOnStartup = 1)
-public class ApplicationStartup extends HttpServlet implements PropertiesLoader {
+public class ApplicationStartup extends HttpServlet implements PropertiesLoaderProd {
 
     // Log4j2 logger for logging application startup/shutdown events
     private final Logger logger = LogManager.getLogger(this.getClass());

@@ -33,7 +33,7 @@ class MealDAOTest {
     @Test
     void getByIdSuccess() {
         Meal expectedMeal = new Meal();
-        User expectedUser = userDAO.getById("user-003");
+        User expectedUser = userDAO.getById(3L);
         expectedMeal.setId(3L);
         expectedMeal.setUser(expectedUser);
         expectedMeal.setMealName("Omega-3 Rich Dinner");
@@ -48,7 +48,7 @@ class MealDAOTest {
 
     @Test
     void insertSuccess() {
-        User user = userDAO.getById("user-001");
+        User user = userDAO.getById(1L);
         assertNotNull(user);
 
         Meal mealToInsert = new Meal(user, "Late Night Snack", LocalDateTime.now(), false);
@@ -63,26 +63,26 @@ class MealDAOTest {
 
     @Test
     void updateSuccess() {
-        Meal mealToUpdate = mealDAO.getById(3);
+        Meal mealToUpdate = mealDAO.getById(3L);
         assertNotNull(mealToUpdate);
 
         mealToUpdate.setMealName("Updated Omega-3 Dinner");
         mealDAO.update(mealToUpdate);
 
-        Meal retrievedMeal = mealDAO.getById(3);
+        Meal retrievedMeal = mealDAO.getById(3L);
         assertEquals("Updated Omega-3 Dinner", retrievedMeal.getMealName());
     }
 
     @Test
     void deleteMealAndCheckFoodMealJournalRemains() {
-        Meal mealToDelete = mealDAO.getById(3);
+        Meal mealToDelete = mealDAO.getById(3L);
         assertNotNull(mealToDelete);
 
         List<FoodMealJournal> relatedEntries = foodMealJournalDAO.getByPropertyEqual("meal", mealToDelete);
         assertFalse(relatedEntries.isEmpty(), "Meal should have linked food items before deletion");
 
         mealDAO.delete(mealToDelete);
-        assertNull(mealDAO.getById(3));
+        assertNull(mealDAO.getById(3L));
 
         List<FoodMealJournal> entriesAfterDeletion = foodMealJournalDAO.getByPropertyEqual("meal", mealToDelete);
         assertTrue(entriesAfterDeletion.isEmpty(), "FoodMealJournal entries should be deleted when meal is deleted");
@@ -100,7 +100,7 @@ class MealDAOTest {
         assertEquals(1, meals.size());
 
         Meal expectedMeal = new Meal();
-        User expectedUser = userDAO.getById("user-001");
+        User expectedUser = userDAO.getById(1L); // FIXED: previously used a string
         expectedMeal.setId(1L);
         expectedMeal.setUser(expectedUser);
         expectedMeal.setMealName("Healthy Breakfast");
