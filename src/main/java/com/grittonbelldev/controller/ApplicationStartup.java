@@ -1,6 +1,6 @@
 package com.grittonbelldev.controller;
 
-import com.grittonbelldev.util.HibernateUtil;
+import com.grittonbelldev.persistence.SessionFactoryProvider;
 import com.grittonbelldev.util.PropertiesLoaderProd;
 import com.grittonbelldev.util.SecretsManagerUtil;
 import org.apache.logging.log4j.LogManager;
@@ -14,39 +14,43 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
-
 /**
  * This servlet is automatically loaded when the web application starts.
- * It initializes the Hibernate SessionFactory so that the application is ready to interact with the database.
- * This class also ensures that resources are released properly when the application shuts down.
+ * It initializes resources such as the Hibernate SessionFactory and Cognito configuration.
  */
 @WebServlet(name = "ApplicationStartup", urlPatterns = {}, loadOnStartup = 1)
 public class ApplicationStartup extends HttpServlet implements PropertiesLoaderProd {
 
-    // Log4j2 logger for logging application startup/shutdown events
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    /**
-     * Called once when the application starts.
-     * This method initializes the Hibernate SessionFactory and logs the status of the database connection.
-     *
-     * @throws ServletException if Hibernate initialization fails
-     */
     @Override
     public void init() throws ServletException {
         super.init();
-        initializeHibernateSessionFactory();
+        initializeSessionFactory();
         loadAndStoreCognitoProperties();
     }
 
     /**
-     * Loads properties from cognito.properties and stores them in the ServletContext.
+     * Initializes Hibernate's SessionFactory via SessionFactoryProvider.
+     */
+    private void initializeSessionFactory() {
+        try {
+            SessionFactoryProvider.createSessionFactory();
+            logger.info("SessionFactoryProvider initialized successfully.");
+        } catch (Exception e) {
+            logger.error("Failed to initialize SessionFactory: {}", e.getMessage(), e);
+            throw new RuntimeException("Startup failed due to Hibernate error", e);
+        }
+    }
+
+    /**
+     * Loads properties from AWS Secrets Manager and cognito.properties,
+     * and makes them available via ServletContext.
      */
     private void loadAndStoreCognitoProperties() {
         try {
             Properties properties = loadProperties("/cognito.properties");
 
-            // Load Cognito secrets
             Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjSecrets");
             String clientId = secrets.get("cognitoClientID");
             String clientSecret = secrets.get("cognitoClientSecret");
@@ -55,9 +59,6 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoaderP
                 logger.error("Missing required Cognito secrets. Cannot continue startup.");
                 throw new RuntimeException("Missing Cognito secrets");
             }
-
-            logger.info("Cognito Client ID: {}", clientId);
-            logger.info("Cognito Client Secret: [set]");
 
             ServletContext context = getServletContext();
             context.setAttribute("client.id", clientId);
@@ -68,37 +69,28 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoaderP
             context.setAttribute("region", properties.getProperty("region"));
             context.setAttribute("poolId", properties.getProperty("poolId"));
 
-            logger.info("Application Startup: Cognito properties loaded.");
+            logger.info("Cognito properties loaded successfully.");
+
         } catch (IOException ioException) {
-            logger.error("IOError loading properties at startup: {}", ioException.getMessage());
+            logger.error("IOError loading Cognito properties: {}", ioException.getMessage(), ioException);
         } catch (Exception exception) {
-            logger.error("Error loading properties at startup: {}", exception.getMessage());
-        }
-    }
-
-    private void initializeHibernateSessionFactory() throws ServletException {
-        try {
-            // Force Hibernate initialization
-            HibernateUtil.getSessionFactory();
-            logger.info("Hibernate SessionFactory initialized successfully.");
-
-        } catch (Exception e) {
-            logger.error("Error initializing application: {}", e.getMessage(), e);
-            throw new ServletException("Startup failed", e);
+            logger.error("Error loading Cognito config: {}", exception.getMessage(), exception);
         }
     }
 
     /**
-     * Called once when the application shuts down.
-     * This method cleanly closes the Hibernate SessionFactory to release all resources.
+     * Called when the application shuts down.
+     * Closes the Hibernate SessionFactory if initialized.
      */
     @Override
     public void destroy() {
         try {
-            HibernateUtil.getSessionFactory().close();
-            logger.info("Hibernate SessionFactory closed.");
+            if (SessionFactoryProvider.getSessionFactory() != null) {
+                SessionFactoryProvider.getSessionFactory().close();
+                logger.info("SessionFactory closed.");
+            }
         } catch (Exception e) {
-            logger.error("Error shutting down Hibernate: {}", e.getMessage(), e);
+            logger.error("Error shutting down SessionFactory: {}", e.getMessage(), e);
         }
     }
 }
