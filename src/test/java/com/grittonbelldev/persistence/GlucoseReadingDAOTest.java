@@ -36,7 +36,7 @@ class GlucoseReadingDAOTest {
 
     @Test
     void insertSuccess() {
-        User user = userDAO.getById("user-001");
+        User user = userDAO.getById(1L); // FIXED: use Long ID instead of String
         assertNotNull(user);
 
         GlucoseReading newReading = new GlucoseReading(user, 103.4, LocalDateTime.now(), "Dexcom", "After workout");
@@ -69,7 +69,7 @@ class GlucoseReadingDAOTest {
 
     @Test
     void deleteUserCascadesReadings() {
-        User user = userDAO.getById("user-001");
+        User user = userDAO.getById(1L); // FIXED: use Long ID
         assertNotNull(user);
 
         List<GlucoseReading> readingsBefore = glucoseReadingDAO.getByPropertyEqual("user", user);

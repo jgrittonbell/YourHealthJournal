@@ -46,8 +46,8 @@ class FavoriteItemDAOTest {
 
     @Test
     void insertSuccess() {
-        User user = userDAO.getById("user-001");
-        Meal meal = mealDAO.getById(2);
+        User user = userDAO.getById(1L); // FIXED: was "user-001"
+        Meal meal = mealDAO.getById(2L);
         assertNotNull(user);
         assertNotNull(meal);
 
@@ -63,35 +63,35 @@ class FavoriteItemDAOTest {
 
     @Test
     void updateSuccess() {
-        FavoriteItem favoriteToUpdate = favoriteItemDAO.getById(1);
+        FavoriteItem favoriteToUpdate = favoriteItemDAO.getById(1L);
         assertNotNull(favoriteToUpdate);
 
         favoriteToUpdate.setFavorite(false);
         favoriteItemDAO.update(favoriteToUpdate);
 
-        FavoriteItem retrievedItem = favoriteItemDAO.getById(1);
+        FavoriteItem retrievedItem = favoriteItemDAO.getById(1L);
         assertFalse(retrievedItem.isFavorite());
     }
 
     @Test
     void deleteFavoriteItem() {
-        FavoriteItem favoriteToDelete = favoriteItemDAO.getById(1);
+        FavoriteItem favoriteToDelete = favoriteItemDAO.getById(1L);
         assertNotNull(favoriteToDelete);
 
         favoriteItemDAO.delete(favoriteToDelete);
-        assertNull(favoriteItemDAO.getById(1));
+        assertNull(favoriteItemDAO.getById(1L));
     }
 
     @Test
     void deleteFavoriteItemDoesNotCascadeMealOrFood() {
-        FavoriteItem favoriteToDelete = favoriteItemDAO.getById(1);
+        FavoriteItem favoriteToDelete = favoriteItemDAO.getById(1L);
         assertNotNull(favoriteToDelete);
 
         Meal linkedMeal = favoriteToDelete.getMeal();
         Food linkedFood = favoriteToDelete.getFood();
 
         favoriteItemDAO.delete(favoriteToDelete);
-        assertNull(favoriteItemDAO.getById(1));
+        assertNull(favoriteItemDAO.getById(1L));
 
         // Ensure the meal and food still exist
         if (linkedMeal != null) {
