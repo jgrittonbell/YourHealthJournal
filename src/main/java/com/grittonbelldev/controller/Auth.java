@@ -38,6 +38,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
@@ -115,7 +116,8 @@ public class Auth extends HttpServlet {
             logger.info("Cognito ID from token: {}", cognitoId);
 
             GenericDAO<User> userDao = new GenericDAO<>(User.class);
-            User user = userDao.getById(cognitoId);
+            List<User> users = userDao.getByPropertyEqual("cognitoId", cognitoId);
+            User user = users.isEmpty() ? null : users.get(0);
 
             HttpSession session = req.getSession(true);
             session.setAttribute("cognitoId", cognitoId); // Store Cognito ID for later use
