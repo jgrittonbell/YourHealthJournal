@@ -4,7 +4,6 @@ import com.grittonbelldev.entity.Food;
 import com.grittonbelldev.entity.Meal;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.util.Database;
-import com.grittonbelldev.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;

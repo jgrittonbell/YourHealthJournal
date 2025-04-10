@@ -23,6 +23,7 @@
                     <th scope="col">Level (mg/dL)</th>
                     <th scope="col">Source</th>
                     <th scope="col">Notes</th>
+                    <th scope="col">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,9 @@
                         <td><c:out value="${reading.glucoseLevel}" /></td>
                         <td><c:out value="${reading.measurementSource}" /></td>
                         <td><c:out value="${reading.notes}" /></td>
+                        <td>
+                            <a href="glucose?action=edit&id=${reading.id}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
