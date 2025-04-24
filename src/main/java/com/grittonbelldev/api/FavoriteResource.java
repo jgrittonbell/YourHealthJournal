@@ -10,8 +10,7 @@ import javax.ws.rs.core.Response;
 @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 public class FavoriteResource {
 
-    @Inject
-    FavoriteService favoriteService;
+    private FavoriteService favoriteService = new FavoriteService();
 
     @POST @Path("meals/{mealId}")
     public Response favoriteMeal(@PathParam("mealId") Long mealId) {

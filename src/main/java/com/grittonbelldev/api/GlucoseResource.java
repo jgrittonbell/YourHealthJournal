@@ -15,8 +15,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class GlucoseResource {
 
-    @Inject
-    GlucoseService glucoseService;
+    private final GlucoseService glucoseService = new GlucoseService();
 
     @GET
     public List<GlucoseResponseDto> listAll() {

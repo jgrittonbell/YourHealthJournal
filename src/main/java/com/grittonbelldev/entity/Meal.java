@@ -31,7 +31,7 @@ public class Meal {
     @Column(name = "is_favorite", nullable = false)
     private boolean isFavorite = false;
 
-    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<FoodMealJournal> foodMealEntries = new ArrayList<>();
 
     // Constructors

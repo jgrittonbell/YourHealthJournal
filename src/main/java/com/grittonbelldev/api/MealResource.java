@@ -15,8 +15,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MealResource {
 
-    @Inject
-    MealService mealService;
+    private final MealService mealService = new MealService();
 
     @GET
     public List<MealResponseDto> listAll() {

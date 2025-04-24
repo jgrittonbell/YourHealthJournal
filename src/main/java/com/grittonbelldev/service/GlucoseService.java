@@ -1,19 +1,16 @@
+
 package com.grittonbelldev.service;
 
 import com.grittonbelldev.dto.GlucoseRequestDto;
 import com.grittonbelldev.dto.GlucoseResponseDto;
 import com.grittonbelldev.entity.GlucoseReading;
-import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
 public class GlucoseService {
-    @Inject
-    private GenericDAO<GlucoseReading> glucoseDao;
+    private final GenericDAO<GlucoseReading> glucoseDao = new GenericDAO<>(GlucoseReading.class);
 
     public List<GlucoseResponseDto> listAll() {
         return glucoseDao.getAll().stream()
@@ -27,7 +24,6 @@ public class GlucoseService {
 
     public GlucoseResponseDto create(GlucoseRequestDto dto) {
         GlucoseReading r = new GlucoseReading();
-        // assume user set in session, set later or inject context
         r.setGlucoseLevel(dto.getGlucoseLevel());
         r.setMeasurementTime(dto.getMeasurementTime());
         r.setMeasurementSource(dto.getMeasurementSource());
@@ -47,7 +43,8 @@ public class GlucoseService {
     }
 
     public void delete(Long id) {
-        glucoseDao.delete(glucoseDao.getById(id));
+        GlucoseReading r = glucoseDao.getById(id);
+        glucoseDao.delete(r);
     }
 
     private GlucoseResponseDto toResponseDto(GlucoseReading r) {

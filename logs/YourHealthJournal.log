@@ -1,0 +1,512 @@
+[INFO ] 2025-04-23 19:33:26.701 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:26.707 [main] Database - Loaded properties file '/database.properties'.
+[INFO ] 2025-04-23 19:33:27.137 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:28.367 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:28.501 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:28.570 [main] GenericDAO - The list of entities: [FavoriteItem{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:28}, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:28}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=null, isFavorite=true}, FavoriteItem{id=2, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:28}, meal=null, food=Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, isFavorite=true}, FavoriteItem{id=3, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:33:28}, meal=null, food=Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}, isFavorite=true}, FavoriteItem{id=4, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:28}, meal=Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:28}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}, food=null, isFavorite=true}]
+[INFO ] 2025-04-23 19:33:28.571 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:28.700 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:28.707 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:28.838 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:28.865 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:28.995 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:29.000 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:29.151 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:29.184 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:33:29.314 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:29.497 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:29.638 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:29.642 [main] GenericDAO - The list of entities: [Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}]
+[INFO ] 2025-04-23 19:33:29.769 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:29.905 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.041 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.180 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.314 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.322 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:30.455 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.461 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:30.593 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:30.604 [main] GenericDAO - The list of entities: [FoodMealJournal{id=1, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:30}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, servingSize=1.5}, FoodMealJournal{id=2, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:30}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, servingSize=2.0}, FoodMealJournal{id=3, meal=Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:33:30}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, food=Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, servingSize=1.0}, FoodMealJournal{id=4, meal=Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:33:30}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, food=Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}, servingSize=1.5}, FoodMealJournal{id=5, meal=Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:30}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}, food=Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, servingSize=1.0}]
+[INFO ] 2025-04-23 19:33:30.604 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:30.743 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.749 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:30.882 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:30.895 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:31.014 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.017 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:31.144 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.156 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:31.281 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.289 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:33:31.419 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.434 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:31.561 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.566 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:31.703 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.716 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:31.843 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:31.849 [main] GenericDAO - The list of entities: [GlucoseReading{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:31}, glucoseLevel=110.5, measurementTime=2024-02-17T07:45, measurementSource='Manual', notes='Before breakfast'}, GlucoseReading{id=2, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:31}, glucoseLevel=145.2, measurementTime=2024-02-17T12:15, measurementSource='Dexcom', notes='Post-lunch spike'}, GlucoseReading{id=3, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:33:31}, glucoseLevel=98.0, measurementTime=2024-02-17T18:50, measurementSource='Nightscout', notes='Before dinner'}, GlucoseReading{id=4, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:31}, glucoseLevel=120.3, measurementTime=2024-02-17T22:30, measurementSource='Manual', notes='Bedtime reading'}]
+[INFO ] 2025-04-23 19:33:31.849 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:31.974 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:31.979 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:32.106 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:32.108 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:32.246 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:32.258 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:33:32.385 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:32.399 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:32.523 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:32.534 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:32.671 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:32.676 [main] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:32}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:33:32}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:32}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]
+[INFO ] 2025-04-23 19:33:32.676 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:32.797 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:32.801 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:32.918 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:32.922 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:33.052 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:33.054 [main] MealDAOTest - Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:33}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}
+[INFO ] 2025-04-23 19:33:33.055 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:33.187 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:33.196 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:33:33.323 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:33.484 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:33.641 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:33.643 [main] GenericDAO - The list of entities: [User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:33:33}, User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:33:33}, User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:33:33}]
+[INFO ] 2025-04-23 19:33:33.765 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:33.904 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:34.033 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:33:34.048 [main] GenericDAO - The list of entities: [Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}]
+[INFO ] 2025-04-23 19:33:34.175 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:34.298 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:34.437 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:33:47.253 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - SessionFactoryProvider initialized successfully.
+[INFO ] 2025-04-23 19:33:47.660 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
+[ERROR] 2025-04-23 19:33:49.734 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:130) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:130) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.internal.LazyAwsCredentialsProvider.resolveCredentials(LazyAwsCredentialsProvider.java:45) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.resolveCredentials(DefaultCredentialsProvider.java:129) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProvider.resolveIdentity(AwsCredentialsProvider.java:54) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.lambda$trySelectAuthScheme$4(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.util.MetricUtils.reportDuration(MetricUtils.java:80) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.trySelectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.selectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:81) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.beforeExecution(SecretsManagerAuthSchemeInterceptor.java:61) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.lambda$beforeExecution$1(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at java.util.ArrayList.forEach(ArrayList.java:1541) ~[?:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.beforeExecution(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.runInitialInterceptors(AwsExecutionContextBuilder.java:254) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:144) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsSyncClientHandler.java:67) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.lambda$execute$1(BaseSyncClientHandler.java:76) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.measureApiCallSuccess(BaseSyncClientHandler.java:182) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.execute(BaseSyncClientHandler.java:74) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.client.handler.SdkSyncClientHandler.execute(SdkSyncClientHandler.java:45) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:53) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.DefaultSecretsManagerClient.getSecretValue(DefaultSecretsManagerClient.java:1129) ~[secretsmanager-2.31.8.jar:?]
+	at com.grittonbelldev.util.SecretsManagerUtil.getSecretAsMap(SecretsManagerUtil.java:51) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.loadAndStoreCognitoProperties(ApplicationStartup.java:54) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:30) [classes/:?]
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143) [servlet-api.jar:4.0.FR]
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:984) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:941) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:838) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4193) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4494) [catalina.jar:9.0.98]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:599) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:571) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:603) [catalina.jar:9.0.98]
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1751) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:453) [catalina.jar:9.0.98]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:407) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at com.sun.jmx.remote.security.MBeanServerAccessController.invoke(MBeanServerAccessController.java:468) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1466) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1406) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:827) [?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:200) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:197) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:389) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[WARN ] 2025-04-23 19:33:49.738 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
+[INFO ] 2025-04-23 19:33:49.738 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito properties loaded successfully.
+[INFO ] 2025-04-23 19:43:51.228 [main] ApplicationStartup - SessionFactory closed.
+[INFO ] 2025-04-23 19:44:01.324 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:01.330 [main] Database - Loaded properties file '/database.properties'.
+[INFO ] 2025-04-23 19:44:01.754 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:02.971 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:03.104 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:03.174 [main] GenericDAO - The list of entities: [FavoriteItem{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:03}, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:03}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=null, isFavorite=true}, FavoriteItem{id=2, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:03}, meal=null, food=Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, isFavorite=true}, FavoriteItem{id=3, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:03}, meal=null, food=Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}, isFavorite=true}, FavoriteItem{id=4, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:03}, meal=Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:03}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}, food=null, isFavorite=true}]
+[INFO ] 2025-04-23 19:44:03.175 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:03.300 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:03.307 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:03.447 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:03.474 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:03.597 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:03.601 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:03.724 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:03.753 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:44:03.883 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.044 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.182 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:04.186 [main] GenericDAO - The list of entities: [Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}]
+[INFO ] 2025-04-23 19:44:04.316 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.454 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.578 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.704 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.844 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.861 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:04.983 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:04.989 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.120 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:05.129 [main] GenericDAO - The list of entities: [FoodMealJournal{id=1, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:05}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, servingSize=1.5}, FoodMealJournal{id=2, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:05}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, servingSize=2.0}, FoodMealJournal{id=3, meal=Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:05}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, food=Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, servingSize=1.0}, FoodMealJournal{id=4, meal=Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:05}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, food=Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}, servingSize=1.5}, FoodMealJournal{id=5, meal=Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:05}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}, food=Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, servingSize=1.0}]
+[INFO ] 2025-04-23 19:44:05.129 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.251 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:05.256 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.386 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:05.400 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.521 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:05.524 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.643 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:05.654 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.785 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:05.793 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:44:05.923 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:05.938 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.061 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.066 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.180 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.194 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.325 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:06.330 [main] GenericDAO - The list of entities: [GlucoseReading{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:06}, glucoseLevel=110.5, measurementTime=2024-02-17T07:45, measurementSource='Manual', notes='Before breakfast'}, GlucoseReading{id=2, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:06}, glucoseLevel=145.2, measurementTime=2024-02-17T12:15, measurementSource='Dexcom', notes='Post-lunch spike'}, GlucoseReading{id=3, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:06}, glucoseLevel=98.0, measurementTime=2024-02-17T18:50, measurementSource='Nightscout', notes='Before dinner'}, GlucoseReading{id=4, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:06}, glucoseLevel=120.3, measurementTime=2024-02-17T22:30, measurementSource='Manual', notes='Bedtime reading'}]
+[INFO ] 2025-04-23 19:44:06.331 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.453 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.457 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.576 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.578 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.697 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.709 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:44:06.836 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.850 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:06.972 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:06.983 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:07.104 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:07.109 [main] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:07}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:07}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:07}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]
+[INFO ] 2025-04-23 19:44:07.109 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:07.233 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:07.236 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:07.357 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:07.361 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:07.489 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:07.491 [main] MealDAOTest - Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:07}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}
+[INFO ] 2025-04-23 19:44:07.492 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:07.624 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:07.634 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:44:07.755 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:07.896 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:08.024 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:08.027 [main] GenericDAO - The list of entities: [User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:08}, User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:08}, User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:08}]
+[INFO ] 2025-04-23 19:44:08.149 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:08.270 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:08.403 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:44:08.418 [main] GenericDAO - The list of entities: [Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}]
+[INFO ] 2025-04-23 19:44:08.545 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:08.671 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:08.805 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:44:21.267 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - SessionFactoryProvider initialized successfully.
+[INFO ] 2025-04-23 19:44:21.657 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
+[ERROR] 2025-04-23 19:44:23.725 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:130) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:130) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.internal.LazyAwsCredentialsProvider.resolveCredentials(LazyAwsCredentialsProvider.java:45) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.resolveCredentials(DefaultCredentialsProvider.java:129) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProvider.resolveIdentity(AwsCredentialsProvider.java:54) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.lambda$trySelectAuthScheme$4(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.util.MetricUtils.reportDuration(MetricUtils.java:80) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.trySelectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.selectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:81) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.beforeExecution(SecretsManagerAuthSchemeInterceptor.java:61) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.lambda$beforeExecution$1(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at java.util.ArrayList.forEach(ArrayList.java:1541) ~[?:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.beforeExecution(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.runInitialInterceptors(AwsExecutionContextBuilder.java:254) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:144) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsSyncClientHandler.java:67) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.lambda$execute$1(BaseSyncClientHandler.java:76) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.measureApiCallSuccess(BaseSyncClientHandler.java:182) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.execute(BaseSyncClientHandler.java:74) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.client.handler.SdkSyncClientHandler.execute(SdkSyncClientHandler.java:45) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:53) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.DefaultSecretsManagerClient.getSecretValue(DefaultSecretsManagerClient.java:1129) ~[secretsmanager-2.31.8.jar:?]
+	at com.grittonbelldev.util.SecretsManagerUtil.getSecretAsMap(SecretsManagerUtil.java:51) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.loadAndStoreCognitoProperties(ApplicationStartup.java:54) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:30) [classes/:?]
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143) [servlet-api.jar:4.0.FR]
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:984) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:941) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:838) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4193) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4494) [catalina.jar:9.0.98]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:599) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:571) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:603) [catalina.jar:9.0.98]
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1751) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:453) [catalina.jar:9.0.98]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:407) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at com.sun.jmx.remote.security.MBeanServerAccessController.invoke(MBeanServerAccessController.java:468) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1466) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1406) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:827) [?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:200) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:197) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:389) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[WARN ] 2025-04-23 19:44:23.729 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
+[INFO ] 2025-04-23 19:44:23.729 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito properties loaded successfully.
+[DEBUG] 2025-04-23 19:44:47.908 [http-nio-8080-exec-6] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:08}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:08}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:08}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]
+[INFO ] 2025-04-23 19:45:00.153 [http-nio-8080-exec-5] LogIn - Attempting to use login servlet and below is the client id and the login URL and the redirect URL:
+[INFO ] 2025-04-23 19:45:00.153 [http-nio-8080-exec-5] LogIn - Client ID: 17maovn490jgjo4sahig56bs9b
+[INFO ] 2025-04-23 19:45:00.153 [http-nio-8080-exec-5] LogIn - Login URL: https://us-east-2qhnriu1dn.auth.us-east-2.amazoncognito.com/login
+[INFO ] 2025-04-23 19:45:00.153 [http-nio-8080-exec-5] LogIn - Redirect URL: http://localhost:8080/YourHealthJournal_war/auth
+[INFO ] 2025-04-23 19:45:00.153 [http-nio-8080-exec-5] LogIn - Here is the redirect URL: https://us-east-2qhnriu1dn.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=17maovn490jgjo4sahig56bs9b&redirect_uri=http://localhost:8080/YourHealthJournal_war/auth
+[DEBUG] 2025-04-23 19:45:06.974 [http-nio-8080-exec-8] Auth - Keys are loaded. Here's e: AQAB
+[INFO ] 2025-04-23 19:45:06.974 [http-nio-8080-exec-8] Auth - Auth servlet triggered. Checking for auth code...
+[DEBUG] 2025-04-23 19:45:07.482 [http-nio-8080-exec-8] Auth - Response headers: java.net.http.HttpHeaders@20d4ae7c { {:status=[200], cache-control=[no-cache, no-store, max-age=0, must-revalidate], content-length=[4087], content-type=[application/json;charset=UTF-8], date=[Thu, 24 Apr 2025 00:45:06 GMT], expires=[0], pragma=[no-cache], set-cookie=[XSRF-TOKEN="30c8abab-1a4e-4983-b632-af410f1e2b65"; Path=/; Secure; HttpOnly; SameSite=Lax], strict-transport-security=[max-age=31536000 ; includeSubDomains], x-amz-apigw-id=[JgJu5Ed7CYcEgaQ=], x-amz-cognito-request-id=[c41197fc-40a1-4711-901b-b706e43b0261], x-amzn-remapped-connection=[keep-alive], x-amzn-remapped-date=[Thu, 24 Apr 2025 00:45:06 GMT], x-amzn-remapped-server=[Server], x-amzn-requestid=[b536e016-7f81-4c1f-946c-aa328d103588], x-content-type-options=[nosniff], x-frame-options=[DENY], x-xss-protection=[1; mode=block]} }
+[DEBUG] 2025-04-23 19:45:07.482 [http-nio-8080-exec-8] Auth - Response body: {"id_token":"eyJraWQiOiJIakc2a29QekNqeHVaSDZIT3pCMDhpV3ZFTmJFb1U5U3ZuUmYxdHNRZzZNPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiMUQxdFFxUEtVTjQ0MVU5b3pqM1JEUSIsInN1YiI6ImQxNWI4NWIwLWEwNDEtNzAwYy1jZWRjLWQ0ZDRkNWJhMzg2NCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9xaE5ySXUxRE4iLCJjb2duaXRvOnVzZXJuYW1lIjoiZDE1Yjg1YjAtYTA0MS03MDBjLWNlZGMtZDRkNGQ1YmEzODY0Iiwib3JpZ2luX2p0aSI6IjVjNTk2OWUyLWVmODEtNDg5My1iNTUwLTQ2OWE2N2NlNTVmOSIsImF1ZCI6IjE3bWFvdm40OTBqZ2pvNHNhaGlnNTZiczliIiwiZXZlbnRfaWQiOiIyNDg1YWIwMi1lYWYyLTQ5ZDQtYWE3Mi1iNmQwNDYzNDQ0ZTYiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTc0NTQ1NTUwNiwiZXhwIjoxNzQ1NDU5MTA2LCJpYXQiOjE3NDU0NTU1MDYsImp0aSI6IjQyNDNmN2Y0LTU2YzAtNDU1Zi1hOTEzLWE0MTJmYzU1ZjI3OSIsImVtYWlsIjoiamdyaXR0b25iZWxsQGdtYWlsLmNvbSJ9.dNFdCRoqVyOFPGteKl0Uetj6eoPZoRW29sf-dcW1tml2zkpbpuim2SsYApC8jvpSkvlbxF74xvkxy_f0fDnkgjqmknAkp_M6wOXEbLfgo2U-hzSds46cmkd1bQXcE_QOwXWE8fUpEMNWnbnf82YgyFfsLs9Lho4Is9viXF1IEbE8HnGvN7G7NxVNBfCPRUV6fmJoxiyXo_ef6mJ1lfi2294UB_zy3wTCA0sxmVklE3hPFFZb7qgtUwClYW9KfxgeqmY0Yh1E6IU4_Y42uD9j8QlplIxFtEYTenh5ZgO56FpYripxxw0vF71gFWvGMlu2vjGnd2ckGVLo0wkEbIwVwA","access_token":"eyJraWQiOiJSaVVMUm1XbGRpTWlIOXdiR2loYmc3aVdXNmNUVVwvQnFkNWpwWGZMb21Xdz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJkMTViODViMC1hMDQxLTcwMGMtY2VkYy1kNGQ0ZDViYTM4NjQiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9xaE5ySXUxRE4iLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiIxN21hb3ZuNDkwamdqbzRzYWhpZzU2YnM5YiIsIm9yaWdpbl9qdGkiOiI1YzU5NjllMi1lZjgxLTQ4OTMtYjU1MC00NjlhNjdjZTU1ZjkiLCJldmVudF9pZCI6IjI0ODVhYjAyLWVhZjItNDlkNC1hYTcyLWI2ZDA0NjM0NDRlNiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNzQ1NDU1NTA2LCJleHAiOjE3NDU0NTkxMDYsImlhdCI6MTc0NTQ1NTUwNiwianRpIjoiNDYxNzZhYzgtY2E1NC00ZWYyLTlkMGMtOWZiMTAwNGNiMzBjIiwidXNlcm5hbWUiOiJkMTViODViMC1hMDQxLTcwMGMtY2VkYy1kNGQ0ZDViYTM4NjQifQ.zFD4CyBAVTO1DyymWgaH7sFjJGxJrb5B2me5q9vRwEg1IdVnmGJY3vTZ96cudZaxey5JpOb_Gt3Occ-RBE0HFJ6lZ-Hg2_SJA3DW8Rg1Kj_llE63dvdPa3m9Byt0UfVMHjEg1d5AV4c4ImnAbixaJk8W5ZQtJPr6-WDa2-I8KTs955qcvpNt3IwzWVRxJ1czC7tdTMmOb-sBHa105JlT78Yh560pw42trdwJJFvns9HosYjPxiQEgVp2DxNwg87Xq3bAwAVUuDO6xH8k6WRBfgKoLA6OrumdaU1ljrs1KjVvJom_HnIa1awLpX1IMfcPatyMRSGK_o2cgwLMPyLb8Q","refresh_token":"eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.TW2yCX5gDWAupJrODcOAXZkSOLE7Tl6Bm544s0bU4-RiBpZzKChR0fMejFQfrQgQDQ3hfSOHs3Q9jP9U7imtJM9KQD_V_2inU-zl9AVZc6Qji5046fViBnc2IU_EZH5CKRqRDdnEFFNjGxZhAM1aGNzy7JEMJhNMVuUQg3m3HiJuqDAlQer56nQ3wWKJdC8e5MRrkjB91o9-2he_Hmh2xbqxUIVgV_WzLyGAUIy00EIU902QAVaV_uyNOOG-pv4cScrr-3ZAXwRB4NhFuagCq6B0tPExpHoFG410BBbANVJSvzyL9DAqyH4HZFhzIiisuW1F1BJu5kr28c0fdDB39w.xJtqU_HCx8DRIg2g.sSPyzYx229-h9VbcVco2Cd-IFLlxqq9TJwh7vTgYSfKf632PhxqmdnBOqTW6TtXkTFxeozNWucdELhHffLD5eri5MtVhNCNMXx9iRdNSAH4nFIKGDtThfEFcyu-4wqupERfk89XFCFEeL2H20GZMl0As7hrXP_nnnP1p6-irgaEE0R0eGTBzWBexJnCCWPBIS82iLnpR64B15Jzdxc7_l6K6fm2Nh7RGeKNJf2q_mOt12j-jBRszyG2agV2VShk7px8QBcTSZS7zf-Ovoal7XPWbjYORttcU_-vIKtV0KxZbvFubrQ4NpvD3V2g3Dt_ItJPkpV7aKfSIV7G3jZn1Vfs1gasOCwKkGMRjVbv6HrLFe8KQFx4K6Rrfs3N4_lNxI0C7_Bz0P6JV2s0Ir-AOFogNpm70VuqGDp9uPoeeejVfAjxTbgGd6fEf3YUgHdevXFCmUXNiwMGco9SJKv4K015wr7pivDduEenWOdHEubjqBNYK6PiHcOuHGZL0lKmTd6jOFQnpKQdTzTcgsvtrIEhM3P7rBtc8_iWBQzaM8TGWcf5MatDfS-T7jcymmd955WB0HNmWTSZPr5mn-XOzYr467tp8MYqzXjSwTZNYP2ukBCCQdVGXbD-RecUvJpw66W2R5req3OWLNXWi8cnaex8CCCLFqR-BP67_G6lrmnFbOF6ecM9-zYAjQp7SVSab_cZyOTGcJaDMTl4GaObYWgC4ILQDET12PK2oXF06vPSptdD55h95kicOLcJ3Pwcm69iD2SFiwaO8CfG7sfDhAjP7rzcQ0TrjGHahtq2t1cSYjX_g9vhGDRSFOJBWcvdB35cj4zV7ywpe-cAqWKXfGiHKpTRCzPRkF2znsR8g-Y3NggX82H3c28O4c5t7QwxHlGMfqCLmef50zxM_zpCvlE9z_h2K1DRfyn0jplwPhGitUqKHcWhUH2rJ-Ik53aBAOuiychcq81SaOaoLTiSPTZhSvpqkzBajAv3p61eZTnnUGbWJJWIttdWyXz4NoiIjyBUJoGJaIJqDnR6TzoivsQYu3Dc323t1shNvdgGCNAkGiKp-P5GBnlZ-AAwwewlTY72ESrOs1cTPnND0G1DyHYWbuZ4IA6aGzxY04RSlElIMQVK8z9SA8lKvDJWH-OAleQeB-YuQHMT09v2RLFHF0NSMZOiAyIJIz3qV-EUV6wIJiHu2G3hTY98wlTKelVMuh_ImgS8ryIoMqqh6wpI7TkYqqLOgb4PpeXJyrMXumNyxTbAXW2XwIC60yQAtK6ZnQTWutFicRyVtE0P7-nszs0sVinpjiZbi1NpLaDsLIuihUdfiOyg4oZDYgbz7.H9aoH2T1tuh6doySIqGnlA","expires_in":3600,"token_type":"Bearer"}
+[DEBUG] 2025-04-23 19:45:07.489 [http-nio-8080-exec-8] Auth - Id token: eyJraWQiOiJIakc2a29QekNqeHVaSDZIT3pCMDhpV3ZFTmJFb1U5U3ZuUmYxdHNRZzZNPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiMUQxdFFxUEtVTjQ0MVU5b3pqM1JEUSIsInN1YiI6ImQxNWI4NWIwLWEwNDEtNzAwYy1jZWRjLWQ0ZDRkNWJhMzg2NCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9xaE5ySXUxRE4iLCJjb2duaXRvOnVzZXJuYW1lIjoiZDE1Yjg1YjAtYTA0MS03MDBjLWNlZGMtZDRkNGQ1YmEzODY0Iiwib3JpZ2luX2p0aSI6IjVjNTk2OWUyLWVmODEtNDg5My1iNTUwLTQ2OWE2N2NlNTVmOSIsImF1ZCI6IjE3bWFvdm40OTBqZ2pvNHNhaGlnNTZiczliIiwiZXZlbnRfaWQiOiIyNDg1YWIwMi1lYWYyLTQ5ZDQtYWE3Mi1iNmQwNDYzNDQ0ZTYiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTc0NTQ1NTUwNiwiZXhwIjoxNzQ1NDU5MTA2LCJpYXQiOjE3NDU0NTU1MDYsImp0aSI6IjQyNDNmN2Y0LTU2YzAtNDU1Zi1hOTEzLWE0MTJmYzU1ZjI3OSIsImVtYWlsIjoiamdyaXR0b25iZWxsQGdtYWlsLmNvbSJ9.dNFdCRoqVyOFPGteKl0Uetj6eoPZoRW29sf-dcW1tml2zkpbpuim2SsYApC8jvpSkvlbxF74xvkxy_f0fDnkgjqmknAkp_M6wOXEbLfgo2U-hzSds46cmkd1bQXcE_QOwXWE8fUpEMNWnbnf82YgyFfsLs9Lho4Is9viXF1IEbE8HnGvN7G7NxVNBfCPRUV6fmJoxiyXo_ef6mJ1lfi2294UB_zy3wTCA0sxmVklE3hPFFZb7qgtUwClYW9KfxgeqmY0Yh1E6IU4_Y42uD9j8QlplIxFtEYTenh5ZgO56FpYripxxw0vF71gFWvGMlu2vjGnd2ckGVLo0wkEbIwVwA
+[DEBUG] 2025-04-23 19:45:07.520 [http-nio-8080-exec-8] Auth - here's the username: d15b85b0-a041-700c-cedc-d4d4d5ba3864
+[DEBUG] 2025-04-23 19:45:07.520 [http-nio-8080-exec-8] Auth - here are all the available claims: {at_hash=com.auth0.jwt.impl.JsonNodeClaim@6f146df3, sub=com.auth0.jwt.impl.JsonNodeClaim@6779e64a, email_verified=com.auth0.jwt.impl.JsonNodeClaim@40b64968, iss=com.auth0.jwt.impl.JsonNodeClaim@5c402577, cognito:username=com.auth0.jwt.impl.JsonNodeClaim@1077a0f9, origin_jti=com.auth0.jwt.impl.JsonNodeClaim@38145f0b, aud=com.auth0.jwt.impl.JsonNodeClaim@4a9bac68, event_id=com.auth0.jwt.impl.JsonNodeClaim@17ad53d1, token_use=com.auth0.jwt.impl.JsonNodeClaim@3a7049b5, auth_time=com.auth0.jwt.impl.JsonNodeClaim@2006b5f7, exp=com.auth0.jwt.impl.JsonNodeClaim@3769a573, iat=com.auth0.jwt.impl.JsonNodeClaim@4a275b94, jti=com.auth0.jwt.impl.JsonNodeClaim@72229e84, email=com.auth0.jwt.impl.JsonNodeClaim@679e243a}
+[INFO ] 2025-04-23 19:45:07.520 [http-nio-8080-exec-8] Auth - Cognito ID from token: d15b85b0-a041-700c-cedc-d4d4d5ba3864
+[INFO ] 2025-04-23 19:45:07.546 [http-nio-8080-exec-8] Auth - No User Found.
+[INFO ] 2025-04-23 19:45:07.547 [http-nio-8080-exec-8] RegisterUser - There is a get request for the registerUser servlet
+[INFO ] 2025-04-23 19:45:14.068 [http-nio-8080-exec-9] RegisterUser - There is a post request for the registerUser servlet
+[INFO ] 2025-04-23 19:45:14.129 [http-nio-8080-exec-9] RegisterUser - Successfully registered user: jgrittonbell@gmail.com (d15b85b0-a041-700c-cedc-d4d4d5ba3864)
+[DEBUG] 2025-04-23 19:45:21.728 [http-nio-8080-exec-2] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:44:08}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:44:08}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:44:08}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]
+[INFO ] 2025-04-23 19:48:21.601 [main] ApplicationStartup - SessionFactory closed.
+[INFO ] 2025-04-23 19:48:30.097 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:30.103 [main] Database - Loaded properties file '/database.properties'.
+[INFO ] 2025-04-23 19:48:30.554 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:31.780 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:31.917 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:31.985 [main] GenericDAO - The list of entities: [FavoriteItem{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:31}, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:31}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=null, isFavorite=true}, FavoriteItem{id=2, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:31}, meal=null, food=Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, isFavorite=true}, FavoriteItem{id=3, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:31}, meal=null, food=Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}, isFavorite=true}, FavoriteItem{id=4, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:31}, meal=Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:31}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}, food=null, isFavorite=true}]
+[INFO ] 2025-04-23 19:48:31.986 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:32.111 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:32.120 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:32.235 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:32.262 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:32.383 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:32.390 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:32.507 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:32.538 [main] FavoriteItemDAOTest - Setting up FavoriteItemDAOTest...
+[INFO ] 2025-04-23 19:48:32.661 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:32.835 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:32.960 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:32.963 [main] GenericDAO - The list of entities: [Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}]
+[INFO ] 2025-04-23 19:48:33.088 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:33.235 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:33.362 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:33.483 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:33.611 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:33.617 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:33.742 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:33.749 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:33.880 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:33.889 [main] GenericDAO - The list of entities: [FoodMealJournal{id=1, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:33}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, servingSize=1.5}, FoodMealJournal{id=2, meal=Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:33}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, food=Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, servingSize=2.0}, FoodMealJournal{id=3, meal=Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:33}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, food=Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, servingSize=1.0}, FoodMealJournal{id=4, meal=Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:33}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, food=Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}, servingSize=1.5}, FoodMealJournal{id=5, meal=Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:33}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}, food=Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, servingSize=1.0}]
+[INFO ] 2025-04-23 19:48:33.889 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:34.011 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.019 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:34.147 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.160 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:34.288 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.292 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:34.413 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.426 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:34.562 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.571 [main] FoodMealJournalDAOTest - Setting up FoodMealJournalDAOTest...
+[INFO ] 2025-04-23 19:48:34.690 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.707 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:34.837 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.843 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:34.974 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:34.989 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:35.111 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:35.117 [main] GenericDAO - The list of entities: [GlucoseReading{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:35}, glucoseLevel=110.5, measurementTime=2024-02-17T07:45, measurementSource='Manual', notes='Before breakfast'}, GlucoseReading{id=2, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:35}, glucoseLevel=145.2, measurementTime=2024-02-17T12:15, measurementSource='Dexcom', notes='Post-lunch spike'}, GlucoseReading{id=3, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:35}, glucoseLevel=98.0, measurementTime=2024-02-17T18:50, measurementSource='Nightscout', notes='Before dinner'}, GlucoseReading{id=4, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:35}, glucoseLevel=120.3, measurementTime=2024-02-17T22:30, measurementSource='Manual', notes='Bedtime reading'}]
+[INFO ] 2025-04-23 19:48:35.117 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:35.237 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:35.240 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:35.364 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:35.366 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:35.496 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:35.508 [main] GlucoseReadingDAOTest - Setting up GlucoseReadingDAOTest...
+[INFO ] 2025-04-23 19:48:35.655 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:35.668 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:35.801 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:35.811 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:35.949 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:35.956 [main] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:35}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:35}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:35}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]
+[INFO ] 2025-04-23 19:48:35.957 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:36.082 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:36.086 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:36.205 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:36.210 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:36.325 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:36.327 [main] MealDAOTest - Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:36}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}
+[INFO ] 2025-04-23 19:48:36.328 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:36.447 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:36.456 [main] MealDAOTest - Setting up MealDAOTest...
+[INFO ] 2025-04-23 19:48:36.576 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:36.716 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:36.853 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:36.856 [main] GenericDAO - The list of entities: [User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:36}, User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:36}, User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:36}]
+[INFO ] 2025-04-23 19:48:36.978 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:37.104 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:37.234 [main] Database - Database.disconnect()... Connection closed
+[DEBUG] 2025-04-23 19:48:37.255 [main] GenericDAO - The list of entities: [Food{id=1, foodName='Grilled Chicken Breast', fat=3.5, protein=31.0, carbs=0.0, calories=165.0, cholesterol=85.0, sodium=75.0, fiber=0.0, sugar=0.0, addedSugar=null, vitaminD=0.0, calcium=15.0, iron=0.8, potassium=256.0, notes='Lean protein source'}, Food{id=2, foodName='Oatmeal with Banana', fat=3.0, protein=6.0, carbs=27.0, calories=154.0, cholesterol=0.0, sodium=2.0, fiber=4.0, sugar=9.0, addedSugar=null, vitaminD=1.0, calcium=15.0, iron=1.5, potassium=164.0, notes='Healthy breakfast option'}, Food{id=3, foodName='Salmon with Steamed Broccoli', fat=15.0, protein=35.0, carbs=10.0, calories=380.0, cholesterol=80.0, sodium=400.0, fiber=5.0, sugar=1.0, addedSugar=null, vitaminD=2.0, calcium=180.0, iron=1.8, potassium=400.0, notes='High-protein dinner with omega-3'}, Food{id=4, foodName='Avocado Toast', fat=14.0, protein=5.0, carbs=18.0, calories=200.0, cholesterol=0.0, sodium=150.0, fiber=7.0, sugar=2.0, addedSugar=null, vitaminD=0.0, calcium=20.0, iron=0.9, potassium=300.0, notes='Good fats and fiber'}, Food{id=5, foodName='Greek Yogurt with Honey', fat=4.0, protein=10.0, carbs=18.0, calories=150.0, cholesterol=5.0, sodium=55.0, fiber=0.0, sugar=14.0, addedSugar=10.0, vitaminD=2.0, calcium=110.0, iron=0.8, potassium=160.0, notes='Protein-rich snack with probiotics'}]
+[INFO ] 2025-04-23 19:48:37.379 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:37.505 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:37.638 [main] Database - Database.disconnect()... Connection closed
+[INFO ] 2025-04-23 19:48:50.005 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - SessionFactoryProvider initialized successfully.
+[INFO ] 2025-04-23 19:48:50.403 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Attempting to fetch secret 'yhjSecrets' from AWS Secrets Manager in region us-east-2
+[ERROR] 2025-04-23 19:48:52.479 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Unexpected error retrieving or parsing secret 'yhjSecrets': Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(sections=[])): Profile file contained no credentials for profile 'default': ProfileFile(sections=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:130) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:130) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.internal.LazyAwsCredentialsProvider.resolveCredentials(LazyAwsCredentialsProvider.java:45) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.resolveCredentials(DefaultCredentialsProvider.java:129) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProvider.resolveIdentity(AwsCredentialsProvider.java:54) ~[auth-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.lambda$trySelectAuthScheme$4(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.util.MetricUtils.reportDuration(MetricUtils.java:80) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.trySelectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:134) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.selectAuthScheme(SecretsManagerAuthSchemeInterceptor.java:81) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.auth.scheme.internal.SecretsManagerAuthSchemeInterceptor.beforeExecution(SecretsManagerAuthSchemeInterceptor.java:61) ~[secretsmanager-2.31.8.jar:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.lambda$beforeExecution$1(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at java.util.ArrayList.forEach(ArrayList.java:1541) ~[?:?]
+	at software.amazon.awssdk.core.interceptor.ExecutionInterceptorChain.beforeExecution(ExecutionInterceptorChain.java:59) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.runInitialInterceptors(AwsExecutionContextBuilder.java:254) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:144) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsSyncClientHandler.java:67) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.lambda$execute$1(BaseSyncClientHandler.java:76) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.measureApiCallSuccess(BaseSyncClientHandler.java:182) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.execute(BaseSyncClientHandler.java:74) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.core.client.handler.SdkSyncClientHandler.execute(SdkSyncClientHandler.java:45) ~[sdk-core-2.31.8.jar:?]
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:53) ~[aws-core-2.31.8.jar:?]
+	at software.amazon.awssdk.services.secretsmanager.DefaultSecretsManagerClient.getSecretValue(DefaultSecretsManagerClient.java:1129) ~[secretsmanager-2.31.8.jar:?]
+	at com.grittonbelldev.util.SecretsManagerUtil.getSecretAsMap(SecretsManagerUtil.java:51) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.loadAndStoreCognitoProperties(ApplicationStartup.java:54) [classes/:?]
+	at com.grittonbelldev.controller.ApplicationStartup.init(ApplicationStartup.java:30) [classes/:?]
+	at javax.servlet.GenericServlet.init(GenericServlet.java:143) [servlet-api.jar:4.0.FR]
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:984) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:941) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:838) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4193) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4494) [catalina.jar:9.0.98]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:599) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:571) [catalina.jar:9.0.98]
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:603) [catalina.jar:9.0.98]
+	at org.apache.catalina.startup.HostConfig.manageApp(HostConfig.java:1751) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:453) [catalina.jar:9.0.98]
+	at org.apache.catalina.mbeans.MBeanFactory.createStandardContext(MBeanFactory.java:407) [catalina.jar:9.0.98]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at org.apache.tomcat.util.modeler.BaseModelMBean.invoke(BaseModelMBean.java:264) [tomcat-coyote.jar:9.0.98]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809) [?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801) [?:?]
+	at com.sun.jmx.remote.security.MBeanServerAccessController.invoke(MBeanServerAccessController.java:468) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1466) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1307) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1406) [?:?]
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:827) [?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:566) ~[?:?]
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:200) [?:?]
+	at sun.rmi.transport.Transport$1.run(Transport.java:197) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:688) [?:?]
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677) [?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:389) [?:?]
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[WARN ] 2025-04-23 19:48:52.483 [RMI TCP Connection(2)-127.0.0.1] SecretsManagerUtil - Falling back to environment variables for secret 'yhjSecrets'
+[INFO ] 2025-04-23 19:48:52.483 [RMI TCP Connection(2)-127.0.0.1] ApplicationStartup - Cognito properties loaded successfully.
+[DEBUG] 2025-04-23 19:49:00.795 [http-nio-8080-exec-4] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:37}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:37}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:37}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]
+[DEBUG] 2025-04-23 19:50:24.206 [http-nio-8080-exec-2] GenericDAO - The list of entities: [Meal{id=1, user=User{id=1, cognitoId='user-001', firstName='John', lastName='Doe', email='john.doe@example.com', createdAt=2025-04-23T19:48:37}, mealName='Healthy Breakfast', timeEaten=2024-02-17T08:00, isFavorite=true}, Meal{id=2, user=User{id=2, cognitoId='user-002', firstName='Jane', lastName='Smith', email='jane.smith@example.com', createdAt=2025-04-23T19:48:37}, mealName='Protein-Packed Lunch', timeEaten=2024-02-17T12:30, isFavorite=false}, Meal{id=3, user=User{id=3, cognitoId='user-003', firstName='Michael', lastName='Brown', email='michael.brown@example.com', createdAt=2025-04-23T19:48:37}, mealName='Omega-3 Rich Dinner', timeEaten=2024-02-17T19:00, isFavorite=true}]

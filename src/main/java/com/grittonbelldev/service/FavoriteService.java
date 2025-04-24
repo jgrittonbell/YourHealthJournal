@@ -1,23 +1,17 @@
+
 package com.grittonbelldev.service;
 
 import com.grittonbelldev.entity.FavoriteItem;
 import com.grittonbelldev.entity.Food;
 import com.grittonbelldev.entity.Meal;
-import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
-@ApplicationScoped
+import java.util.List;
+
 public class FavoriteService {
-    @Inject
-    private GenericDAO<FavoriteItem> favDao;
-
-    @Inject
-    private GenericDAO<Meal> mealDao;
-
-    @Inject
-    private GenericDAO<Food> foodDao;
+    private final GenericDAO<FavoriteItem> favDao = new GenericDAO<>(FavoriteItem.class);
+    private final GenericDAO<Meal> mealDao = new GenericDAO<>(Meal.class);
+    private final GenericDAO<Food> foodDao = new GenericDAO<>(Food.class);
 
     public void favoriteMeal(Long mealId) {
         Meal meal = mealDao.getById(mealId);
@@ -28,9 +22,10 @@ public class FavoriteService {
     }
 
     public void unfavoriteMeal(Long mealId) {
-        // find and delete existing favorite
-        favDao.getByPropertyEqual("meal.id", mealId)
-                .forEach(favDao::delete);
+        List<FavoriteItem> found = favDao.getByPropertyEqual("meal.id", mealId);
+        for (FavoriteItem f : found) {
+            favDao.delete(f);
+        }
     }
 
     public void favoriteFood(Long foodId) {
@@ -42,7 +37,9 @@ public class FavoriteService {
     }
 
     public void unfavoriteFood(Long foodId) {
-        favDao.getByPropertyEqual("food.id", foodId)
-                .forEach(favDao::delete);
+        List<FavoriteItem> found = favDao.getByPropertyEqual("food.id", foodId);
+        for (FavoriteItem f : found) {
+            favDao.delete(f);
+        }
     }
 }

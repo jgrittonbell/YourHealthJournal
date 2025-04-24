@@ -1,3 +1,4 @@
+
 package com.grittonbelldev.service;
 
 import com.grittonbelldev.dto.FoodEntryDto;
@@ -7,21 +8,15 @@ import com.grittonbelldev.entity.Food;
 import com.grittonbelldev.entity.FoodMealJournal;
 import com.grittonbelldev.entity.Meal;
 import com.grittonbelldev.persistence.GenericDAO;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ApplicationScoped
 public class MealService {
-    @Inject
-    private GenericDAO<Meal> mealDao;
 
-    @Inject
-    private GenericDAO<FoodMealJournal> fmjDao;
-
-    @Inject
-    private GenericDAO<Food> foodDao;
+    private final GenericDAO<Meal> mealDao = new GenericDAO<>(Meal.class);
+    private final GenericDAO<FoodMealJournal> fmjDao = new GenericDAO<>(FoodMealJournal.class);
+    private final GenericDAO<Food> foodDao = new GenericDAO<>(Food.class);
 
     public List<MealResponseDto> listAll() {
         return mealDao.getAll().stream()
