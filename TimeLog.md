@@ -59,6 +59,8 @@
 | 4/07/25 | Created Controlers and JSPs to align with an MVP to use servlets and jsps instead of API | 2     |       |
 | 4/08/25 | Met with Paula and got AWS Beanstalk and RDS working again                               | 0.5   |       |
 | 4/08/25 | Removed custom hibernate config and used more standard hibernate.cfg.xml instead         | 2     |       |
+| 4/23/25 | Branched and started planning out API again...                                           | 4     |       |
+| 4/23/25 | Abandoned API again and went back to main to update logic with servlets                  | 2     |       |
 
 
 
