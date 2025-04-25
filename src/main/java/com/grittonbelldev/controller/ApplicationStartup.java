@@ -15,79 +15,114 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * This servlet is automatically loaded when the web application starts.
- * It initializes resources such as the Hibernate SessionFactory and Cognito configuration.
+ * Servlet that initializes application-wide resources on startup.
+ * <p>
+ * Responsibilities:
+ * <ul>
+ *   <li>Initialize Hibernate SessionFactory</li>
+ *   <li>Load and store AWS Cognito configuration</li>
+ *   <li>Load and store Nutritionix API credentials</li>
+ * </ul>
+ * Configuration values are placed into the ServletContext for use
+ * by other components (e.g., JAX-RS resources).
+ * </p>
  */
 @WebServlet(name = "ApplicationStartup", urlPatterns = {}, loadOnStartup = 1)
 public class ApplicationStartup extends HttpServlet implements PropertiesLoaderProd {
 
-    private final Logger logger = LogManager.getLogger(this.getClass());
+    private static final Logger logger = LogManager.getLogger(ApplicationStartup.class);
 
+    /**
+     * Called once when the application starts.
+     * Initializes all necessary resources.
+     */
     @Override
     public void init() throws ServletException {
         super.init();
         initializeSessionFactory();
         loadAndStoreCognitoProperties();
+        loadAndStoreNutritionixProperties();
     }
 
     /**
-     * Initializes Hibernate's SessionFactory via SessionFactoryProvider.
+     * Initializes Hibernate's SessionFactory via the SessionFactoryProvider.
+     *
+     * @throws ServletException if initialization fails
      */
-    private void initializeSessionFactory() {
+    private void initializeSessionFactory() throws ServletException {
         try {
             SessionFactoryProvider.createSessionFactory();
-            logger.info("SessionFactoryProvider initialized successfully.");
+            logger.info("Hibernate SessionFactory initialized successfully.");
         } catch (Exception e) {
             logger.error("Failed to initialize SessionFactory: {}", e.getMessage(), e);
-            throw new RuntimeException("Startup failed due to Hibernate error", e);
+            throw new ServletException("Startup failed due to Hibernate error", e);
         }
     }
 
     /**
-     * Loads properties from AWS Secrets Manager and cognito.properties,
-     * and makes them available via ServletContext.
+     * Loads AWS Cognito settings from properties file and Secrets Manager,
+     * and stores them in the ServletContext.
      */
     private void loadAndStoreCognitoProperties() {
         try {
-            Properties properties = loadProperties("/cognito.properties");
-
+            Properties props = loadProperties("/cognito.properties");
             Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjSecrets");
-            String clientId = secrets.get("cognitoClientID");
+
+            String clientId     = secrets.get("cognitoClientID");
             String clientSecret = secrets.get("cognitoClientSecret");
 
             if (clientId == null || clientSecret == null) {
-                logger.error("Missing required Cognito secrets. Cannot continue startup.");
+                logger.error("Missing required Cognito credentials");
                 throw new RuntimeException("Missing Cognito secrets");
             }
 
-            ServletContext context = getServletContext();
-            context.setAttribute("client.id", clientId);
-            context.setAttribute("client.secret", clientSecret);
-            context.setAttribute("oauthURL", properties.getProperty("oauthURL"));
-            context.setAttribute("loginURL", properties.getProperty("loginURL"));
-            context.setAttribute("redirectURL", properties.getProperty("redirectURL"));
-            context.setAttribute("region", properties.getProperty("region"));
-            context.setAttribute("poolId", properties.getProperty("poolId"));
+            ServletContext ctx = getServletContext();
+            ctx.setAttribute("client.id", clientId);
+            ctx.setAttribute("client.secret", clientSecret);
+            ctx.setAttribute("oauthURL",   props.getProperty("oauthURL"));
+            ctx.setAttribute("loginURL",   props.getProperty("loginURL"));
+            ctx.setAttribute("redirectURL", props.getProperty("redirectURL"));
+            ctx.setAttribute("region",      props.getProperty("region"));
+            ctx.setAttribute("poolId",      props.getProperty("poolId"));
 
             logger.info("Cognito properties loaded successfully.");
-
-        } catch (IOException ioException) {
-            logger.error("IOError loading Cognito properties: {}", ioException.getMessage(), ioException);
-        } catch (Exception exception) {
-            logger.error("Error loading Cognito config: {}", exception.getMessage(), exception);
+        } catch (IOException ioe) {
+            logger.error("Error loading Cognito properties: {}", ioe.getMessage(), ioe);
+        } catch (Exception e) {
+            logger.error("Error loading Cognito properties: {}", e.getMessage(), e);
         }
     }
 
     /**
-     * Called when the application shuts down.
-     * Closes the Hibernate SessionFactory if initialized.
+     * Loads Nutritionix API credentials from AWS Secrets Manager or environment,
+     * and stores them in the ServletContext.
+     */
+    private void loadAndStoreNutritionixProperties() {
+        Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjNutritionix");
+        String appId  = secrets.get("nutritionixAppId");
+        String appKey = secrets.get("nutritionixAppKey");
+
+        if (appId == null || appKey == null) {
+            logger.error("Missing Nutritionix API credentials; features depending on Nutritionix will be unavailable.");
+            return;
+        }
+
+        ServletContext ctx = getServletContext();
+        ctx.setAttribute("nutritionix.appId",  appId);
+        ctx.setAttribute("nutritionix.appKey", appKey);
+        logger.info("Nutritionix API credentials loaded successfully.");
+    }
+
+    /**
+     * Called once when the application shuts down.
+     * Closes the Hibernate SessionFactory to release resources.
      */
     @Override
     public void destroy() {
         try {
             if (SessionFactoryProvider.getSessionFactory() != null) {
                 SessionFactoryProvider.getSessionFactory().close();
-                logger.info("SessionFactory closed.");
+                logger.info("Hibernate SessionFactory closed.");
             }
         } catch (Exception e) {
             logger.error("Error shutting down SessionFactory: {}", e.getMessage(), e);
