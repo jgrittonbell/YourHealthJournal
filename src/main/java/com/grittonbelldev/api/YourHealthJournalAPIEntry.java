@@ -31,6 +31,7 @@ public class YourHealthJournalAPIEntry extends Application {
                 MealResource.class,      // REST endpoints for meals
                 GlucoseResource.class,   // REST endpoints for glucose readings
                 FavoriteResource.class,  // REST endpoints for favorites
+                FoodSearchResource.class,// REST endpoints for nutritionix API
                 JacksonFeature.class     // Enables JSON (de)serialization via Jackson
         );
     }
