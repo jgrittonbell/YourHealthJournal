@@ -1,9 +1,6 @@
 package com.grittonbelldev.api;
 
-import com.grittonbelldev.dto.nutritionix.BrandedItem;
-import com.grittonbelldev.dto.nutritionix.CommonItem;
-import com.grittonbelldev.dto.nutritionix.FoodsItem;
-import com.grittonbelldev.dto.nutritionix.NutritionixSearchResponseDto;
+import com.grittonbelldev.dto.nutritionix.*;
 import com.grittonbelldev.service.NutritionixService;
 
 import javax.servlet.ServletContext;
@@ -14,10 +11,10 @@ import java.util.Objects;
 
 /**
  * Exposes Nutritionix instant‐search and single‐item lookup:
- *   GET  /api/nutritionix/foods?q=…         ⇒ full DTO (common + branded)
- *   GET  /api/nutritionix/foods/common?q=…  ⇒ just common items
- *   GET  /api/nutritionix/foods/branded?q=… ⇒ just branded items
- *   GET  /api/nutritionix/foods/{nixItemId} ⇒ full nutrition for one item
+ *   GET  /api/nutritionix/foods?q=…         => full DTO (common + branded)
+ *   GET  /api/nutritionix/foods/common?q=…  => just common items
+ *   GET  /api/nutritionix/foods/branded?q=… => just branded items
+ *   GET  /api/nutritionix/foods/{nixItemId} => full nutrition for one item
  *
  * Credentials are looked up once from the ServletContext.
  */
@@ -121,6 +118,30 @@ public class NutritionixResource {
                     "Failed to fetch Nutritionix item: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY
             );
+        }
+    }
+
+    /**
+     * Natural‐language nutrient analysis.
+     * POST /api/nutritionix/foods/nutrients
+     * Body: { "query": "3 bananas and an apple" }
+     */
+    @POST
+    @Path("nutrients")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<FoodsItem> analyzeNutrients(NutrientsRequestDto req) {
+        String q = req.getQuery();
+        if (q == null || q.trim().isEmpty()) {
+            throw new WebApplicationException("`query` must be provided",
+                    Response.Status.BAD_REQUEST);
+        }
+        try {
+            return nutritionixService.naturalNutrients(q);
+        } catch (WebApplicationException e) {
+            throw e; // preserve 404 / 503 if thrown by service
+        } catch (Exception e) {
+            throw new WebApplicationException("Failed to analyze nutrients: " + e.getMessage(),
+                    Response.Status.BAD_GATEWAY);
         }
     }
 }

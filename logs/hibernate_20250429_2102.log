@@ -1,0 +1,4 @@
+[DEBUG] 2025-04-29 21:02:54.212 [main] SessionFactoryImpl - HHH000031: Closing
+[DEBUG] 2025-04-29 21:02:54.213 [main] TypeConfiguration$Scope - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@38831718] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@56e0f783]
+[DEBUG] 2025-04-29 21:02:54.214 [main] AbstractServiceRegistryImpl - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+[DEBUG] 2025-04-29 21:02:54.216 [main] BootstrapServiceRegistryImpl - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
