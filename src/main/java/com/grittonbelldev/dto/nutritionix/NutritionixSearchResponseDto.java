@@ -1,11 +1,13 @@
 package com.grittonbelldev.dto.nutritionix;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * The response from Nutritionix’s “instant” search endpoint.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NutritionixSearchResponseDto {
     @JsonProperty("branded")
     private List<BrandedItem> branded;

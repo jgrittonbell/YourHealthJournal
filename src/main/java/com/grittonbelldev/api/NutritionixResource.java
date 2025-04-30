@@ -2,6 +2,7 @@ package com.grittonbelldev.api;
 
 import com.grittonbelldev.dto.nutritionix.BrandedItem;
 import com.grittonbelldev.dto.nutritionix.CommonItem;
+import com.grittonbelldev.dto.nutritionix.FoodsItem;
 import com.grittonbelldev.dto.nutritionix.NutritionixSearchResponseDto;
 import com.grittonbelldev.service.NutritionixService;
 
@@ -12,22 +13,24 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Exposes Nutritionix instant‐search functionality:
+ * Exposes Nutritionix instant‐search and single‐item lookup:
  *   GET  /api/nutritionix/foods?q=…         ⇒ full DTO (common + branded)
  *   GET  /api/nutritionix/foods/common?q=…  ⇒ just common items
  *   GET  /api/nutritionix/foods/branded?q=… ⇒ just branded items
+ *   GET  /api/nutritionix/foods/{nixItemId} ⇒ full nutrition for one item
  *
  * Credentials are looked up once from the ServletContext.
  */
 @Path("/nutritionix/foods")
 @Produces(MediaType.APPLICATION_JSON)
-public class FoodSearchResource {
+public class NutritionixResource {
 
     private NutritionixService nutritionixService;
 
     /**
-     * JAX-RS will call this once, giving you the ServletContext
-     * so you can pull out your appId/appKey and wire up the service.
+     * JAX-RS callback to inject ServletContext, from which we read
+     * nutritionix.appId and nutritionix.appKey and use them to
+     * instantiate our service.
      */
     @Context
     public void setServletContext(ServletContext ctx) {
@@ -40,7 +43,6 @@ public class FoodSearchResource {
                     Response.Status.SERVICE_UNAVAILABLE
             );
         }
-
         this.nutritionixService = new NutritionixService(appId, appKey);
     }
 
@@ -93,6 +95,30 @@ public class FoodSearchResource {
         } catch (Exception e) {
             throw new WebApplicationException(
                     "Failed to search branded items: " + e.getMessage(),
+                    Response.Status.BAD_GATEWAY
+            );
+        }
+    }
+
+    /**
+     * Fetch full nutrition facts for a single Nutritionix item.
+     * GET  /api/nutritionix/foods/{nixItemId}
+     *
+     * @param nixItemId the Nutritionix item identifier
+     * @return a single {@link FoodsItem} with detailed nutrients
+     */
+    @GET @Path("{nixItemId}")
+    public FoodsItem getById(
+            @PathParam("nixItemId") String nixItemId
+    ) {
+        try {
+            return nutritionixService.fetchById(nixItemId);
+        } catch (WebApplicationException e) {
+            // rethrow to preserve HTTP status
+            throw e;
+        } catch (Exception e) {
+            throw new WebApplicationException(
+                    "Failed to fetch Nutritionix item: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY
             );
         }

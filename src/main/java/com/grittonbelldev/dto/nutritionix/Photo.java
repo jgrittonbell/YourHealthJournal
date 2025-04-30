@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Photo {
+public class Photo{
+
+	@JsonProperty("is_user_uploaded")
+	private boolean isUserUploaded;
 
 	@JsonProperty("thumb")
 	private String thumb;
@@ -12,18 +15,27 @@ public class Photo {
 	@JsonProperty("highres")
 	private Object highres;
 
-	@JsonProperty("is_user_uploaded")
-	private boolean isUserUploaded;
-
-	public String getThumb() {
-		return thumb;
+	public void setIsUserUploaded(boolean isUserUploaded){
+		this.isUserUploaded = isUserUploaded;
 	}
 
-	public boolean isUserUploaded() {
+	public boolean isIsUserUploaded(){
 		return isUserUploaded;
 	}
 
-	public Object getHighres() {
+	public void setThumb(String thumb){
+		this.thumb = thumb;
+	}
+
+	public String getThumb(){
+		return thumb;
+	}
+
+	public void setHighres(Object highres){
+		this.highres = highres;
+	}
+
+	public Object getHighres(){
 		return highres;
 	}
 }

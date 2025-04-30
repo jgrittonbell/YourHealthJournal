@@ -1,11 +1,10 @@
 package com.grittonbelldev.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.grittonbelldev.dto.nutritionix.*;
 import com.grittonbelldev.persistence.NutritionixDao;
-import com.grittonbelldev.dto.nutritionix.CommonItem;
-import com.grittonbelldev.dto.nutritionix.BrandedItem;
-import com.grittonbelldev.dto.nutritionix.NutritionixSearchResponseDto;
-import com.grittonbelldev.dto.nutritionix.NutritionixFoodDto;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -36,4 +35,13 @@ public class NutritionixService {
         return dao.getBranded(query);
     }
 
+    /**
+     * Returns the first (and only) food-detail record for this item.
+     * @throws NotFoundException if Nutritionix returns an empty list.
+     */
+    public FoodsItem fetchById(String nixItemId) {
+        FoodResponse detail = dao.fetchById(nixItemId);
+        return detail.getFoods().stream().findFirst()
+                .orElseThrow(() -> new NotFoundException("Item not found: " + nixItemId));
+    }
 }
