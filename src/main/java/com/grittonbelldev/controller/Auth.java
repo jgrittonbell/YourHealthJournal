@@ -92,6 +92,7 @@ public class Auth extends HttpServlet {
         logger.info("Auth servlet triggered. Checking for auth code...");
         String authCode = req.getParameter("code");
 
+        logger.info("→ Incoming authorization code: {}", authCode);
 
         // If no authorization code is present, something went wrong in the Cognito login
         if (authCode == null) {
@@ -101,6 +102,8 @@ public class Auth extends HttpServlet {
         }
 
         try {
+
+            logger.info("→ Exchanging code at: {}", OAUTH_URL);
             // Step 1: Exchange the auth code for tokens
             HttpRequest authRequest = buildAuthRequest(authCode);
             TokenResponse tokenResponse = getToken(authRequest);
@@ -153,6 +156,9 @@ public class Auth extends HttpServlet {
         HttpResponse<?> response = null;
 
         response = client.send(authRequest, HttpResponse.BodyHandlers.ofString());
+
+        logger.info("← Token exchange response status: {}", response.statusCode());
+        logger.debug("← Token exchange response body: {}", response.body());
 
 
         logger.debug("Response headers: " + response.headers().toString());

@@ -7,70 +7,70 @@ import com.grittonbelldev.service.GlucoseService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 /**
- * JAX-RS resource exposing RESTful endpoints for GlucoseReading operations.
- * <p>
- * Provides CRUD operations for glucose readings: listing, retrieval by ID,
- * creation, update, and deletion. Delegates business logic to GlucoseService.
- * </p>
+ * JAX-RS resource exposing RESTful endpoints for GlucoseReading operations,
+ * scoped to the currently authenticated user.
  */
 @Path("/readings")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class GlucoseResource {
 
-    /**
-     * Service layer handling glucose reading persistence and mapping.
-     */
+    @Context
+    private SecurityContext securityContext;
+
     private final GlucoseService glucoseService = new GlucoseService();
 
     /**
+     * Extracts the internal user ID from the SecurityContext.
+     */
+    private long currentUserId() {
+        Principal p = securityContext.getUserPrincipal();
+        if (p == null) {
+            throw new WebApplicationException("Not authenticated", Response.Status.UNAUTHORIZED);
+        }
+        try {
+            return Long.parseLong(p.getName());
+        } catch (NumberFormatException e) {
+            throw new WebApplicationException("Invalid user principal", Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * GET /api/readings
-     * <p>
-     * Retrieves all glucose readings.
-     * </p>
-     *
-     * @return List of GlucoseResponseDto representing all readings
+     * Returns only this user’s glucose readings.
      */
     @GET
     public List<GlucoseResponseDto> listAll() {
-        return glucoseService.listAll();
+        long userId = currentUserId();
+        return glucoseService.listAllForUser(userId);
     }
 
     /**
      * GET /api/readings/{id}
-     * <p>
-     * Retrieves a single glucose reading by its identifier.
-     * </p>
-     *
-     * @param id Path parameter representing the reading ID
-     * @return GlucoseResponseDto for the requested reading
+     * Returns the specified reading only if it belongs to this user.
      */
     @GET
     @Path("{id}")
     public GlucoseResponseDto getById(@PathParam("id") Long id) {
-        return glucoseService.find(id);
+        long userId = currentUserId();
+        return glucoseService.findForUser(userId, id);
     }
 
     /**
      * POST /api/readings
-     * <p>
-     * Creates a new glucose reading based on the provided DTO.
-     * Returns 201 Created with Location header pointing to the new resource.
-     * </p>
-     *
-     * @param dto     DTO containing measurement data
-     * @param uriInfo Context for building the resource URI
-     * @return Response with created GlucoseResponseDto and Location header
+     * Creates a new glucose reading owned by this user.
      */
     @POST
     public Response create(
             GlucoseRequestDto dto,
             @Context UriInfo uriInfo
     ) {
-        GlucoseResponseDto created = glucoseService.create(dto);
+        long userId = currentUserId();
+        GlucoseResponseDto created = glucoseService.createForUser(userId, dto);
         URI uri = uriInfo.getAbsolutePathBuilder()
                 .path(created.getId().toString())
                 .build();
@@ -81,13 +81,7 @@ public class GlucoseResource {
 
     /**
      * PUT /api/readings/{id}
-     * <p>
-     * Updates an existing glucose reading with new values from the DTO.
-     * </p>
-     *
-     * @param id  Path parameter representing the reading ID to update
-     * @param dto DTO containing updated measurement data
-     * @return GlucoseResponseDto for the updated reading
+     * Updates an existing reading, only if it belongs to this user.
      */
     @PUT
     @Path("{id}")
@@ -95,21 +89,18 @@ public class GlucoseResource {
             @PathParam("id") Long id,
             GlucoseRequestDto dto
     ) {
-        return glucoseService.update(id, dto);
+        long userId = currentUserId();
+        return glucoseService.updateForUser(userId, id, dto);
     }
 
     /**
      * DELETE /api/readings/{id}
-     * <p>
-     * Deletes the glucose reading with the given ID.
-     * </p>
-     *
-     * @param id Path parameter representing the reading ID to delete
+     * Deletes the specified reading, only if it belongs to this user.
      */
     @DELETE
     @Path("{id}")
     public void delete(@PathParam("id") Long id) {
-        glucoseService.delete(id);
+        long userId = currentUserId();
+        glucoseService.deleteForUser(userId, id);
     }
 }
-

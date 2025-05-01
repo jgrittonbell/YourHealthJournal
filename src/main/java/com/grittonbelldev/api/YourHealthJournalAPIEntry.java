@@ -1,5 +1,6 @@
 package com.grittonbelldev.api;
 
+import com.grittonbelldev.auth.JwtAuthFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
 import javax.ws.rs.ApplicationPath;
@@ -28,11 +29,14 @@ public class YourHealthJournalAPIEntry extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         return Set.of(
-                MealResource.class,      // REST endpoints for meals
-                GlucoseResource.class,   // REST endpoints for glucose readings
-                FavoriteResource.class,  // REST endpoints for favorites
+                MealResource.class,       // REST endpoints for meals
+                GlucoseResource.class,    // REST endpoints for glucose readings
+                FavoriteResource.class,   // REST endpoints for favorites
+                UserResource.class,       // REST endpoints for authenticated user's profile
                 NutritionixResource.class,// REST endpoints for nutritionix API
-                JacksonFeature.class     // Enables JSON (de)serialization via Jackson
+                JwtAuthFilter.class,      // JAX-RS Filter to restrict the API to authenticated Users
+                JacksonFeature.class,      // Enables JSON (de)serialization via Jackson
+                JacksonConfig.class       //Registers support for java.time.*
         );
     }
 }

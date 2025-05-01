@@ -1,4 +1,3 @@
-
 package com.grittonbelldev.service;
 
 import com.grittonbelldev.dto.FoodEntryDto;
@@ -7,95 +6,81 @@ import com.grittonbelldev.dto.MealResponseDto;
 import com.grittonbelldev.entity.Food;
 import com.grittonbelldev.entity.FoodMealJournal;
 import com.grittonbelldev.entity.Meal;
+import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
+
 /**
- * Service layer for managing Meal entities.
- * <p>
- * Responsible for CRUD operations on meals, mapping between DTOs and entities,
- * and orchestrating persistence actions via GenericDAO.
- * </p>
+ * Service layer for managing Meal entities, scoped per user.
  */
 public class MealService {
-    /** DAO for Meal entity persistence. */
     private final GenericDAO<Meal> mealDao = new GenericDAO<>(Meal.class);
-    /** DAO for FoodMealJournal join entity persistence. */
     private final GenericDAO<FoodMealJournal> fmjDao = new GenericDAO<>(FoodMealJournal.class);
-    /** DAO for Food entity persistence. */
     private final GenericDAO<Food> foodDao = new GenericDAO<>(Food.class);
+    private final GenericDAO<User> userDao = new GenericDAO<>(User.class);
 
     /**
-     * Retrieves all meals and converts them to response DTOs.
-     *
-     * @return list of MealResponseDto representing all persisted meals
+     * List all meals belonging to the given user.
      */
-    public List<MealResponseDto> listAll() {
-        // Fetch all Meal entities and map each to a DTO
-        return mealDao.getAll().stream()
+    public List<MealResponseDto> listAllForUser(long userId) {
+        return mealDao.getByPropertyEqual("user.id", userId).stream()
                 .map(this::toResponseDto)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Retrieves a single meal by its identifier.
-     *
-     * @param id the primary key of the Meal to find
-     * @return MealResponseDto of the found meal
-     * @throws IllegalArgumentException if no Meal is found for the given id
+     * Find one meal by ID, but only if it belongs to the given user.
      */
-    public MealResponseDto find(Long id) {
-        Meal meal = mealDao.getById(id);
-        if (meal == null) {
-            throw new IllegalArgumentException("Meal not found for id " + id);
+    public MealResponseDto findForUser(long userId, long mealId) {
+        Meal meal = mealDao.getById(mealId);
+        if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+            throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
         return toResponseDto(meal);
     }
 
     /**
-     * Creates a new Meal along with any provided food entries.
-     *
-     * @param dto data transfer object containing meal data and optional foods
-     * @return MealResponseDto representing the newly created meal
+     * Create a new meal owned by the given user, with optional foods.
      */
-    public MealResponseDto create(MealRequestDto dto) {
-        // Map request DTO to entity
+    public MealResponseDto createForUser(long userId, MealRequestDto dto) {
+        User user = userDao.getById(userId);
+        if (user == null) {
+            throw new WebApplicationException("User not found", Response.Status.NOT_FOUND);
+        }
         Meal meal = new Meal();
+        meal.setUser(user);
         meal.setMealName(dto.getMealName());
         meal.setTimeEaten(dto.getTimeEaten());
-        // Persist the Meal to generate an identifier
         mealDao.insert(meal);
 
-        // If food entries are provided, create join entities
         if (dto.getFoods() != null) {
             for (FoodEntryDto fe : dto.getFoods()) {
-                // Lookup the Food entity by ID
                 Food food = foodDao.getById(fe.getFoodId());
-                // Create and persist the join entity linking meal to food
+                if (food == null) {
+                    throw new WebApplicationException(
+                            "Food not found: " + fe.getFoodId(),
+                            Response.Status.BAD_REQUEST
+                    );
+                }
                 FoodMealJournal entry = new FoodMealJournal(meal, food, fe.getServingSize());
                 fmjDao.insert(entry);
             }
         }
-
-        // Convert the fully populated Meal entity to response DTO
         return toResponseDto(meal);
     }
 
     /**
-     * Updates an existing Meal's basic fields (name and time).
-     *
-     * @param id  identifier of the Meal to update
-     * @param dto data transfer object containing updated values
-     * @return MealResponseDto representing the updated meal
-     * @throws IllegalArgumentException if no Meal is found for the given id
+     * Update an existing meal’s name and time, only if it belongs to the given user.
      */
-    public MealResponseDto update(Long id, MealRequestDto dto) {
-        Meal meal = mealDao.getById(id);
-        if (meal == null) {
-            throw new IllegalArgumentException("Cannot update; Meal not found for id " + id);
+    public MealResponseDto updateForUser(long userId, long mealId, MealRequestDto dto) {
+        Meal meal = mealDao.getById(mealId);
+        if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+            throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
-        // Apply updates from DTO
         meal.setMealName(dto.getMealName());
         meal.setTimeEaten(dto.getTimeEaten());
         mealDao.update(meal);
@@ -103,32 +88,85 @@ public class MealService {
     }
 
     /**
-     * Deletes a Meal and its associated food entries.
-     *
-     * @param id identifier of the Meal to delete
-     * @throws IllegalArgumentException if no Meal is found for the given id
+     * Delete a meal, only if it belongs to the given user.
      */
+    public void deleteForUser(long userId, long mealId) {
+        Meal meal = mealDao.getById(mealId);
+        if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+            throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
+        }
+        mealDao.delete(meal);
+    }
+
+    // ------------------------------------------------------------------------
+    // Legacy methods (unscoped) left here if needed—but prefer the per-user variants
+    // ------------------------------------------------------------------------
+
+    public List<MealResponseDto> listAll() {
+        return mealDao.getAll().stream()
+                .map(this::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    public MealResponseDto find(Long id) {
+        Meal meal = mealDao.getById(id);
+        if (meal == null) {
+            throw new WebApplicationException(
+                    "Meal not found for id " + id,
+                    Response.Status.NOT_FOUND
+            );
+        }
+        return toResponseDto(meal);
+    }
+
+    public MealResponseDto create(MealRequestDto dto) {
+        Meal meal = new Meal();
+        meal.setMealName(dto.getMealName());
+        meal.setTimeEaten(dto.getTimeEaten());
+        mealDao.insert(meal);
+        if (dto.getFoods() != null) {
+            for (FoodEntryDto fe : dto.getFoods()) {
+                Food food = foodDao.getById(fe.getFoodId());
+                FoodMealJournal entry = new FoodMealJournal(meal, food, fe.getServingSize());
+                fmjDao.insert(entry);
+            }
+        }
+        return toResponseDto(meal);
+    }
+
+    public MealResponseDto update(Long id, MealRequestDto dto) {
+        Meal meal = mealDao.getById(id);
+        if (meal == null) {
+            throw new WebApplicationException(
+                    "Meal not found for id " + id,
+                    Response.Status.NOT_FOUND
+            );
+        }
+        meal.setMealName(dto.getMealName());
+        meal.setTimeEaten(dto.getTimeEaten());
+        mealDao.update(meal);
+        return toResponseDto(meal);
+    }
+
     public void delete(Long id) {
         Meal meal = mealDao.getById(id);
         if (meal == null) {
-            throw new IllegalArgumentException("Cannot delete; Meal not found for id " + id);
+            throw new WebApplicationException(
+                    "Meal not found for id " + id,
+                    Response.Status.NOT_FOUND
+            );
         }
         mealDao.delete(meal);
     }
 
     /**
-     * Maps a Meal entity to its response DTO representation.
-     * Populates basic fields and associated food entry DTOs.
-     *
-     * @param meal the Meal entity to convert
-     * @return MealResponseDto populated with entity data
+     * Maps a Meal entity (and its FoodMealJournal entries) to a DTO.
      */
     private MealResponseDto toResponseDto(Meal meal) {
         MealResponseDto r = new MealResponseDto();
         r.setId(meal.getId());
         r.setMealName(meal.getMealName());
         r.setTimeEaten(meal.getTimeEaten());
-        // Map each join entry to a simple DTO
         List<FoodEntryDto> foods = meal.getFoodMealEntries().stream()
                 .map(e -> {
                     FoodEntryDto fe = new FoodEntryDto();

@@ -1,121 +1,98 @@
-
 package com.grittonbelldev.service;
 
 import com.grittonbelldev.dto.GlucoseRequestDto;
 import com.grittonbelldev.dto.GlucoseResponseDto;
 import com.grittonbelldev.entity.GlucoseReading;
+import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Service layer for managing GlucoseReading entities.
- * <p>
- * Provides CRUD operations for glucose readings and maps between
- * request/response DTOs and the persistence entities via GenericDAO.
- * </p>
+ * Service layer for managing GlucoseReading entities, scoped per user.
  */
 public class GlucoseService {
-    /** DAO for GlucoseReading entity persistence. */
     private final GenericDAO<GlucoseReading> glucoseDao = new GenericDAO<>(GlucoseReading.class);
+    private final GenericDAO<User> userDao = new GenericDAO<>(User.class);
 
     /**
-     * Retrieves all glucose readings as response DTOs.
-     *
-     * @return List of GlucoseResponseDto representing all persisted readings
+     * List all glucose readings belonging to the given user.
      */
-    public List<GlucoseResponseDto> listAll() {
-        return glucoseDao.getAll().stream()
+    public List<GlucoseResponseDto> listAllForUser(long userId) {
+        return glucoseDao.getByPropertyEqual("user.id", userId).stream()
                 .map(this::toResponseDto)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Retrieves a single glucose reading by its identifier.
-     *
-     * @param id the primary key of the reading to find
-     * @return GlucoseResponseDto representing the found reading
-     * @throws IllegalArgumentException if no reading is found for the given id
+     * Find one reading by ID, but only if it belongs to the given user.
      */
-    public GlucoseResponseDto find(Long id) {
-        GlucoseReading reading = glucoseDao.getById(id);
-        if (reading == null) {
-            throw new IllegalArgumentException("Glucose reading not found for id " + id);
+    public GlucoseResponseDto findForUser(long userId, long readingId) {
+        GlucoseReading r = glucoseDao.getById(readingId);
+        if (r == null || r.getUser() == null || r.getUser().getId() != userId) {
+            throw new WebApplicationException("Reading not found", Response.Status.NOT_FOUND);
         }
-        return toResponseDto(reading);
+        return toResponseDto(r);
     }
 
     /**
-     * Creates and persists a new glucose reading based on the provided DTO.
-     *
-     * @param dto GlucoseRequestDto containing the measurement data
-     * @return GlucoseResponseDto for the newly created reading
+     * Create a new reading owned by the given user.
      */
-    public GlucoseResponseDto create(GlucoseRequestDto dto) {
-        // Map DTO to entity
-        GlucoseReading reading = new GlucoseReading();
-        reading.setGlucoseLevel(dto.getGlucoseLevel());
-        reading.setMeasurementTime(dto.getMeasurementTime());
-        reading.setMeasurementSource(dto.getMeasurementSource());
-        reading.setNotes(dto.getNotes());
-        // Persist entity
-        glucoseDao.insert(reading);
-        // Convert back to DTO
-        return toResponseDto(reading);
-    }
-
-    /**
-     * Updates an existing glucose reading with values from the provided DTO.
-     *
-     * @param id  identifier of the reading to update
-     * @param dto GlucoseRequestDto containing updated fields
-     * @return GlucoseResponseDto for the updated reading
-     * @throws IllegalArgumentException if no reading is found for the given id
-     */
-    public GlucoseResponseDto update(Long id, GlucoseRequestDto dto) {
-        GlucoseReading reading = glucoseDao.getById(id);
-        if (reading == null) {
-            throw new IllegalArgumentException("Cannot update; glucose reading not found for id " + id);
+    public GlucoseResponseDto createForUser(long userId, GlucoseRequestDto dto) {
+        User user = userDao.getById(userId);
+        if (user == null) {
+            throw new WebApplicationException("User not found", Response.Status.NOT_FOUND);
         }
-        // Apply updates
-        reading.setGlucoseLevel(dto.getGlucoseLevel());
-        reading.setMeasurementTime(dto.getMeasurementTime());
-        reading.setMeasurementSource(dto.getMeasurementSource());
-        reading.setNotes(dto.getNotes());
-        // Persist changes
-        glucoseDao.update(reading);
-        return toResponseDto(reading);
+        GlucoseReading r = new GlucoseReading();
+        r.setUser(user);
+        r.setGlucoseLevel(dto.getGlucoseLevel());
+        r.setMeasurementTime(dto.getMeasurementTime());
+        r.setMeasurementSource(dto.getMeasurementSource());
+        r.setNotes(dto.getNotes());
+        glucoseDao.insert(r);
+        return toResponseDto(r);
     }
 
     /**
-     * Deletes a glucose reading by its identifier.
-     *
-     * @param id identifier of the reading to delete
-     * @throws IllegalArgumentException if no reading is found for the given id
+     * Update an existing reading, only if it belongs to the given user.
      */
-    public void delete(Long id) {
-        GlucoseReading reading = glucoseDao.getById(id);
-        if (reading == null) {
-            throw new IllegalArgumentException("Cannot delete; glucose reading not found for id " + id);
+    public GlucoseResponseDto updateForUser(long userId, long readingId, GlucoseRequestDto dto) {
+        GlucoseReading r = glucoseDao.getById(readingId);
+        if (r == null || r.getUser() == null || r.getUser().getId() != userId) {
+            throw new WebApplicationException("Reading not found", Response.Status.NOT_FOUND);
         }
-        glucoseDao.delete(reading);
+        r.setGlucoseLevel(dto.getGlucoseLevel());
+        r.setMeasurementTime(dto.getMeasurementTime());
+        r.setMeasurementSource(dto.getMeasurementSource());
+        r.setNotes(dto.getNotes());
+        glucoseDao.update(r);
+        return toResponseDto(r);
     }
 
     /**
-     * Converts a GlucoseReading entity to its corresponding response DTO.
-     *
-     * @param reading the entity to convert
-     * @return GlucoseResponseDto populated with entity data
+     * Delete a reading, only if it belongs to the given user.
      */
-    private GlucoseResponseDto toResponseDto(GlucoseReading reading) {
+    public void deleteForUser(long userId, long readingId) {
+        GlucoseReading r = glucoseDao.getById(readingId);
+        if (r == null || r.getUser() == null || r.getUser().getId() != userId) {
+            throw new WebApplicationException("Reading not found", Response.Status.NOT_FOUND);
+        }
+        glucoseDao.delete(r);
+    }
+
+    /**
+     * Convert entity → response DTO.
+     */
+    private GlucoseResponseDto toResponseDto(GlucoseReading r) {
         GlucoseResponseDto dto = new GlucoseResponseDto();
-        dto.setId(reading.getId());
-        dto.setGlucoseLevel(reading.getGlucoseLevel());
-        dto.setMeasurementTime(reading.getMeasurementTime());
-        dto.setMeasurementSource(reading.getMeasurementSource());
-        dto.setNotes(reading.getNotes());
+        dto.setId(r.getId());
+        dto.setGlucoseLevel(r.getGlucoseLevel());
+        dto.setMeasurementTime(r.getMeasurementTime());
+        dto.setMeasurementSource(r.getMeasurementSource());
+        dto.setNotes(r.getNotes());
         return dto;
     }
 }
-
