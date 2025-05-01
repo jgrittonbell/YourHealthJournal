@@ -1,89 +1,104 @@
 package com.grittonbelldev.api;
 
+import com.grittonbelldev.dto.FoodResponseDto;
+import com.grittonbelldev.dto.MealResponseDto;
 import com.grittonbelldev.service.FavoriteService;
 
-
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
+import java.security.Principal;
+import java.util.List;
 
 /**
- * JAX-RS resource exposing endpoints for managing user favorites.
- * <p>
- * Allows clients to mark meals or foods as favorites and remove those markings.
- * Delegates business logic to FavoriteService.
- * </p>
+ * JAX-RS resource exposing endpoints for managing user favorites,
+ * scoped to the currently authenticated user.
  */
 @Path("/favorites")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class FavoriteResource {
 
-    /**
-     * Service layer handling favorite/unfavorite operations.
-     */
+    @Context
+    private SecurityContext securityContext;
+
     private final FavoriteService favoriteService = new FavoriteService();
+
+    /** Extract the internal user ID from the SecurityContext. */
+    private long currentUserId() {
+        Principal p = securityContext.getUserPrincipal();
+        if (p == null) {
+            throw new WebApplicationException("Not authenticated", Response.Status.UNAUTHORIZED);
+        }
+        try {
+            return Long.parseLong(p.getName());
+        } catch (NumberFormatException e) {
+            throw new WebApplicationException("Invalid user principal", Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /**
      * POST /api/favorites/meals/{mealId}
-     * <p>
-     * Marks the meal identified by mealId as a favorite for the current user.
-     * </p>
-     *
-     * @param mealId the ID of the meal to favorite
-     * @return HTTP 200 OK if the operation succeeds
+     * Marks the meal as favorite for the current user.
      */
     @POST
     @Path("meals/{mealId}")
     public Response favoriteMeal(@PathParam("mealId") Long mealId) {
-        favoriteService.favoriteMeal(mealId);
+        long userId = currentUserId();
+        favoriteService.favoriteMealForUser(userId, mealId);
         return Response.ok().build();
     }
 
     /**
      * DELETE /api/favorites/meals/{mealId}
-     * <p>
-     * Removes the favorite marking from the specified meal.
-     * </p>
-     *
-     * @param mealId the ID of the meal to unfavorite
-     * @return HTTP 204 No Content if deletion succeeds
+     * Removes the meal from the current user’s favorites.
      */
     @DELETE
     @Path("meals/{mealId}")
     public Response unfavoriteMeal(@PathParam("mealId") Long mealId) {
-        favoriteService.unfavoriteMeal(mealId);
+        long userId = currentUserId();
+        favoriteService.unfavoriteMealForUser(userId, mealId);
         return Response.noContent().build();
     }
 
     /**
      * POST /api/favorites/foods/{foodId}
-     * <p>
-     * Marks the food identified by foodId as a favorite for the current user.
-     * </p>
-     *
-     * @param foodId the ID of the food to favorite
-     * @return HTTP 200 OK if the operation succeeds
+     * Marks the food as favorite for the current user.
      */
     @POST
     @Path("foods/{foodId}")
     public Response favoriteFood(@PathParam("foodId") Long foodId) {
-        favoriteService.favoriteFood(foodId);
+        long userId = currentUserId();
+        favoriteService.favoriteFoodForUser(userId, foodId);
         return Response.ok().build();
     }
 
     /**
      * DELETE /api/favorites/foods/{foodId}
-     * <p>
-     * Removes the favorite marking from the specified food.
-     * </p>
-     *
-     * @param foodId the ID of the food to unfavorite
-     * @return HTTP 204 No Content if deletion succeeds
+     * Removes the food from the current user’s favorites.
      */
     @DELETE
     @Path("foods/{foodId}")
     public Response unfavoriteFood(@PathParam("foodId") Long foodId) {
-        favoriteService.unfavoriteFood(foodId);
+        long userId = currentUserId();
+        favoriteService.unfavoriteFoodForUser(userId, foodId);
         return Response.noContent().build();
+    }
+
+    /**
+     * GET /api/favorites/meals
+     * <p>Return all meals this user has favorited.</p>
+     */
+    @GET @Path("meals")
+    public List<MealResponseDto> listFavoriteMeals() {
+        return favoriteService.listFavoriteMeals(currentUserId());
+    }
+
+    /**
+     * GET /api/favorites/foods
+     * <p>Return all foods this user has favorited.</p>
+     */
+    @GET @Path("foods")
+    public List<FoodResponseDto> listFavoriteFoods() {
+        return favoriteService.listFavoriteFoods(currentUserId());
     }
 }
