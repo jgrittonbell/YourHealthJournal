@@ -29,14 +29,15 @@ public class YourHealthJournalAPIEntry extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         return Set.of(
-                MealResource.class,       // REST endpoints for meals
-                GlucoseResource.class,    // REST endpoints for glucose readings
-                FavoriteResource.class,   // REST endpoints for favorites
-                UserResource.class,       // REST endpoints for authenticated user's profile
-                NutritionixResource.class,// REST endpoints for nutritionix API
-                JwtAuthFilter.class,      // JAX-RS Filter to restrict the API to authenticated Users
+                MealResource.class,        // REST endpoints for meals
+                GlucoseResource.class,     // REST endpoints for glucose readings
+                FavoriteResource.class,    // REST endpoints for favorites
+                UserResource.class,        // REST endpoints for authenticated user's profile
+                NutritionixResource.class, // REST endpoints for nutritionix API
+                AuthResource.class,        // REST endpoints handling Cognito token exchange after OAuth redirect
+                JwtAuthFilter.class,       // JAX-RS Filter to restrict the API to authenticated Users
                 JacksonFeature.class,      // Enables JSON (de)serialization via Jackson
-                JacksonConfig.class       //Registers support for java.time.*
+                JacksonConfig.class        //Registers support for java.time.*
         );
     }
 }

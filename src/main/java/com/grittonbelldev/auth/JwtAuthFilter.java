@@ -52,6 +52,15 @@ public class JwtAuthFilter implements ContainerRequestFilter {
         */
         // ──────────────────────────────────────────────────
 
+        // Skip filtering for public paths like /api/auth/token
+        String path = ctx.getUriInfo().getPath();
+        logger.debug("Request path: {}", path);
+
+        if (path.equals("auth/token") || path.equals("/auth/token")) {
+            logger.debug("Skipping JWT filter for public path: {}", path);
+            return;
+        }
+
         // 1) Extract and validate Authorization header
         String auth = ctx.getHeaderString(HttpHeaders.AUTHORIZATION);
         if (auth == null || !auth.startsWith(BEARER_PREFIX)) {
