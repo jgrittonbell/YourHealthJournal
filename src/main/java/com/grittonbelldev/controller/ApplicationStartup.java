@@ -98,9 +98,9 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoaderP
      * and stores them in the ServletContext.
      */
     private void loadAndStoreNutritionixProperties() {
-        Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjNutritionix");
-        String appId  = secrets.get("nutritionixAppId");
-        String appKey = secrets.get("nutritionixAppKey");
+        Map<String, String> secrets = SecretsManagerUtil.getSecretAsMap("yhjSecrets");
+        String appId  = secrets.get("nutritionixID");
+        String appKey = secrets.get("nutritionixKey");
 
         if (appId == null || appKey == null) {
             logger.error("Missing Nutritionix API credentials; features depending on Nutritionix will be unavailable.");
