@@ -30,9 +30,26 @@
 
 ## Plugin-specific files:
 
+# Angular frontend (in FrontEndSource/yhj-frontend/)
+FrontEndSource/yhj-frontend/node_modules
+FrontEndSource/yhj-frontend/dist
+FrontEndSource/yhj-frontend/.angular
+FrontEndSource/yhj-frontend/.sass-cache
+FrontEndSource/yhj-frontend/.DS_Store
+FrontEndSource/yhj-frontend/.vscode/
+FrontEndSource/yhj-frontend/.history
+FrontEndSource/yhj-frontend/coverage
+FrontEndSource/yhj-frontend/npm-debug.log
+FrontEndSource/yhj-frontend/yarn-error.log
+FrontEndSource/yhj-frontend/testem.log
+FrontEndSource/yhj-frontend/README.md
+FrontEndSource/yhj-frontend/.editorconfig
+FrontEndSource/yhj-frontend/Angular.zip
+
 # IntelliJ
 /out/
 
+/logs
 # Maven
 /target/
 /log/
@@ -55,3 +72,6 @@ src/main/resources/hibernate.cfg.xml
 src/main/resources/cognito.properties
 src/test/resources/database.properties
 src/test/resources/hibernate.cfg.xml
+Java.zip
+
+

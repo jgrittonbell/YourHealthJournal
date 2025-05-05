@@ -35,32 +35,30 @@ public class JwtAuthFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext ctx) throws IOException {
-        // DEV-ONLY BYPASS: any Host containing "localhost"
-        /*
-        String host = ctx.getUriInfo().getRequestUri().getHost();
-        logger.info("JwtAuthFilter: request host = {}", host);
-        if ("localhost".equals(host) || "127.0.0.1".equals(host)) {
-            SecurityContext orig = ctx.getSecurityContext();
-            ctx.setSecurityContext(new SecurityContext() {
-                @Override public Principal getUserPrincipal()      { return () -> "1"; }
-                @Override public boolean   isUserInRole(String r)   { return true; }
-                @Override public boolean   isSecure()               { return orig.isSecure(); }
-                @Override public String    getAuthenticationScheme(){ return "DEV";  }
-            });
+        String method = ctx.getMethod();
+        String path = ctx.getUriInfo().getPath();
+        logger.debug("Request method: {}, path: {}", method, path);
+
+        // Allow CORS preflight requests
+        if ("OPTIONS".equalsIgnoreCase(method)) {
+            logger.debug("Skipping JWT filter for OPTIONS preflight");
             return;
         }
-        */
-        // ──────────────────────────────────────────────────
 
-        // 1) Extract and validate Authorization header
+        // Allow unauthenticated access to token exchange endpoint
+        if (path.equals("auth/token") || path.equals("/auth/token")) {
+            logger.debug("Skipping JWT filter for public path: {}", path);
+            return;
+        }
+
         String auth = ctx.getHeaderString(HttpHeaders.AUTHORIZATION);
         if (auth == null || !auth.startsWith(BEARER_PREFIX)) {
             ctx.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
             return;
         }
+
         String token = auth.substring(BEARER_PREFIX.length()).trim();
 
-        // 2) Validate JWT to get full decoded token
         DecodedJWT jwt;
         try {
             jwt = JwtUtils.validate(token);
@@ -70,35 +68,39 @@ public class JwtAuthFilter implements ContainerRequestFilter {
             return;
         }
 
-        // 3) Pull out subject ("sub") and email claim
         String cognitoSub = jwt.getSubject();
-        String email      = jwt.getClaim("email").asString();
+        String email = jwt.getClaim("email").asString();
         if (cognitoSub == null || email == null) {
             logger.warn("Missing sub or email in token");
             ctx.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
             return;
         }
 
-        // 4) Map (cognitoSub, email) → internal User record
         User user = userService.findOrCreateByCognitoId(cognitoSub, email);
         final long internalId = user.getId();
 
-        // 5) Wrap the SecurityContext so getUserPrincipal() returns internalId
         final SecurityContext original = ctx.getSecurityContext();
         ctx.setSecurityContext(new SecurityContext() {
             @Override
             public Principal getUserPrincipal() {
                 return () -> Long.toString(internalId);
             }
-            @Override public boolean isUserInRole(String role) {
+
+            @Override
+            public boolean isUserInRole(String role) {
                 return original.isUserInRole(role);
             }
-            @Override public boolean isSecure() {
+
+            @Override
+            public boolean isSecure() {
                 return original.isSecure();
             }
-            @Override public String getAuthenticationScheme() {
+
+            @Override
+            public String getAuthenticationScheme() {
                 return "Bearer";
             }
         });
     }
+
 }
