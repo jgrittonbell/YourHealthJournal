@@ -23,14 +23,9 @@ public class CorsFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         String origin = requestContext.getHeaderString("Origin");
 
-        logger.debug("CORS filter triggered. Origin: {}", origin);
-
         if (origin != null && allowedOrigins.contains(origin)) {
-            logger.debug("Origin allowed: {}", origin);
             responseContext.getHeaders().add("Access-Control-Allow-Origin", origin);
             responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
-        } else {
-            logger.warn("Origin NOT allowed: {}", origin);
         }
 
         responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
