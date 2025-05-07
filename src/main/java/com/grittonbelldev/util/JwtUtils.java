@@ -7,12 +7,10 @@ import com.grittonbelldev.auth.Keys;
 import com.grittonbelldev.auth.KeysItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -22,28 +20,33 @@ import java.security.Signature;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 /**
- * Utility to validate Cognito JWTs and extract claims.
- * <p>
- * Loads region & poolId from cognito.properties via PropertiesLoaderProd.
- * </p>
+ * Utility class for validating Cognito JWTs and extracting claims.
+ *
+ * <p>This class is responsible for loading Cognito configuration, retrieving and caching
+ * JSON Web Keys (JWKs), verifying JWT signatures, and validating claims such as
+ * expiration and issuer.</p>
+ *
+ * <p>The class is used to support secure authentication flows where JWTs are issued
+ * by AWS Cognito and verified within this application.</p>
  */
 public class JwtUtils implements PropertiesLoaderProd {
     private static final Logger logger = LogManager.getLogger(JwtUtils.class);
 
+    // Cognito configuration values loaded from properties
     private static final String REGION;
     private static final String POOL_ID;
     private static final String ISSUER;
     private static final String JWKS_URL;
 
-    // simple in-memory cache of JWKs
+    // In-memory cache of keys fetched from Cognito
     private static Keys cachedKeys;
     private static long lastFetch;
     private static final long CACHE_TTL_MS = 60 * 60 * 1000L; // 1 hour
 
+    // Static initializer to load properties and construct Cognito URLs
     static {
         Properties props;
         try {
@@ -63,16 +66,23 @@ public class JwtUtils implements PropertiesLoaderProd {
             );
         }
 
+        // Construct issuer and JWKS URL for validation
         ISSUER  = "https://cognito-idp." + REGION + ".amazonaws.com/" + POOL_ID;
         JWKS_URL = ISSUER + "/.well-known/jwks.json";
     }
 
+    // Private constructor to prevent instantiation
     private JwtUtils() {}
 
-    /** Load (and cache) the JWK set from Cognito */
+    /**
+     * Fetches and caches the public keys (JWKs) used by Cognito to sign JWTs.
+     *
+     * @return a Keys object containing the current JWKs
+     */
     private static synchronized Keys fetchJwks() {
         long now = System.currentTimeMillis();
         if (cachedKeys == null || now - lastFetch > CACHE_TTL_MS) {
+            // Use JAX-RS client to retrieve the JWKS JSON from Cognito
             Client client = ClientBuilder.newClient();
             cachedKeys = client
                     .target(URI.create(JWKS_URL))
@@ -84,15 +94,14 @@ public class JwtUtils implements PropertiesLoaderProd {
     }
 
     /**
-     * Validate the JWT’s signature, expiration, and issuer,
-     * then return its "sub" claim.
+     * Validates a JWT's format, signature, expiration, and issuer, and returns the subject claim.
      *
-     * @param jwt the raw Bearer token
-     * @return the Cognito subject ("sub")
-     * @throws ProcessingException on any validation failure
+     * @param jwt the raw JWT string from the Authorization header
+     * @return the value of the "sub" claim
+     * @throws ProcessingException if the JWT is invalid for any reason
      */
     public static String validateAndGetSubject(String jwt) {
-        // sanity-check format & header/payload parsing
+        // Parse and validate basic format and extract headers
         CognitoJWTParser.validateJWT(jwt);
         var headerJson = CognitoJWTParser.getHeader(jwt);
 
@@ -102,7 +111,7 @@ public class JwtUtils implements PropertiesLoaderProd {
             throw new ProcessingException("Unexpected alg: " + alg);
         }
 
-        // find matching JWK
+        // Locate the correct key from the JWK set using the key ID (kid)
         List<KeysItem> keys = fetchJwks().getKeys();
         KeysItem match = keys.stream()
                 .filter(k -> kid.equals(k.getKid()))
@@ -112,7 +121,7 @@ public class JwtUtils implements PropertiesLoaderProd {
                 );
 
         try {
-            // build RSA public key from n & e
+            // Decode modulus (n) and exponent (e) to reconstruct RSA public key
             BigInteger n = new BigInteger(1,
                     Base64.getUrlDecoder().decode(match.getN()));
             BigInteger e = new BigInteger(1,
@@ -120,7 +129,7 @@ public class JwtUtils implements PropertiesLoaderProd {
             KeyFactory kf = KeyFactory.getInstance("RSA");
             PublicKey pub = kf.generatePublic(new RSAPublicKeySpec(n, e));
 
-            // verify signature
+            // Use RSA key to verify the JWT signature
             Signature sig = Signature.getInstance("SHA256withRSA");
             sig.initVerify(pub);
             String[] parts = jwt.split("\\.");
@@ -130,7 +139,7 @@ public class JwtUtils implements PropertiesLoaderProd {
                 throw new ProcessingException("Invalid JWT signature");
             }
 
-            // parse payload & check exp + iss
+            // Decode payload and check expiration and issuer
             var payload = CognitoJWTParser.getPayload(jwt);
             long expMs = payload.getLong("exp") * 1000L;
             if (System.currentTimeMillis() > expMs) {
@@ -142,7 +151,7 @@ public class JwtUtils implements PropertiesLoaderProd {
                 throw new ProcessingException("Invalid issuer: " + tokenIssuer);
             }
 
-            // finally, return sub
+            // Return the subject claim ("sub") from the token
             return payload.getString("sub");
 
         } catch (ProcessingException pe) {
@@ -153,17 +162,16 @@ public class JwtUtils implements PropertiesLoaderProd {
     }
 
     /**
-     * Validate the given JWT (signature, exp, issuer) and then
-     * return a full DecodedJWT for claim access (email, sub, etc.).
+     * Validates a JWT and returns a decoded representation of its claims.
      *
-     * @param token the raw Bearer token
-     * @return a DecodedJWT with all claims available
-     * @throws ProcessingException on any validation failure
+     * @param token the raw JWT string
+     * @return a DecodedJWT object containing claims such as email and sub
+     * @throws ProcessingException if validation fails
      */
     public static DecodedJWT validate(String token) {
-        // throws if anything is invalid
+        // Perform full validation first
         validateAndGetSubject(token);
-        // now decode and return
+        // Return decoded token for claim access
         return JWT.decode(token);
     }
 }

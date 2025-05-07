@@ -10,37 +10,43 @@ import java.util.Set;
 
 /**
  * Entry point for the JAX-RS application.
- * <p>
- * This class configures the base API path, registers resource classes,
- * and enables JSON serialization via Jackson.
- * </p>
+ *
+ * This class extends {@link Application} to configure all REST resources,
+ * filters, and features used by the application.
+ *
+ * The {@code @ApplicationPath("/api")} annotation defines the base URI
+ * for all JAX-RS resources. All registered endpoints will be available
+ * under the "/api" path.
  */
 @ApplicationPath("/api")
 public class YourHealthJournalAPIEntry extends Application {
 
     /**
-     * Returns a set of classes to be registered with the JAX-RS runtime.
-     * <p>
-     * Includes all resource endpoint classes and any additional features
-     * such as JSON support.
-     * </p>
+     * Registers all classes needed by the JAX-RS runtime.
      *
-     * @return set of configured JAX-RS classes
+     * This method returns a {@link Set} of classes that includes:
+     * <ul>
+     *   <li>All REST resource classes that define the API endpoints</li>
+     *   <li>Filters for authentication and CORS support</li>
+     *   <li>Jackson modules for JSON support and Java time serialization</li>
+     * </ul>
+     *
+     * @return set of classes to be loaded by the JAX-RS container
      */
     @Override
     public Set<Class<?>> getClasses() {
         return Set.of(
-                MealResource.class,          // REST endpoints for meals
-                GlucoseResource.class,       // REST endpoints for glucose readings
-                FavoriteResource.class,      // REST endpoints for favorites
-                UserResource.class,          // REST endpoints for authenticated user's profile
-                NutritionixResource.class,   // REST endpoints for nutritionix API
-                AuthResource.class,          // REST endpoints handling Cognito token exchange after OAuth redirect
-                JwtAuthFilter.class,         // JAX-RS Filter to restrict the API to authenticated Users
-                CorsPreflightResource.class, // Ensures we can handle OPTIONS preflight requests from browsers
-                CorsFilter.class,            // Enables CORS for cross-origin requests (e.g., from GitHub Pages or localhost:4200)
-                JacksonFeature.class,        // Enables JSON (de)serialization via Jackson
-                JacksonConfig.class          //Registers support for java.time.*
+                MealResource.class,          // Provides CRUD operations for meals
+                GlucoseResource.class,       // Provides CRUD operations for glucose readings
+                FavoriteResource.class,      // Provides endpoints for managing favorites
+                UserResource.class,          // Provides endpoints for the authenticated user's profile
+                NutritionixResource.class,   // Provides integration with the Nutritionix API
+                AuthResource.class,          // Handles OAuth callback and token processing
+                JwtAuthFilter.class,         // Validates JWTs and attaches user identity to requests
+                CorsPreflightResource.class, // Handles HTTP OPTIONS requests for CORS preflight
+                CorsFilter.class,            // Adds CORS headers to all API responses
+                JacksonFeature.class,        // Enables automatic JSON serialization/deserialization using Jackson
+                JacksonConfig.class          // Customizes Jackson to handle Java time objects (e.g., LocalDateTime)
         );
     }
 }

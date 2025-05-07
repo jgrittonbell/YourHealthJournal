@@ -9,25 +9,33 @@ import javax.ws.rs.core.*;
 import java.security.Principal;
 
 /**
- * JAX-RS resource for the currently authenticated user’s profile.
+ * RESTful resource that provides profile-related operations for the
+ * currently authenticated user. This class exposes two endpoints
+ * for retrieving and updating user profile data.
  *
  * Endpoints:
- *   GET  /api/users/me      → fetch your profile
- *   PUT  /api/users/me      → update your profile
+ * <ul>
+ *   <li>GET  /api/users/me → fetch the authenticated user's profile</li>
+ *   <li>PUT  /api/users/me → update the authenticated user's profile</li>
+ * </ul>
  */
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
+    // Injected security context used to determine the identity of the authenticated user
     @Context
     private SecurityContext securityContext;
 
+    // Service class responsible for interacting with the User entity
     private final UserService userService = new UserService();
 
     /**
-     * GET /api/users/me
-     * @return the profile of the authenticated user
+     * Retrieves the profile information of the currently authenticated user.
+     *
+     * @return a DTO representing the user's profile
+     * @throws WebApplicationException if the user is not found
      */
     @GET
     @Path("me")
@@ -41,11 +49,11 @@ public class UserResource {
     }
 
     /**
-     * PUT /api/users/me
-     * Updates first name, last name, and/or email for the authenticated user.
+     * Updates the first name, last name, and/or email address for the
+     * currently authenticated user.
      *
-     * @param dto contains the fields to update (first_name, last_name, email)
-     * @return the updated profile
+     * @param dto the fields to update
+     * @return the updated user profile as a DTO
      */
     @PUT
     @Path("me")
@@ -60,7 +68,13 @@ public class UserResource {
         return toDto(updated);
     }
 
-    /** Helper: extract the internal user ID from SecurityContext */
+    /**
+     * Extracts the authenticated user's ID from the SecurityContext.
+     * This ID was placed into the context by JwtAuthFilter.
+     *
+     * @return the internal user ID
+     * @throws WebApplicationException if the user is not authenticated or the ID is invalid
+     */
     private long getCurrentUserId() {
         Principal p = securityContext.getUserPrincipal();
         if (p == null) {
@@ -73,7 +87,13 @@ public class UserResource {
         }
     }
 
-    /** Map your User entity to the public UserDto */
+    /**
+     * Maps a User entity to its corresponding UserDto.
+     * This ensures only public profile fields are exposed to the client.
+     *
+     * @param u the User entity
+     * @return the corresponding UserDto
+     */
     private static UserDto toDto(User u) {
         UserDto dto = new UserDto();
         dto.setId(u.getId());

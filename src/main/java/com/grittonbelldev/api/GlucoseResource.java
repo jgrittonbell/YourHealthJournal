@@ -11,8 +11,20 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * JAX-RS resource exposing RESTful endpoints for GlucoseReading operations,
- * scoped to the currently authenticated user.
+ * JAX-RS resource exposing RESTful endpoints for managing glucose readings.
+ *
+ * All operations are scoped to the currently authenticated user and enforce
+ * user-level access control to ensure that readings cannot be viewed or modified
+ * across different users.
+ *
+ * Endpoints:
+ * <ul>
+ *     <li>GET    /api/readings         – list all glucose readings for the user</li>
+ *     <li>GET    /api/readings/{id}    – retrieve a specific reading</li>
+ *     <li>POST   /api/readings         – create a new reading</li>
+ *     <li>PUT    /api/readings/{id}    – update an existing reading</li>
+ *     <li>DELETE /api/readings/{id}    – delete a reading</li>
+ * </ul>
  */
 @Path("/readings")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,10 +34,15 @@ public class GlucoseResource {
     @Context
     private SecurityContext securityContext;
 
+    // Service layer responsible for glucose business logic
     private final GlucoseService glucoseService = new GlucoseService();
 
     /**
-     * Extracts the internal user ID from the SecurityContext.
+     * Helper method to extract the currently authenticated user's ID
+     * from the JAX-RS security context.
+     *
+     * @return the internal user ID
+     * @throws WebApplicationException if the user is not authenticated
      */
     private long currentUserId() {
         Principal p = securityContext.getUserPrincipal();
@@ -41,7 +58,9 @@ public class GlucoseResource {
 
     /**
      * GET /api/readings
-     * Returns only this user’s glucose readings.
+     * Lists all glucose readings that belong to the current user.
+     *
+     * @return list of {@link GlucoseResponseDto}
      */
     @GET
     public List<GlucoseResponseDto> listAll() {
@@ -51,7 +70,10 @@ public class GlucoseResource {
 
     /**
      * GET /api/readings/{id}
-     * Returns the specified reading only if it belongs to this user.
+     * Retrieves a single glucose reading by ID, if it belongs to the current user.
+     *
+     * @param id the reading ID
+     * @return the corresponding {@link GlucoseResponseDto}
      */
     @GET
     @Path("{id}")
@@ -62,7 +84,11 @@ public class GlucoseResource {
 
     /**
      * POST /api/readings
-     * Creates a new glucose reading owned by this user.
+     * Creates a new glucose reading associated with the current user.
+     *
+     * @param dto the data to create the reading
+     * @param uriInfo context for building the URI of the created resource
+     * @return a 201 Created response with the created resource
      */
     @POST
     public Response create(
@@ -81,7 +107,11 @@ public class GlucoseResource {
 
     /**
      * PUT /api/readings/{id}
-     * Updates an existing reading, only if it belongs to this user.
+     * Updates an existing glucose reading, if it belongs to the current user.
+     *
+     * @param id the ID of the reading to update
+     * @param dto the updated reading data
+     * @return the updated {@link GlucoseResponseDto}
      */
     @PUT
     @Path("{id}")
@@ -95,7 +125,9 @@ public class GlucoseResource {
 
     /**
      * DELETE /api/readings/{id}
-     * Deletes the specified reading, only if it belongs to this user.
+     * Deletes the specified glucose reading, if it belongs to the current user.
+     *
+     * @param id the ID of the reading to delete
      */
     @DELETE
     @Path("{id}")

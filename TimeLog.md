@@ -66,7 +66,8 @@
 | 5/01/25 | Comprehensive Nutritionix Integration & JWT-Secured API                                         | 8     |       |
 | 5/02/25 | Worked on Angular with Cognito and researched Angular Tomcat Deploy and Ran into CORS           | 4     |       |
 | 5/03/25 | Lots of Debugging with AWS EBS Debugging, Reading logs Postman testing and CorsFilter Revisions | 10    |       |
-| 5/03/25 | Testing endpoints with postman and Angular app, Researched and tried EB configurations          | 4     |       |
+| 5/04/25 | Testing endpoints with postman and Angular app, Researched and tried EB configurations          | 4     |       |
+| 5/07/25 | Updated Java Docs and trimmed out old or unused classes                                         | 4     |       |
 
 
 

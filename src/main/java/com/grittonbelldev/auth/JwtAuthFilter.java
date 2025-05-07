@@ -19,11 +19,17 @@ import java.io.IOException;
 import java.security.Principal;
 
 /**
- * JAX-RS filter that:
- * 1) reads and validates the Cognito JWT from the
- *    Authorization: Bearer <token> header,
- * 2) looks up or creates an internal User by (cognito_id, email),
- * 3) replaces the SecurityContext so getUserPrincipal().getName() == internal user.id.
+ * JAX-RS container request filter that handles authentication via AWS Cognito JWT.
+ *
+ * This filter performs the following responsibilities:
+ * <ul>
+ *   <li>Extracts and verifies the JWT token from the Authorization header.</li>
+ *   <li>Validates the token using the project's JWKS logic in {@link JwtUtils}.</li>
+ *   <li>Retrieves or creates a {@link User} entity matching the Cognito subject and email.</li>
+ *   <li>Replaces the request's {@link SecurityContext} so that the user principal reflects the internal User ID.</li>
+ * </ul>
+ * This enables secure API access with per-user identification while preserving compatibility
+ * with JAX-RS-based role checks and principal lookups.
  */
 @Provider
 @Priority(Priorities.AUTHENTICATION)
@@ -33,32 +39,42 @@ public class JwtAuthFilter implements ContainerRequestFilter {
     private final UserService userService = new UserService();
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    /**
+     * Main filter method invoked for each incoming request.
+     * Validates the JWT and sets up user identity context.
+     *
+     * @param ctx the container request context
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     public void filter(ContainerRequestContext ctx) throws IOException {
         String method = ctx.getMethod();
         String path = ctx.getUriInfo().getPath();
         logger.debug("Request method: {}, path: {}", method, path);
 
-        // Allow CORS preflight requests
+        // Skip JWT processing for preflight CORS requests
         if ("OPTIONS".equalsIgnoreCase(method)) {
             logger.debug("Skipping JWT filter for OPTIONS preflight");
             return;
         }
 
-        // Allow unauthenticated access to token exchange endpoint
+        // Allow unauthenticated access to the token endpoint
         if (path.equals("auth/token") || path.equals("/auth/token")) {
             logger.debug("Skipping JWT filter for public path: {}", path);
             return;
         }
 
+        // Read and validate the Authorization header
         String auth = ctx.getHeaderString(HttpHeaders.AUTHORIZATION);
         if (auth == null || !auth.startsWith(BEARER_PREFIX)) {
             ctx.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
             return;
         }
 
+        // Remove the prefix and trim whitespace
         String token = auth.substring(BEARER_PREFIX.length()).trim();
 
+        // Validate and decode the JWT token
         DecodedJWT jwt;
         try {
             jwt = JwtUtils.validate(token);
@@ -68,6 +84,7 @@ public class JwtAuthFilter implements ContainerRequestFilter {
             return;
         }
 
+        // Extract necessary claims from the JWT
         String cognitoSub = jwt.getSubject();
         String email = jwt.getClaim("email").asString();
         if (cognitoSub == null || email == null) {
@@ -76,9 +93,11 @@ public class JwtAuthFilter implements ContainerRequestFilter {
             return;
         }
 
+        // Retrieve or create an internal User record based on Cognito sub and email
         User user = userService.findOrCreateByCognitoId(cognitoSub, email);
         final long internalId = user.getId();
 
+        // Replace the SecurityContext with one that exposes the internal User ID
         final SecurityContext original = ctx.getSecurityContext();
         ctx.setSecurityContext(new SecurityContext() {
             @Override
@@ -102,5 +121,4 @@ public class JwtAuthFilter implements ContainerRequestFilter {
             }
         });
     }
-
 }

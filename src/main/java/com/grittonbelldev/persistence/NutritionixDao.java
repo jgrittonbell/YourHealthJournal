@@ -23,27 +23,25 @@ import java.util.Map;
 
 /**
  * DAO for interacting with the Nutritionix Track API.
- * <p>
- * Provides methods to:
- * <ul>
- *   <li>Perform instant (type‐ahead) food searches</li>
- *   <li>Retrieve only the “common” or “branded” subsets</li>
- *   <li>Fetch full nutrition details for a given Nutritionix item ID</li>
- *   <li>Get nutrient breakdown for free‐form natural‐language queries</li>
- * </ul>
- * Handles HTTP header injection, response‐status checks, JSON mapping, and
- * proper closing of JAX‐RS Response objects.
- * </p>
+ *
+ * <p>Supports several types of API calls including instant (type-ahead) searches,
+ * branded/common food filtering, item lookups by ID, and natural-language nutrient breakdowns.</p>
+ *
+ * <p>Handles request header injection, response validation, error propagation,
+ * and object mapping using Jackson.</p>
  */
 public class NutritionixDao {
+
     private static final Logger logger = LogManager.getLogger(NutritionixDao.class);
 
-    /** Nutritionix instant search endpoint (type-ahead). */
-    private static final String INSTANT_URL   = "https://trackapi.nutritionix.com/v2/search/instant";
-    /** Nutritionix single-item details endpoint. */
-    private static final String ITEM_URL      = "https://trackapi.nutritionix.com/v2/search/item";
-    /** Nutritionix natural-language nutrient endpoint. */
-    private static final String NATURAL_URL   = "https://trackapi.nutritionix.com/v2/natural/nutrients";
+    /** Base URL for instant (type-ahead) search. */
+    private static final String INSTANT_URL = "https://trackapi.nutritionix.com/v2/search/instant";
+
+    /** Base URL for retrieving a single item's detailed information. */
+    private static final String ITEM_URL = "https://trackapi.nutritionix.com/v2/search/item";
+
+    /** Base URL for free-form, natural-language nutrient analysis. */
+    private static final String NATURAL_URL = "https://trackapi.nutritionix.com/v2/natural/nutrients";
 
     private final String appId;
     private final String appKey;
@@ -51,29 +49,28 @@ public class NutritionixDao {
     private final ObjectMapper mapper;
 
     /**
-     * Construct a DAO with the required Nutritionix credentials.
+     * Constructs a DAO for Nutritionix with the required application credentials.
      *
-     * @param appId Nutritionix application ID
-     * @param appKey Nutritionix application key
+     * @param appId the Nutritionix App ID
+     * @param appKey the Nutritionix App Key
      */
     public NutritionixDao(String appId, String appKey) {
-        this.appId  = appId;
+        this.appId = appId;
         this.appKey = appKey;
-        // Configure Jackson to ignore any JSON fields that haven’t been explicitly modeled
+
+        // Configure Jackson to ignore unknown fields in JSON
         this.mapper = new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     /**
-     * Perform an “instant” (type-ahead) search.
-     * <p>
-     * Sends a GET to {@value #INSTANT_URL}?query={query} with the X-App-Id/Key headers
-     * and maps the JSON into {@link NutritionixSearchResponseDto}.
-     * </p>
+     * Performs an instant (type-ahead) search using the given query string.
      *
-     * @param query the search term (null → empty string)
-     * @return the full search response DTO (common + branded)
-     * @throws RuntimeException on non-200 HTTP status, network errors, or JSON parse failures
+     * <p>Returns a result that includes both branded and common food items.</p>
+     *
+     * @param query the search term (may be null)
+     * @return the search result DTO
+     * @throws RuntimeException if the HTTP request fails or JSON cannot be parsed
      */
     public NutritionixSearchResponseDto searchInstant(String query) {
         WebTarget target = client.target(INSTANT_URL)
@@ -82,7 +79,7 @@ public class NutritionixDao {
         Response resp = null;
         try {
             resp = target.request(MediaType.APPLICATION_JSON)
-                    .header("x-app-id",  appId)
+                    .header("x-app-id", appId)
                     .header("x-app-key", appKey)
                     .get();
 
@@ -107,34 +104,31 @@ public class NutritionixDao {
     }
 
     /**
-     * Convenience: return only the “common” items from an instant search.
+     * Returns only the list of generic/common food items from an instant search.
      *
-     * @param q the search term
-     * @return list of generic/common foods
+     * @param q the search query
+     * @return a list of CommonItem entries
      */
     public List<CommonItem> getCommon(String q) {
         return searchInstant(q).getCommon();
     }
 
     /**
-     * Convenience: return only the “branded” items from an instant search.
+     * Returns only the list of branded food items from an instant search.
      *
-     * @param q the search term
-     * @return list of branded foods
+     * @param q the search query
+     * @return a list of BrandedItem entries
      */
     public List<BrandedItem> getBranded(String q) {
         return searchInstant(q).getBranded();
     }
 
     /**
-     * Fetch full nutrition details for a single Nutritionix item.
-     * <p>
-     * Sends a GET to {@value #ITEM_URL}?nix_item_id={nixItemId} and maps into {@link FoodResponse}.
-     * </p>
+     * Retrieves full nutritional details for a specific item by Nutritionix ID.
      *
-     * @param nixItemId the Nutritionix item identifier
-     * @return a {@link FoodResponse} (usually contains one element)
-     * @throws RuntimeException on non-200 HTTP status, network errors, or JSON parse failures
+     * @param nixItemId the Nutritionix item ID
+     * @return a FoodResponse containing nutritional data
+     * @throws RuntimeException if the request fails or response is malformed
      */
     public FoodResponse fetchById(String nixItemId) {
         WebTarget target = client.target(ITEM_URL)
@@ -143,7 +137,7 @@ public class NutritionixDao {
         Response resp = null;
         try {
             resp = target.request(MediaType.APPLICATION_JSON)
-                    .header("x-app-id",  appId)
+                    .header("x-app-id", appId)
                     .header("x-app-key", appKey)
                     .get();
 
@@ -168,28 +162,24 @@ public class NutritionixDao {
     }
 
     /**
-     * Perform a natural‐language nutrient analysis.
-     * <p>
-     * Sends a POST to {@value #NATURAL_URL} with JSON body {"query": "..."}
-     * and maps the JSON into {@link FoodResponse}.
-     * </p>
+     * Performs a natural-language nutrient analysis using a free-form query.
      *
-     * @param query a free‐form description (e.g. "1 banana" or "2 eggs")
-     * @return a {@link FoodResponse} (usually contains one element with alt_measures)
-     * @throws RuntimeException on non-200 HTTP status, network errors, or JSON parse failures
+     * @param query a description such as "1 banana" or "2 eggs and toast"
+     * @return a FoodResponse object containing parsed nutrient data
+     * @throws RuntimeException if the HTTP call fails or the response cannot be parsed
      */
     public FoodResponse naturalNutrients(String query) {
         WebTarget target = client.target(NATURAL_URL);
 
-        // build JSON body: {"query":"..."}
-        Map<String,String> body = new HashMap<>();
+        Map<String, String> body = new HashMap<>();
         body.put("query", query == null ? "" : query);
 
         Response resp = null;
         try {
             String payload = mapper.writeValueAsString(body);
+
             resp = target.request(MediaType.APPLICATION_JSON)
-                    .header("x-app-id",  appId)
+                    .header("x-app-id", appId)
                     .header("x-app-key", appKey)
                     .post(Entity.json(payload));
 

@@ -22,6 +22,16 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * JAX-RS resource responsible for handling OAuth2 token exchange using AWS Cognito.
+ *
+ * This class defines a single endpoint that receives an authorization code,
+ * exchanges it with Cognito for an access token and ID token, and returns
+ * the response payload in a simplified DTO format.
+ *
+ * ServletContext is used to pull preloaded secrets such as the client ID,
+ * client secret, redirect URL, and Cognito OAuth URL.
+ */
 @Path("/auth")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,9 +39,19 @@ public class AuthResource {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    // ServletContext provides access to application-scoped configuration and secrets
     @Context
     private ServletContext context;
 
+    /**
+     * POST /api/auth/token
+     *
+     * Accepts an authorization code and performs the OAuth2 token exchange
+     * with Cognito to retrieve an ID token and access token.
+     *
+     * @param request JSON payload containing the authorization code
+     * @return Response containing a JWT and expiration or an appropriate error
+     */
     @POST
     @Path("/token")
     public Response exchangeCodeForToken(AuthCodeRequest request) {
@@ -39,12 +59,13 @@ public class AuthResource {
         logger.info("Starting token exchange for code: {}", code);
 
         try {
-            // Read secrets and config from ServletContext
-            String clientId = (String) context.getAttribute("client.id");
+            // Retrieve required config values from the servlet context
+            String clientId     = (String) context.getAttribute("client.id");
             String clientSecret = (String) context.getAttribute("client.secret");
-            String redirectUri = (String) context.getAttribute("redirectURL");
-            String oauthURL = (String) context.getAttribute("oauthURL");
+            String redirectUri  = (String) context.getAttribute("redirectURL");
+            String oauthURL     = (String) context.getAttribute("oauthURL");
 
+            // Validate that all required config values are present
             if (clientId == null || clientSecret == null || redirectUri == null || oauthURL == null) {
                 logger.error("Missing Cognito configuration in servlet context. " +
                                 "clientId={}, clientSecretPresent={}, redirectUri={}, oauthURL={}",
@@ -53,7 +74,7 @@ public class AuthResource {
                         .entity("Missing Cognito configuration in servlet context").build();
             }
 
-            // Construct form body
+            // Build the form-encoded request body for the token request
             String form = "grant_type=authorization_code"
                     + "&client_id=" + URLEncoder.encode(clientId, "UTF-8")
                     + "&client_secret=" + URLEncoder.encode(clientSecret, "UTF-8")
@@ -62,7 +83,7 @@ public class AuthResource {
 
             logger.debug("Submitting token exchange request to Cognito: oauthURL={}, redirectUri={}", oauthURL, redirectUri);
 
-            // Build request to Cognito token endpoint
+            // Construct the HTTP request to Cognito's /token endpoint
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest tokenRequest = HttpRequest.newBuilder()
                     .uri(URI.create(oauthURL))
@@ -70,18 +91,20 @@ public class AuthResource {
                     .POST(HttpRequest.BodyPublishers.ofString(form))
                     .build();
 
+            // Send the request and capture the response
             HttpResponse<String> response = client.send(tokenRequest, HttpResponse.BodyHandlers.ofString());
 
             logger.info("Received response from Cognito: statusCode={}, body={}",
                     response.statusCode(), response.body());
 
+            // If token exchange failed, return 401 Unauthorized
             if (response.statusCode() != 200) {
                 logger.warn("Token exchange failed. Response code: {}", response.statusCode());
                 return Response.status(Response.Status.UNAUTHORIZED)
                         .entity("Failed to exchange code with Cognito").build();
             }
 
-            // Parse the JSON response
+            // Parse JSON response to extract tokens and expiration
             ObjectMapper mapper = new ObjectMapper();
             JsonNode json = mapper.readTree(response.body());
 

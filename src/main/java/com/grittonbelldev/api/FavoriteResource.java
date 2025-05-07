@@ -10,8 +10,21 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * JAX-RS resource exposing endpoints for managing user favorites,
- * scoped to the currently authenticated user.
+ * JAX-RS resource exposing endpoints for managing user favorite meals and foods.
+ *
+ * All operations are restricted to the authenticated user. This class allows
+ * users to mark meals and foods as favorites, remove those favorites, and fetch
+ * lists of favorited meals and foods.
+ *
+ * Endpoints:
+ * <ul>
+ *   <li>POST   /api/favorites/meals/{mealId} – mark a meal as favorite</li>
+ *   <li>DELETE /api/favorites/meals/{mealId} – remove a meal from favorites</li>
+ *   <li>POST   /api/favorites/foods/{foodId} – mark a food as favorite</li>
+ *   <li>DELETE /api/favorites/foods/{foodId} – remove a food from favorites</li>
+ *   <li>GET    /api/favorites/meals          – list favorited meals</li>
+ *   <li>GET    /api/favorites/foods          – list favorited foods</li>
+ * </ul>
  */
 @Path("/favorites")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,9 +34,16 @@ public class FavoriteResource {
     @Context
     private SecurityContext securityContext;
 
+    // Service layer that contains the business logic for managing favorites
     private final FavoriteService favoriteService = new FavoriteService();
 
-    /** Extract the internal user ID from the SecurityContext. */
+    /**
+     * Helper method to extract the currently authenticated user's ID
+     * from the JAX-RS security context.
+     *
+     * @return the internal user ID
+     * @throws WebApplicationException if authentication is missing or invalid
+     */
     private long currentUserId() {
         Principal p = securityContext.getUserPrincipal();
         if (p == null) {
@@ -38,7 +58,10 @@ public class FavoriteResource {
 
     /**
      * POST /api/favorites/meals/{mealId}
-     * Marks the meal as favorite for the current user.
+     * Marks a meal as favorite for the authenticated user.
+     *
+     * @param mealId the ID of the meal to mark as favorite
+     * @return 200 OK if successful
      */
     @POST
     @Path("meals/{mealId}")
@@ -50,7 +73,10 @@ public class FavoriteResource {
 
     /**
      * DELETE /api/favorites/meals/{mealId}
-     * Removes the meal from the current user’s favorites.
+     * Removes a meal from the user's favorites.
+     *
+     * @param mealId the ID of the meal to unfavorite
+     * @return 204 No Content if successful
      */
     @DELETE
     @Path("meals/{mealId}")
@@ -62,7 +88,10 @@ public class FavoriteResource {
 
     /**
      * POST /api/favorites/foods/{foodId}
-     * Marks the food as favorite for the current user.
+     * Marks a food item as favorite for the authenticated user.
+     *
+     * @param foodId the ID of the food to mark as favorite
+     * @return 200 OK if successful
      */
     @POST
     @Path("foods/{foodId}")
@@ -74,7 +103,10 @@ public class FavoriteResource {
 
     /**
      * DELETE /api/favorites/foods/{foodId}
-     * Removes the food from the current user’s favorites.
+     * Removes a food item from the user's favorites.
+     *
+     * @param foodId the ID of the food to unfavorite
+     * @return 204 No Content if successful
      */
     @DELETE
     @Path("foods/{foodId}")
@@ -86,18 +118,24 @@ public class FavoriteResource {
 
     /**
      * GET /api/favorites/meals
-     * <p>Return all meals this user has favorited.</p>
+     * Retrieves all meals that the authenticated user has favorited.
+     *
+     * @return a list of favorited meals
      */
-    @GET @Path("meals")
+    @GET
+    @Path("meals")
     public List<MealResponseDto> listFavoriteMeals() {
         return favoriteService.listFavoriteMeals(currentUserId());
     }
 
     /**
      * GET /api/favorites/foods
-     * <p>Return all foods this user has favorited.</p>
+     * Retrieves all foods that the authenticated user has favorited.
+     *
+     * @return a list of favorited foods
      */
-    @GET @Path("foods")
+    @GET
+    @Path("foods")
     public List<FoodResponseDto> listFavoriteFoods() {
         return favoriteService.listFavoriteFoods(currentUserId());
     }

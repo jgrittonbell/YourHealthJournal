@@ -10,13 +10,22 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Exposes Nutritionix instant‐search and single‐item lookup:
- *   GET  /api/nutritionix/foods?q=…         => full DTO (common + branded)
- *   GET  /api/nutritionix/foods/common?q=…  => just common items
- *   GET  /api/nutritionix/foods/branded?q=… => just branded items
- *   GET  /api/nutritionix/foods/{nixItemId} => full nutrition for one item
+ * Provides REST API endpoints that proxy Nutritionix search and analysis features.
  *
- * Credentials are looked up once from the ServletContext.
+ * This class handles lookup of common and branded food items, full nutritional
+ * details, and supports natural language nutrient parsing.
+ *
+ * API Endpoints:
+ * <ul>
+ *     <li>GET    /api/nutritionix/foods?q=term          — returns both common and branded items</li>
+ *     <li>GET    /api/nutritionix/foods/common?q=term   — returns only common items</li>
+ *     <li>GET    /api/nutritionix/foods/branded?q=term  — returns only branded items</li>
+ *     <li>GET    /api/nutritionix/foods/{nixItemId}     — returns full nutrition data for a specific item</li>
+ *     <li>POST   /api/nutritionix/foods/nutrients        — parses natural-language queries for nutrition facts</li>
+ * </ul>
+ *
+ * Credentials (appId, appKey) are loaded from ServletContext attributes,
+ * which are set during application startup.
  */
 @Path("/nutritionix/foods")
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,9 +34,10 @@ public class NutritionixResource {
     private NutritionixService nutritionixService;
 
     /**
-     * JAX-RS callback to inject ServletContext, from which we read
-     * nutritionix.appId and nutritionix.appKey and use them to
-     * instantiate our service.
+     * Injects the ServletContext and retrieves Nutritionix credentials.
+     * If credentials are missing, this method throws a 503 error.
+     *
+     * @param ctx the servlet context used to load configuration attributes
      */
     @Context
     public void setServletContext(ServletContext ctx) {
@@ -40,12 +50,17 @@ public class NutritionixResource {
                     Response.Status.SERVICE_UNAVAILABLE
             );
         }
+
+        // Instantiate service with runtime credentials
         this.nutritionixService = new NutritionixService(appId, appKey);
     }
 
     /**
-     * Full instant‐search: common + branded in one DTO.
-     * GET  /api/nutritionix/foods?q=banana
+     * Performs a full search using the Nutritionix instant search API.
+     * Combines both common and branded results into a single DTO.
+     *
+     * @param q the search query term
+     * @return a DTO with separate lists of common and branded results
      */
     @GET
     public NutritionixSearchResponseDto searchAll(
@@ -62,10 +77,13 @@ public class NutritionixResource {
     }
 
     /**
-     * Only the “common” results.
-     * GET  /api/nutritionix/foods/common?q=banana
+     * Performs a search that returns only common food items.
+     *
+     * @param q the search query term
+     * @return a list of common items
      */
-    @GET @Path("common")
+    @GET
+    @Path("common")
     public List<CommonItem> searchCommon(
             @QueryParam("q") @DefaultValue("") String q
     ) {
@@ -80,10 +98,13 @@ public class NutritionixResource {
     }
 
     /**
-     * Only the “branded” results.
-     * GET  /api/nutritionix/foods/branded?q=banana
+     * Performs a search that returns only branded food items.
+     *
+     * @param q the search query term
+     * @return a list of branded items
      */
-    @GET @Path("branded")
+    @GET
+    @Path("branded")
     public List<BrandedItem> searchBranded(
             @QueryParam("q") @DefaultValue("") String q
     ) {
@@ -98,21 +119,20 @@ public class NutritionixResource {
     }
 
     /**
-     * Fetch full nutrition facts for a single Nutritionix item.
-     * GET  /api/nutritionix/foods/{nixItemId}
+     * Retrieves detailed nutrition data for a single branded item.
      *
      * @param nixItemId the Nutritionix item identifier
-     * @return a single {@link FoodsItem} with detailed nutrients
+     * @return the full {@link FoodsItem} with nutrients and metadata
      */
-    @GET @Path("{nixItemId}")
+    @GET
+    @Path("{nixItemId}")
     public FoodsItem getById(
             @PathParam("nixItemId") String nixItemId
     ) {
         try {
             return nutritionixService.fetchById(nixItemId);
         } catch (WebApplicationException e) {
-            // rethrow to preserve HTTP status
-            throw e;
+            throw e; // Preserve any custom HTTP status thrown inside service
         } catch (Exception e) {
             throw new WebApplicationException(
                     "Failed to fetch Nutritionix item: " + e.getMessage(),
@@ -122,9 +142,11 @@ public class NutritionixResource {
     }
 
     /**
-     * Natural‐language nutrient analysis.
-     * POST /api/nutritionix/foods/nutrients
-     * Body: { "query": "3 bananas and an apple" }
+     * Parses a natural-language query describing food and portions,
+     * and returns estimated nutrients for the described items.
+     *
+     * @param req a DTO containing the natural language query string
+     * @return a list of parsed {@link FoodsItem} entries
      */
     @POST
     @Path("nutrients")
@@ -138,7 +160,7 @@ public class NutritionixResource {
         try {
             return nutritionixService.naturalNutrients(q);
         } catch (WebApplicationException e) {
-            throw e; // preserve 404 / 503 if thrown by service
+            throw e;
         } catch (Exception e) {
             throw new WebApplicationException("Failed to analyze nutrients: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY);
