@@ -42,7 +42,8 @@ public class ApplicationStartup extends HttpServlet implements PropertiesLoaderP
         super.init();
         initializeSessionFactory();           // Set up Hibernate ORM layer
         loadAndStoreCognitoProperties();      // Load Cognito secrets and store them in context
-        loadAndStoreNutritionixProperties();  // Load Nutritionix API credentials
+        loadAndStoreNutritionixProperties();
+        logger.info("Application Startup Complete");// Load Nutritionix API credentials
     }
 
     /**

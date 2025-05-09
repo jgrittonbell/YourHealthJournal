@@ -3,6 +3,8 @@ package com.grittonbelldev.api;
 import com.grittonbelldev.dto.GlucoseRequestDto;
 import com.grittonbelldev.dto.GlucoseResponseDto;
 import com.grittonbelldev.service.GlucoseService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -31,9 +33,10 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class GlucoseResource {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     @Context
     private SecurityContext securityContext;
-
     // Service layer responsible for glucose business logic
     private final GlucoseService glucoseService = new GlucoseService();
 
@@ -47,11 +50,15 @@ public class GlucoseResource {
     private long currentUserId() {
         Principal p = securityContext.getUserPrincipal();
         if (p == null) {
+            logger.error("User is not authenticated: SecurityContext.getUserPrincipal() returned null.");
             throw new WebApplicationException("Not authenticated", Response.Status.UNAUTHORIZED);
         }
         try {
-            return Long.parseLong(p.getName());
+            long userId = Long.parseLong(p.getName());
+            logger.debug("Authenticated user ID: {}", userId);
+            return userId;
         } catch (NumberFormatException e) {
+            logger.error("Invalid principal format: {}", p.getName(), e);
             throw new WebApplicationException("Invalid user principal", Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -65,7 +72,10 @@ public class GlucoseResource {
     @GET
     public List<GlucoseResponseDto> listAll() {
         long userId = currentUserId();
-        return glucoseService.listAllForUser(userId);
+        logger.info("GET /api/readings requested by user {}", userId);
+        List<GlucoseResponseDto> readings = glucoseService.listAllForUser(userId);
+        logger.debug("Found {} readings for user {}", readings.size(), userId);
+        return readings;
     }
 
     /**
@@ -79,7 +89,10 @@ public class GlucoseResource {
     @Path("{id}")
     public GlucoseResponseDto getById(@PathParam("id") Long id) {
         long userId = currentUserId();
-        return glucoseService.findForUser(userId, id);
+        logger.info("GET /api/readings/{} requested by user {}", id, userId);
+        GlucoseResponseDto reading = glucoseService.findForUser(userId, id);
+        logger.debug("Glucose reading {} retrieved for user {}", id, userId);
+        return reading;
     }
 
     /**
@@ -96,10 +109,12 @@ public class GlucoseResource {
             @Context UriInfo uriInfo
     ) {
         long userId = currentUserId();
+        logger.info("POST /api/readings by user {}: {}", userId, dto);
         GlucoseResponseDto created = glucoseService.createForUser(userId, dto);
         URI uri = uriInfo.getAbsolutePathBuilder()
                 .path(created.getId().toString())
                 .build();
+        logger.debug("Glucose reading created with ID {} for user {}", created.getId(), userId);
         return Response.created(uri)
                 .entity(created)
                 .build();
@@ -120,7 +135,10 @@ public class GlucoseResource {
             GlucoseRequestDto dto
     ) {
         long userId = currentUserId();
-        return glucoseService.updateForUser(userId, id, dto);
+        logger.info("PUT /api/readings/{} by user {}", id, userId);
+        GlucoseResponseDto updated = glucoseService.updateForUser(userId, id, dto);
+        logger.debug("Glucose reading {} updated for user {}", id, userId);
+        return updated;
     }
 
     /**
@@ -133,6 +151,8 @@ public class GlucoseResource {
     @Path("{id}")
     public void delete(@PathParam("id") Long id) {
         long userId = currentUserId();
+        logger.info("DELETE /api/readings/{} by user {}", id, userId);
         glucoseService.deleteForUser(userId, id);
+        logger.debug("Glucose reading {} deleted for user {}", id, userId);
     }
 }

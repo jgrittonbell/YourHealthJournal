@@ -5,6 +5,8 @@ import com.grittonbelldev.dto.GlucoseResponseDto;
 import com.grittonbelldev.entity.GlucoseReading;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
  */
 public class GlucoseService {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     // DAOs for glucose readings and users
     private final GenericDAO<GlucoseReading> glucoseDao = new GenericDAO<>(GlucoseReading.class);
     private final GenericDAO<User> userDao = new GenericDAO<>(User.class);
@@ -31,9 +35,12 @@ public class GlucoseService {
      * @return a list of GlucoseResponseDto instances
      */
     public List<GlucoseResponseDto> listAllForUser(long userId) {
-        return glucoseDao.getByPropertyEqual("user.id", userId).stream()
+        logger.info("Fetching all glucose readings for user {}", userId);
+        List<GlucoseResponseDto> results = glucoseDao.getByPropertyEqual("user.id", userId).stream()
                 .map(this::toResponseDto)
                 .collect(Collectors.toList());
+        logger.debug("Found {} readings for user {}", results.size(), userId);
+        return results;
     }
 
     /**
@@ -45,10 +52,13 @@ public class GlucoseService {
      * @throws WebApplicationException if the reading is not found or not owned by the user
      */
     public GlucoseResponseDto findForUser(long userId, long readingId) {
+        logger.info("Fetching glucose reading {} for user {}", readingId, userId);
         GlucoseReading r = glucoseDao.getById(readingId);
         if (r == null || r.getUser() == null || r.getUser().getId() != userId) {
+            logger.warn("Reading {} not found or does not belong to user {}", readingId, userId);
             throw new WebApplicationException("Reading not found", Response.Status.NOT_FOUND);
         }
+        logger.debug("Reading {} successfully retrieved for user {}", readingId, userId);
         return toResponseDto(r);
     }
 
@@ -61,8 +71,10 @@ public class GlucoseService {
      * @throws WebApplicationException if the user is not found
      */
     public GlucoseResponseDto createForUser(long userId, GlucoseRequestDto dto) {
+        logger.info("Creating glucose reading for user {}", userId);
         User user = userDao.getById(userId);
         if (user == null) {
+            logger.error("User {} not found during glucose creation", userId);
             throw new WebApplicationException("User not found", Response.Status.NOT_FOUND);
         }
 
@@ -74,6 +86,7 @@ public class GlucoseService {
         r.setNotes(dto.getNotes());
         glucoseDao.insert(r);
 
+        logger.debug("Created glucose reading with ID {} for user {}", r.getId(), userId);
         return toResponseDto(r);
     }
 
@@ -89,8 +102,10 @@ public class GlucoseService {
      * @throws WebApplicationException if the reading does not exist or is not owned by the user
      */
     public GlucoseResponseDto updateForUser(long userId, long readingId, GlucoseRequestDto dto) {
+        logger.info("Updating glucose reading {} for user {}", readingId, userId);
         GlucoseReading r = glucoseDao.getById(readingId);
         if (r == null || r.getUser() == null || r.getUser().getId() != userId) {
+            logger.warn("Reading {} not found or not owned by user {}", readingId, userId);
             throw new WebApplicationException("Reading not found", Response.Status.NOT_FOUND);
         }
 
@@ -100,6 +115,7 @@ public class GlucoseService {
         r.setNotes(dto.getNotes());
         glucoseDao.update(r);
 
+        logger.debug("Updated reading {} for user {}", readingId, userId);
         return toResponseDto(r);
     }
 
@@ -111,11 +127,14 @@ public class GlucoseService {
      * @throws WebApplicationException if the reading is not found or not owned by the user
      */
     public void deleteForUser(long userId, long readingId) {
+        logger.info("Deleting glucose reading {} for user {}", readingId, userId);
         GlucoseReading r = glucoseDao.getById(readingId);
         if (r == null || r.getUser() == null || r.getUser().getId() != userId) {
+            logger.warn("Reading {} not found or not owned by user {}", readingId, userId);
             throw new WebApplicationException("Reading not found", Response.Status.NOT_FOUND);
         }
         glucoseDao.delete(r);
+        logger.debug("Deleted reading {} for user {}", readingId, userId);
     }
 
     /**
@@ -131,6 +150,7 @@ public class GlucoseService {
         dto.setMeasurementTime(r.getMeasurementTime());
         dto.setMeasurementSource(r.getMeasurementSource());
         dto.setNotes(r.getNotes());
+        logger.trace("Mapped reading {} to DTO", r.getId());
         return dto;
     }
 }

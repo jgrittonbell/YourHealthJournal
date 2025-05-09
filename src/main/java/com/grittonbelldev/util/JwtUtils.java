@@ -108,7 +108,9 @@ public class JwtUtils implements PropertiesLoaderProd {
         String kid = headerJson.getString("kid");
         String alg = headerJson.getString("alg");
         if (!"RS256".equals(alg)) {
+            logger.info("Invalid algorithm: {}", alg);
             throw new ProcessingException("Unexpected alg: " + alg);
+
         }
 
         // Locate the correct key from the JWK set using the key ID (kid)
@@ -136,6 +138,7 @@ public class JwtUtils implements PropertiesLoaderProd {
             sig.update((parts[0] + "." + parts[1])
                     .getBytes(StandardCharsets.US_ASCII));
             if (!sig.verify(Base64.getUrlDecoder().decode(parts[2]))) {
+                logger.info("Invalid signature: {}", parts[2]);
                 throw new ProcessingException("Invalid JWT signature");
             }
 
@@ -143,11 +146,13 @@ public class JwtUtils implements PropertiesLoaderProd {
             var payload = CognitoJWTParser.getPayload(jwt);
             long expMs = payload.getLong("exp") * 1000L;
             if (System.currentTimeMillis() > expMs) {
+                logger.info("JWT expired: {}", expMs);
                 throw new ProcessingException("JWT expired");
             }
 
             String tokenIssuer = payload.getString("iss");
             if (!ISSUER.equals(tokenIssuer)) {
+                logger.info("Invalid issuer: {}", tokenIssuer);
                 throw new ProcessingException("Invalid issuer: " + tokenIssuer);
             }
 
@@ -155,8 +160,10 @@ public class JwtUtils implements PropertiesLoaderProd {
             return payload.getString("sub");
 
         } catch (ProcessingException pe) {
+            logger.info("JWT not valid: {}", pe.getMessage());
             throw pe;
         } catch (Exception ex) {
+            logger.info("JWT not valid: {}", ex.getMessage());
             throw new ProcessingException("JWT validation error", ex);
         }
     }

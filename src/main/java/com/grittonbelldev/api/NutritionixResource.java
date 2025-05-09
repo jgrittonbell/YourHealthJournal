@@ -2,6 +2,8 @@ package com.grittonbelldev.api;
 
 import com.grittonbelldev.dto.nutritionix.*;
 import com.grittonbelldev.service.NutritionixService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.*;
@@ -32,6 +34,7 @@ import java.util.Objects;
 public class NutritionixResource {
 
     private NutritionixService nutritionixService;
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
      * Injects the ServletContext and retrieves Nutritionix credentials.
@@ -45,12 +48,14 @@ public class NutritionixResource {
         String appKey = Objects.toString(ctx.getAttribute("nutritionix.appKey"), null);
 
         if (appId == null || appKey == null) {
+            logger.error("Nutritionix credentials missing in ServletContext.");
             throw new WebApplicationException(
                     "Nutritionix API not configured",
                     Response.Status.SERVICE_UNAVAILABLE
             );
         }
 
+        logger.info("Nutritionix credentials loaded from context.");
         // Instantiate service with runtime credentials
         this.nutritionixService = new NutritionixService(appId, appKey);
     }
@@ -66,9 +71,11 @@ public class NutritionixResource {
     public NutritionixSearchResponseDto searchAll(
             @QueryParam("q") @DefaultValue("") String q
     ) {
+        logger.info("GET /nutritionix/foods?q={}", q);
         try {
             return nutritionixService.searchAll(q);
         } catch (Exception e) {
+            logger.error("Error during searchAll: {}", e.getMessage(), e);
             throw new WebApplicationException(
                     "Failed to search Nutritionix: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY
@@ -87,9 +94,11 @@ public class NutritionixResource {
     public List<CommonItem> searchCommon(
             @QueryParam("q") @DefaultValue("") String q
     ) {
+        logger.info("GET /nutritionix/foods/common?q={}", q);
         try {
             return nutritionixService.searchCommon(q);
         } catch (Exception e) {
+            logger.error("Error during searchCommon: {}", e.getMessage(), e);
             throw new WebApplicationException(
                     "Failed to search common items: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY
@@ -108,9 +117,11 @@ public class NutritionixResource {
     public List<BrandedItem> searchBranded(
             @QueryParam("q") @DefaultValue("") String q
     ) {
+        logger.info("GET /nutritionix/foods/branded?q={}", q);
         try {
             return nutritionixService.searchBranded(q);
         } catch (Exception e) {
+            logger.error("Error during searchBranded: {}", e.getMessage(), e);
             throw new WebApplicationException(
                     "Failed to search branded items: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY
@@ -129,11 +140,14 @@ public class NutritionixResource {
     public FoodsItem getById(
             @PathParam("nixItemId") String nixItemId
     ) {
+        logger.info("GET /nutritionix/foods/{}", nixItemId);
         try {
             return nutritionixService.fetchById(nixItemId);
         } catch (WebApplicationException e) {
+            logger.warn("WebApplicationException for fetchById: {}", e.getMessage(), e);
             throw e; // Preserve any custom HTTP status thrown inside service
         } catch (Exception e) {
+            logger.error("Error fetching item by ID: {}", e.getMessage(), e);
             throw new WebApplicationException(
                     "Failed to fetch Nutritionix item: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY
@@ -153,15 +167,19 @@ public class NutritionixResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public List<FoodsItem> analyzeNutrients(NutrientsRequestDto req) {
         String q = req.getQuery();
+        logger.info("POST /nutritionix/foods/nutrients with query: {}", q);
         if (q == null || q.trim().isEmpty()) {
+            logger.warn("Missing query in nutrient analysis request.");
             throw new WebApplicationException("`query` must be provided",
                     Response.Status.BAD_REQUEST);
         }
         try {
             return nutritionixService.naturalNutrients(q);
         } catch (WebApplicationException e) {
+            logger.warn("WebApplicationException during nutrient analysis: {}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
+            logger.error("Error during nutrient analysis: {}", e.getMessage(), e);
             throw new WebApplicationException("Failed to analyze nutrients: " + e.getMessage(),
                     Response.Status.BAD_GATEWAY);
         }

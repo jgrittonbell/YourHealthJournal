@@ -2,6 +2,8 @@ package com.grittonbelldev.service;
 
 import com.grittonbelldev.dto.nutritionix.*;
 import com.grittonbelldev.persistence.NutritionixDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.NotFoundException;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
  */
 public class NutritionixService {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     private final NutritionixDao dao;
 
     /**
@@ -26,6 +30,7 @@ public class NutritionixService {
      * @param appKey Nutritionix Application Key
      */
     public NutritionixService(String appId, String appKey) {
+        logger.debug("Initializing NutritionixService with appId: {}", appId);
         this.dao = new NutritionixDao(appId, appKey);
     }
 
@@ -36,7 +41,11 @@ public class NutritionixService {
      * @return DTO containing both common and branded search results
      */
     public NutritionixSearchResponseDto searchAll(String query) {
-        return dao.searchInstant(query);
+        logger.info("Performing full Nutritionix search for query: '{}'", query);
+        NutritionixSearchResponseDto result = dao.searchInstant(query);
+        logger.debug("Received {} common and {} branded results",
+                result.getCommon().size(), result.getBranded().size());
+        return result;
     }
 
     /**
@@ -47,7 +56,10 @@ public class NutritionixService {
      * @return list of common food entries
      */
     public List<CommonItem> searchCommon(String query) {
-        return dao.getCommon(query);
+        logger.info("Searching for common food items with query: '{}'", query);
+        List<CommonItem> results = dao.getCommon(query);
+        logger.debug("Found {} common items", results.size());
+        return results;
     }
 
     /**
@@ -58,7 +70,10 @@ public class NutritionixService {
      * @return list of branded food entries
      */
     public List<BrandedItem> searchBranded(String query) {
-        return dao.getBranded(query);
+        logger.info("Searching for branded food items with query: '{}'", query);
+        List<BrandedItem> results = dao.getBranded(query);
+        logger.debug("Found {} branded items", results.size());
+        return results;
     }
 
     /**
@@ -69,10 +84,14 @@ public class NutritionixService {
      * @throws NotFoundException if no item is found
      */
     public FoodsItem fetchById(String nixItemId) {
+        logger.info("Fetching Nutritionix item by ID: {}", nixItemId);
         FoodResponse detail = dao.fetchById(nixItemId);
         return detail.getFoods().stream()
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException("Item not found: " + nixItemId));
+                .orElseThrow(() -> {
+                    logger.warn("No item found for Nutritionix ID: {}", nixItemId);
+                    return new NotFoundException("Item not found: " + nixItemId);
+                });
     }
 
     /**
@@ -84,11 +103,14 @@ public class NutritionixService {
      * @throws NotFoundException if Nutritionix returns an empty list
      */
     public List<FoodsItem> naturalNutrients(String query) {
+        logger.info("Analyzing natural nutrient string: '{}'", query);
         FoodResponse resp = dao.naturalNutrients(query);
         List<FoodsItem> foods = resp.getFoods();
         if (foods.isEmpty()) {
+            logger.error("No nutrients found for input: '{}'", query);
             throw new NotFoundException("No nutrient data found for: " + query);
         }
+        logger.debug("Parsed {} food items from natural language input", foods.size());
         return foods;
     }
 }

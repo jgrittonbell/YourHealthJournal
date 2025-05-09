@@ -2,6 +2,8 @@ package com.grittonbelldev.service;
 
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
  * It abstracts persistence logic using a generic DAO layer.</p>
  */
 public class UserService {
+
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
 
     // DAO instance for User entities
     private final GenericDAO<User> userDao = new GenericDAO<>(User.class);
@@ -29,12 +34,16 @@ public class UserService {
      * @return the existing or newly created User
      */
     public User findOrCreateByCognitoId(String cognitoSub, String email) {
+        logger.info("Looking up user by Cognito ID: {}", cognitoSub);
+
         List<User> found = userDao.getByPropertyEqual("cognitoId", cognitoSub);
         if (!found.isEmpty()) {
+            logger.debug("User found with Cognito ID: {}", cognitoSub);
             return found.get(0);
         }
 
         // This is a new user, so create one with required default values
+        logger.info("No user found. Creating new user with Cognito ID: {}", cognitoSub);
         User u = new User();
         u.setCognitoId(cognitoSub);
         u.setEmail(email);
@@ -51,6 +60,7 @@ public class UserService {
      * @return the User entity or null if not found
      */
     public User getById(long id) {
+        logger.debug("Retrieving user by ID: {}", id);
         return userDao.getById(id);
     }
 
@@ -68,14 +78,26 @@ public class UserService {
      * @throws IllegalArgumentException if the user does not exist
      */
     public User updateProfile(long id, String firstName, String lastName, String email) {
+        logger.info("Attempting to update user profile. ID: {}, firstName: {}, lastName: {}, email: {}", id, firstName, lastName, email);
         User u = userDao.getById(id);
         if (u == null) {
+            logger.warn("User with ID {} not found. Update aborted.", id);
             throw new IllegalArgumentException("User not found: " + id);
         }
-        if (firstName != null) u.setFirstName(firstName);
-        if (lastName  != null) u.setLastName(lastName);
-        if (email     != null) u.setEmail(email);
+        if (firstName != null) {
+            logger.debug("Updating first name to '{}'", firstName);
+            u.setFirstName(firstName);
+        }
+        if (lastName != null) {
+            logger.debug("Updating last name to '{}'", lastName);
+            u.setLastName(lastName);
+        }
+        if (email != null) {
+            logger.debug("Updating email to '{}'", email);
+            u.setEmail(email);
+        }
         userDao.update(u);
+        logger.info("User profile updated successfully for ID {}", id);
         return u;
     }
 }

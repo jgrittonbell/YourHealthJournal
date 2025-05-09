@@ -56,7 +56,7 @@
 | 4/02/25 | Added new dependency that Paula found that fixed API and SLF4J Errors                           | 2     |       |
 | 4/03/25 | Debugging turning my back-end into an API to be consumed by front-end                           | 4     |       |
 | 4/04/25 | Debugging AWS elastic Beanstalk resulting in a reset of the service                             | 8     |       |
-| 4/07/25 | Created Controlers and JSPs to align with an MVP to use servlets and jsps instead of API        | 2     |       |
+| 4/07/25 | Created Controllers and JSPs to align with an MVP to use servlets and jsps instead of API       | 2     |       |
 | 4/08/25 | Met with Paula and got AWS Beanstalk and RDS working again                                      | 0.5   |       |
 | 4/08/25 | Removed custom hibernate config and used more standard hibernate.cfg.xml instead                | 2     |       |
 | 4/23/25 | Branched and started planning out API again...                                                  | 4     |       |
@@ -68,6 +68,9 @@
 | 5/03/25 | Lots of Debugging with AWS EBS Debugging, Reading logs Postman testing and CorsFilter Revisions | 10    |       |
 | 5/04/25 | Testing endpoints with postman and Angular app, Researched and tried EB configurations          | 4     |       |
 | 5/07/25 | Updated Java Docs and trimmed out old or unused classes                                         | 4     |       |
+| 5/08/25 | Did Code Peer Review for Classmate Jake Cipri                                                   | 1.5   |       |
+| 5/09/25 | Added more logging statements through out the API Resources and Service Classes                 | 1.5   |       |
+| 5/09/25 | Updated the FoodEntry and FoodResponse to cover all the attributes to the food entity           | 2     |       |
 
 
 

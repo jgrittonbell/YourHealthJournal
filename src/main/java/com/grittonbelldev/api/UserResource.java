@@ -3,6 +3,8 @@ package com.grittonbelldev.api;
 import com.grittonbelldev.dto.UserDto;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -24,6 +26,8 @@ import java.security.Principal;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     // Injected security context used to determine the identity of the authenticated user
     @Context
     private SecurityContext securityContext;
@@ -41,8 +45,11 @@ public class UserResource {
     @Path("me")
     public UserDto getMyProfile() {
         long userId = getCurrentUserId();
+        logger.info("Fetching profile for user ID {}", userId);
+
         User user = userService.getById(userId);
         if (user == null) {
+            logger.warn("User not found: ID {}", userId);
             throw new WebApplicationException("User not found", Response.Status.NOT_FOUND);
         }
         return toDto(user);
@@ -59,12 +66,15 @@ public class UserResource {
     @Path("me")
     public UserDto updateMyProfile(UserDto dto) {
         long userId = getCurrentUserId();
+        logger.info("Updating profile for user ID {} with firstName='{}', lastName='{}', email='{}'",
+                userId, dto.getFirstName(), dto.getLastName(), dto.getEmail());
         User updated = userService.updateProfile(
                 userId,
                 dto.getFirstName(),
                 dto.getLastName(),
                 dto.getEmail()
         );
+        logger.debug("User profile updated successfully for ID {}", userId);
         return toDto(updated);
     }
 
@@ -78,11 +88,13 @@ public class UserResource {
     private long getCurrentUserId() {
         Principal p = securityContext.getUserPrincipal();
         if (p == null) {
+            logger.error("Access denied: no authenticated user found.");
             throw new WebApplicationException("Not authenticated", Response.Status.UNAUTHORIZED);
         }
         try {
             return Long.parseLong(p.getName());
         } catch (NumberFormatException e) {
+            logger.error("Malformed principal name: '{}'", p.getName());
             throw new WebApplicationException("Invalid principal", Response.Status.INTERNAL_SERVER_ERROR);
         }
     }

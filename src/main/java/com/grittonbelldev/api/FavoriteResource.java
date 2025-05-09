@@ -3,6 +3,8 @@ package com.grittonbelldev.api;
 import com.grittonbelldev.dto.FoodResponseDto;
 import com.grittonbelldev.dto.MealResponseDto;
 import com.grittonbelldev.service.FavoriteService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -31,6 +33,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class FavoriteResource {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     @Context
     private SecurityContext securityContext;
 
@@ -47,11 +51,15 @@ public class FavoriteResource {
     private long currentUserId() {
         Principal p = securityContext.getUserPrincipal();
         if (p == null) {
+            logger.error("User is not authenticated: SecurityContext.getUserPrincipal() returned null.");
             throw new WebApplicationException("Not authenticated", Response.Status.UNAUTHORIZED);
         }
         try {
-            return Long.parseLong(p.getName());
+            long userId = Long.parseLong(p.getName());
+            logger.debug("Authenticated user ID: {}", userId);
+            return userId;
         } catch (NumberFormatException e) {
+            logger.error("Invalid principal value: {}", p.getName(), e);
             throw new WebApplicationException("Invalid user principal", Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -67,7 +75,9 @@ public class FavoriteResource {
     @Path("meals/{mealId}")
     public Response favoriteMeal(@PathParam("mealId") Long mealId) {
         long userId = currentUserId();
+        logger.info("POST /api/favorites/meals/{} by user {}", mealId, userId);
         favoriteService.favoriteMealForUser(userId, mealId);
+        logger.debug("Meal {} favorited for user {}", mealId, userId);
         return Response.ok().build();
     }
 
@@ -82,7 +92,9 @@ public class FavoriteResource {
     @Path("meals/{mealId}")
     public Response unfavoriteMeal(@PathParam("mealId") Long mealId) {
         long userId = currentUserId();
+        logger.info("DELETE /api/favorites/meals/{} by user {}", mealId, userId);
         favoriteService.unfavoriteMealForUser(userId, mealId);
+        logger.debug("Meal {} unfavorited for user {}", mealId, userId);
         return Response.noContent().build();
     }
 
@@ -97,7 +109,9 @@ public class FavoriteResource {
     @Path("foods/{foodId}")
     public Response favoriteFood(@PathParam("foodId") Long foodId) {
         long userId = currentUserId();
+        logger.info("POST /api/favorites/foods/{} by user {}", foodId, userId);
         favoriteService.favoriteFoodForUser(userId, foodId);
+        logger.debug("Food {} favorited for user {}", foodId, userId);
         return Response.ok().build();
     }
 
@@ -112,7 +126,9 @@ public class FavoriteResource {
     @Path("foods/{foodId}")
     public Response unfavoriteFood(@PathParam("foodId") Long foodId) {
         long userId = currentUserId();
+        logger.info("DELETE /api/favorites/foods/{} by user {}", foodId, userId);
         favoriteService.unfavoriteFoodForUser(userId, foodId);
+        logger.debug("Food {} unfavorited for user {}", foodId, userId);
         return Response.noContent().build();
     }
 
@@ -125,7 +141,11 @@ public class FavoriteResource {
     @GET
     @Path("meals")
     public List<MealResponseDto> listFavoriteMeals() {
-        return favoriteService.listFavoriteMeals(currentUserId());
+        long userId = currentUserId();
+        logger.info("GET /api/favorites/meals requested by user {}", userId);
+        List<MealResponseDto> meals = favoriteService.listFavoriteMeals(userId);
+        logger.debug("Found {} favorite meals for user {}", meals.size(), userId);
+        return meals;
     }
 
     /**
@@ -137,6 +157,10 @@ public class FavoriteResource {
     @GET
     @Path("foods")
     public List<FoodResponseDto> listFavoriteFoods() {
-        return favoriteService.listFavoriteFoods(currentUserId());
+        long userId = currentUserId();
+        logger.info("GET /api/favorites/foods requested by user {}", userId);
+        List<FoodResponseDto> foods = favoriteService.listFavoriteFoods(userId);
+        logger.debug("Found {} favorite foods for user {}", foods.size(), userId);
+        return foods;
     }
 }

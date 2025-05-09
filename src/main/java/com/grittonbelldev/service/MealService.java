@@ -8,6 +8,8 @@ import com.grittonbelldev.entity.FoodMealJournal;
 import com.grittonbelldev.entity.Meal;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -23,6 +25,9 @@ import java.util.stream.Collectors;
  */
 public class MealService {
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
+
     // DAOs for working with Meal, FoodMealJournal, Food, and User entities
     private final GenericDAO<Meal> mealDao = new GenericDAO<>(Meal.class);
     private final GenericDAO<FoodMealJournal> fmjDao = new GenericDAO<>(FoodMealJournal.class);
@@ -36,9 +41,12 @@ public class MealService {
      * @return a list of MealResponseDto representing each meal
      */
     public List<MealResponseDto> listAllForUser(long userId) {
-        return mealDao.getByPropertyEqual("user.id", userId).stream()
+        logger.info("Listing all meals for user {}", userId);
+        List<MealResponseDto> results = mealDao.getByPropertyEqual("user.id", userId).stream()
                 .map(this::toResponseDto)
                 .collect(Collectors.toList());
+        logger.debug("Found {} meals for user {}", results.size(), userId);
+        return results;
     }
 
     /**
@@ -50,10 +58,13 @@ public class MealService {
      * @throws WebApplicationException if the meal does not exist or does not belong to the user
      */
     public MealResponseDto findForUser(long userId, long mealId) {
+        logger.info("Fetching meal {} for user {}", mealId, userId);
         Meal meal = mealDao.getById(mealId);
         if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+            logger.warn("Meal {} not found or does not belong to user {}", mealId, userId);
             throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
+        logger.debug("Meal {} found for user {}", mealId, userId);
         return toResponseDto(meal);
     }
 
@@ -66,8 +77,10 @@ public class MealService {
      * @throws WebApplicationException if the user or any food entries are invalid
      */
     public MealResponseDto createForUser(long userId, MealRequestDto dto) {
+        logger.info("Creating meal for user {}", userId);
         User user = userDao.getById(userId);
         if (user == null) {
+            logger.error("User {} not found during meal creation", userId);
             throw new WebApplicationException("User not found", Response.Status.NOT_FOUND);
         }
 
@@ -76,11 +89,14 @@ public class MealService {
         meal.setMealName(dto.getMealName());
         meal.setTimeEaten(dto.getTimeEaten());
         mealDao.insert(meal);
+        logger.debug("Inserted meal with ID {}", meal.getId());
 
         if (dto.getFoods() != null) {
+            logger.debug("Adding {} food entries to meal {}", dto.getFoods().size(), meal.getId());
             for (FoodEntryDto fe : dto.getFoods()) {
                 Food food = foodDao.getById(fe.getFoodId());
                 if (food == null) {
+                    logger.error("Food ID {} not found during meal creation", fe.getFoodId());
                     throw new WebApplicationException(
                             "Food not found: " + fe.getFoodId(),
                             Response.Status.BAD_REQUEST
@@ -104,13 +120,17 @@ public class MealService {
      * @throws WebApplicationException if the meal does not exist or does not belong to the user
      */
     public MealResponseDto updateForUser(long userId, long mealId, MealRequestDto dto) {
+        logger.info("Updating meal {} for user {}", mealId, userId);
         Meal meal = mealDao.getById(mealId);
         if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+            logger.warn("Meal {} not found or does not belong to user {}", mealId, userId);
             throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
+
         meal.setMealName(dto.getMealName());
         meal.setTimeEaten(dto.getTimeEaten());
         mealDao.update(meal);
+        logger.debug("Meal {} updated for user {}", mealId, userId);
         return toResponseDto(meal);
     }
 
@@ -122,11 +142,15 @@ public class MealService {
      * @throws WebApplicationException if the meal is not found or not owned by the user
      */
     public void deleteForUser(long userId, long mealId) {
+        logger.info("Deleting meal {} for user {}", mealId, userId);
         Meal meal = mealDao.getById(mealId);
         if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+            logger.warn("Meal {} not found or does not belong to user {}", mealId, userId);
             throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
+
         mealDao.delete(meal);
+        logger.debug("Meal {} deleted", mealId);
     }
 
 
@@ -142,17 +166,33 @@ public class MealService {
         r.setMealName(meal.getMealName());
         r.setTimeEaten(meal.getTimeEaten());
 
-        // Map each food entry to its corresponding DTO representation
+        // Map each food entry with full nutritional info
         List<FoodEntryDto> foods = meal.getFoodMealEntries().stream()
                 .map(e -> {
+                    Food f = e.getFood();
                     FoodEntryDto fe = new FoodEntryDto();
-                    fe.setFoodId(e.getFood().getId());
+                    fe.setFoodId(f.getId());
+                    fe.setFoodName(f.getFoodName());
                     fe.setServingSize(e.getServingSize());
+                    fe.setCalories(f.getCalories());
+                    fe.setProtein(f.getProtein());
+                    fe.setCarbs(f.getCarbs());
+                    fe.setFat(f.getFat());
+                    fe.setCholesterol(f.getCholesterol());
+                    fe.setSodium(f.getSodium());
+                    fe.setFiber(f.getFiber());
+                    fe.setSugar(f.getSugar());
+                    fe.setAddedSugar(f.getAddedSugar());
+                    fe.setVitaminD(f.getVitaminD());
+                    fe.setCalcium(f.getCalcium());
+                    fe.setIron(f.getIron());
+                    fe.setPotassium(f.getPotassium());
+                    fe.setNotes(f.getNotes());
                     return fe;
                 })
                 .collect(Collectors.toList());
-        r.setFoods(foods);
 
+        r.setFoods(foods);
         return r;
     }
 }

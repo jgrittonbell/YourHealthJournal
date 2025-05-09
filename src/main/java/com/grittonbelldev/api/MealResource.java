@@ -3,6 +3,8 @@ package com.grittonbelldev.api;
 import com.grittonbelldev.dto.MealRequestDto;
 import com.grittonbelldev.dto.MealResponseDto;
 import com.grittonbelldev.service.MealService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -33,6 +35,8 @@ public class MealResource {
     @Context
     private SecurityContext securityContext;
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     // Handles business logic for meal operations
     private final MealService mealService = new MealService();
 
@@ -45,11 +49,15 @@ public class MealResource {
     private long currentUserId() {
         Principal p = securityContext.getUserPrincipal();
         if (p == null) {
+            logger.error("User is not authenticated: SecurityContext.getUserPrincipal() returned null.");
             throw new WebApplicationException("Not authenticated", Response.Status.UNAUTHORIZED);
         }
         try {
+            long userId = Long.parseLong(p.getName());
+            logger.debug("Authenticated user ID: {}", userId);
             return Long.parseLong(p.getName());
         } catch (NumberFormatException e) {
+            logger.error("Invalid principal format: {}", p.getName(), e);
             throw new WebApplicationException("Invalid user principal", Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -63,7 +71,10 @@ public class MealResource {
     @GET
     public List<MealResponseDto> listAll() {
         long userId = currentUserId();
-        return mealService.listAllForUser(userId);
+        logger.info("GET /api/meals requested by user {}", userId);
+        List<MealResponseDto> meals = mealService.listAllForUser(userId);
+        logger.debug("Found {} meals for user {}", meals.size(), userId);
+        return meals;
     }
 
     /**
@@ -77,7 +88,10 @@ public class MealResource {
     @Path("{id}")
     public MealResponseDto getById(@PathParam("id") Long id) {
         long userId = currentUserId();
-        return mealService.findForUser(userId, id);
+        logger.info("GET /api/meals/{} requested by user {}", id, userId);
+        MealResponseDto meal = mealService.findForUser(userId, id);
+        logger.debug("Meal {} retrieved for user {}", id, userId);
+        return meal;
     }
 
     /**
@@ -91,10 +105,12 @@ public class MealResource {
     @POST
     public Response create(MealRequestDto dto, @Context UriInfo uriInfo) {
         long userId = currentUserId();
+        logger.info("POST /api/meals by user {}: {}", userId, dto);
         MealResponseDto created = mealService.createForUser(userId, dto);
         URI uri = uriInfo.getAbsolutePathBuilder()
                 .path(created.getId().toString())
                 .build();
+        logger.debug("Meal created with ID {} for user {}", created.getId(), userId);
         return Response.created(uri)
                 .entity(created)
                 .build();
@@ -115,7 +131,10 @@ public class MealResource {
             MealRequestDto dto
     ) {
         long userId = currentUserId();
-        return mealService.updateForUser(userId, id, dto);
+        logger.info("PUT /api/meals/{} by user {}", id, userId);
+        MealResponseDto updated = mealService.updateForUser(userId, id, dto);
+        logger.debug("Meal {} updated for user {}", id, userId);
+        return updated;
     }
 
     /**
@@ -128,6 +147,8 @@ public class MealResource {
     @Path("{id}")
     public void delete(@PathParam("id") Long id) {
         long userId = currentUserId();
+        logger.info("DELETE /api/meals/{} by user {}", id, userId);
         mealService.deleteForUser(userId, id);
+        logger.debug("Meal {} deleted for user {}", id, userId);
     }
 }
