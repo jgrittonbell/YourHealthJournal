@@ -1,5 +1,6 @@
 package com.grittonbelldev.util;
 
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
@@ -37,6 +38,7 @@ public class SecretsManagerUtil {
     public static Map<String, String> getSecretAsMap(String secretName) {
         try (SecretsManagerClient client = SecretsManagerClient.builder()
                 .region(REGION)
+                .credentialsProvider(ProfileCredentialsProvider.create()) // This uses the local credentials provider which must be set
                 .build()) {
 
             logger.info("Attempting to fetch secret '{}' from AWS Secrets Manager in region {}", secretName, REGION);

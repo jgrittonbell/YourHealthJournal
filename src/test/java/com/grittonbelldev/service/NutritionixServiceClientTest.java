@@ -3,6 +3,8 @@ package com.grittonbelldev.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -10,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.*;
-
+@Disabled
 public class NutritionixServiceClientTest {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -19,6 +21,7 @@ public class NutritionixServiceClientTest {
     private static final String APP_ID  = System.getenv("nutritionixID");
     private static final String APP_KEY = System.getenv("nutritionixKey");
 
+    @Disabled
     @Test
     public void testInstantSearchEndpoint() {
         assertNotNull("nutritionixID must be set",  APP_ID);

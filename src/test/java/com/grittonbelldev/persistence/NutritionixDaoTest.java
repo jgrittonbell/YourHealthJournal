@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import javax.ws.rs.ProcessingException;
 import java.util.List;
@@ -18,6 +19,7 @@ import static org.junit.Assert.*;
  *   • nutritionixID
  *   • nutritionixKey
  */
+@Disabled
 public class NutritionixDaoTest {
     private static final Logger logger = LogManager.getLogger(NutritionixDaoTest.class);
 
@@ -34,6 +36,7 @@ public class NutritionixDaoTest {
         dao = new NutritionixDao(appId, appKey);
     }
 
+    @Disabled
     @Test
     public void testSearchInstantReturnsCommonAndBranded() {
         NutritionixSearchResponseDto resp = dao.searchInstant("banana");
@@ -53,6 +56,7 @@ public class NutritionixDaoTest {
         }
     }
 
+    @Disabled
     @Test
     public void testGetCommonConvenience() {
         List<CommonItem> common = dao.getCommon("apple");
@@ -61,6 +65,7 @@ public class NutritionixDaoTest {
         assertTrue(common.get(0).getFoodName().toLowerCase().contains("apple"));
     }
 
+    @Disabled
     @Test
     public void testGetBrandedConvenience() {
         List<BrandedItem> branded = dao.getBranded("coke");
@@ -68,6 +73,7 @@ public class NutritionixDaoTest {
         // may legitimately be empty if Nutritionix has no match, but must not be null
     }
 
+    @Disabled
     @Test
     public void testFetchByIdReturnsOneFood() {
         // Use a known branded-item ID; replace with a valid one if needed
@@ -86,12 +92,14 @@ public class NutritionixDaoTest {
         logger.info("Fetched [{}] → {} kcal", item.getFoodName(), item.getNfCalories());
     }
 
+    @Disabled
     @Test(expected = RuntimeException.class)
     public void testFetchByIdWithInvalidIdThrows() {
         // Should produce a 4xx/5xx and thus a RuntimeException
         dao.fetchById("nonexistent-item-id-xyz");
     }
 
+    @Disabled
     @Test
     public void testNaturalNutrientsBanana() {
         // naturalNutrients should give you one FoodsItem describing "banana"
@@ -111,6 +119,7 @@ public class NutritionixDaoTest {
                 banana.getServingWeightGrams(), banana.getNfCalories());
     }
 
+    @Disabled
     @Test(expected = RuntimeException.class)
     public void testNaturalNutrientsWithEmptyQueryThrows() {
         // Sending an empty or missing query should error out
