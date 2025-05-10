@@ -17,7 +17,7 @@ public class FoodEntryDto {
     /**
      * The ID of the food entity.
      */
-    @NotNull
+
     @JsonProperty("foodId")
     private Long foodId;
 
