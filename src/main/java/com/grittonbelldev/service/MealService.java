@@ -155,27 +155,107 @@ public class MealService {
 
 
     /**
-     * Updates a meal's name and time if it belongs to the user.
+     * Updates a meal and its associated food entries if it belongs to the given user.
      *
-     * @param userId the user's ID
-     * @param mealId the meal's ID
-     * @param dto the updated meal data
-     * @return the updated MealResponseDto
-     * @throws WebApplicationException if the meal does not exist or does not belong to the user
+     * @param userId The ID of the user making the request
+     * @param mealId The ID of the meal to update
+     * @param dto The updated meal data
+     * @return The updated MealResponseDto
+     * @throws WebApplicationException If the meal does not exist or does not belong to the user
      */
     public MealResponseDto updateForUser(long userId, long mealId, MealRequestDto dto) {
         logger.info("Updating meal {} for user {}", mealId, userId);
-        Meal meal = mealDao.getById(mealId);
-        if (meal == null || meal.getUser() == null || meal.getUser().getId() != userId) {
+
+        // Fetch and validate the meal
+        Meal mealToUpdate = mealDao.getById(mealId);
+        if (mealToUpdate == null || mealToUpdate.getUser() == null || mealToUpdate.getUser().getId() != userId) {
             logger.warn("Meal {} not found or does not belong to user {}", mealId, userId);
             throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
 
-        meal.setMealName(dto.getMealName());
-        meal.setTimeEaten(dto.getTimeEaten());
-        mealDao.update(meal);
-        logger.debug("Meal {} updated for user {}", mealId, userId);
-        return toResponseDto(meal);
+        // Update top-level fields
+        mealToUpdate.setMealName(dto.getMealName());
+        mealToUpdate.setTimeEaten(dto.getTimeEaten());
+        mealDao.update(mealToUpdate);
+        logger.debug("Updated meal {} fields: name='{}', timeEaten='{}'",
+                mealId, dto.getMealName(), dto.getTimeEaten());
+
+        // Remove all existing food journal entries linked to this meal
+        List<FoodMealJournal> existingFoodLinks = mealToUpdate.getFoodMealEntries();
+        for (FoodMealJournal journalEntry : existingFoodLinks) {
+            fmjDao.delete(journalEntry);
+        }
+        logger.debug("Deleted {} existing FoodMealJournal entries for meal {}", existingFoodLinks.size(), mealId);
+
+        // Re-create food entries and links
+        if (dto.getFoods() != null && !dto.getFoods().isEmpty()) {
+            logger.debug("Processing {} foods from update DTO", dto.getFoods().size());
+
+            for (FoodEntryDto foodDto : dto.getFoods()) {
+                Food linkedFood;
+
+                // Case 1: Existing food entry to be updated
+                if (foodDto.getFoodId() != null) {
+                    linkedFood = foodDao.getById(foodDto.getFoodId());
+
+                    if (linkedFood == null) {
+                        logger.error("Food ID {} not found in update", foodDto.getFoodId());
+                        throw new WebApplicationException("Food not found: " + foodDto.getFoodId(), Response.Status.BAD_REQUEST);
+                    }
+
+                    // Update fields in the existing food record
+                    linkedFood.setFoodName(foodDto.getFoodName());
+                    linkedFood.setCalories(foodDto.getCalories());
+                    linkedFood.setProtein(foodDto.getProtein());
+                    linkedFood.setFat(foodDto.getFat());
+                    linkedFood.setCarbs(foodDto.getCarbs());
+                    linkedFood.setCholesterol(foodDto.getCholesterol());
+                    linkedFood.setSodium(foodDto.getSodium());
+                    linkedFood.setFiber(foodDto.getFiber());
+                    linkedFood.setSugar(foodDto.getSugar());
+                    linkedFood.setAddedSugar(foodDto.getAddedSugar());
+                    linkedFood.setVitaminD(foodDto.getVitaminD());
+                    linkedFood.setCalcium(foodDto.getCalcium());
+                    linkedFood.setIron(foodDto.getIron());
+                    linkedFood.setPotassium(foodDto.getPotassium());
+                    linkedFood.setNotes(foodDto.getNotes());
+
+                    foodDao.update(linkedFood);
+                    logger.debug("Updated food ID {} with new nutrition data", linkedFood.getId());
+
+                } else {
+                    // Case 2: New food entry to be created
+                    linkedFood = new Food();
+                    linkedFood.setFoodName(foodDto.getFoodName());
+                    linkedFood.setCalories(foodDto.getCalories());
+                    linkedFood.setProtein(foodDto.getProtein());
+                    linkedFood.setFat(foodDto.getFat());
+                    linkedFood.setCarbs(foodDto.getCarbs());
+                    linkedFood.setCholesterol(foodDto.getCholesterol());
+                    linkedFood.setSodium(foodDto.getSodium());
+                    linkedFood.setFiber(foodDto.getFiber());
+                    linkedFood.setSugar(foodDto.getSugar());
+                    linkedFood.setAddedSugar(foodDto.getAddedSugar());
+                    linkedFood.setVitaminD(foodDto.getVitaminD());
+                    linkedFood.setCalcium(foodDto.getCalcium());
+                    linkedFood.setIron(foodDto.getIron());
+                    linkedFood.setPotassium(foodDto.getPotassium());
+                    linkedFood.setNotes(foodDto.getNotes());
+
+                    foodDao.insert(linkedFood);
+                    logger.debug("Created new food entry with ID {}", linkedFood.getId());
+                }
+
+                // Link food to the updated meal
+                FoodMealJournal newLink = new FoodMealJournal(mealToUpdate, linkedFood, foodDto.getServingSize());
+                fmjDao.insert(newLink);
+                logger.debug("Linked food ID {} to meal ID {} with serving size {}",
+                        linkedFood.getId(), mealToUpdate.getId(), foodDto.getServingSize());
+            }
+        }
+
+        logger.info("Meal {} successfully updated for user {}", mealId, userId);
+        return toResponseDto(mealToUpdate);
     }
 
     /**
