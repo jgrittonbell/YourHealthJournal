@@ -1,5 +1,6 @@
 ## User Stories
-
+### Below is a text base and a diagram of the possible user interactions with this application not all of these may be implemented and it's very much a rough draft but I wanted to document my process as much as possible.
+![UserFlowDiagram](UserFlow.png)
 ### Account Management
 #### Sign Up *  
 _As a new user, I want to create an account so that I can log my meals and track my glucose levels._

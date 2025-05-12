@@ -2,6 +2,9 @@
 
 This is an independent project for Madison College's Enterprise Java Class.
 
+This is an API that serves an Angular Frontend. The source code can be found in this repo:
+https://github.com/jgrittonbell/yhj-frontend
+
 ### Problem Statement
 
 Managing nutrition and blood glucose levels is a critical yet challenging task for individuals with
@@ -15,37 +18,49 @@ for glucose monitoring. By enabling users to log meals through multiple methodsâ
 barcodes, or entering custom foodsâ€”the app will provide a streamlined experience for tracking and analyzing
 health data in one place.
 
+This project has a Java backend that uses Jackson to serve an API to a frontend written in Angular. The front end
+is in a different repo to manage version control better.
+
+The project is still being worked on and will soon be migrated to a server that better fits it's needs.
+
 ### Project Technologies/Techniques
 * Security/Authentication
     * AWS Cognito
+    * Custom JWT and Session-based authentication filters
+    * AWS Secrets Manager (Credentials stored and loaded via SDK)
 * Database
     * MySQL 8.x
+    * AWS RDS
 * ORM Framework
-    * Hibernate Version TBD
+    * Hibernate
 * Dependency Management
     * Maven
 * Web Services consumed using Java
     * Nutritionix - https://www.nutritionix.com/
-    * pydexcom - https://github.com/gagebenne/pydexcom
-* CSS
-    * Bootstrap or Materialize
+    * pydexcom - https://github.com/gagebenne/pydexcom *Moved to later version
+* FrontEnd Technologies
+    * Angular 19
+    * Bootstrap 5 (ng-bootstrap and Bootstrap-powered styling)
 * Data Validation
     * Bootstrap Validator for front end
-    * Explore Hibernate Validator?
-    * Explore Data Display Frameworks
 * Logging
     * Log4J2
 * Hosting
-    * AWS
-* Tech I'd like to explore as part of this work
-    * Amazon Rekognition
-    * MongoDB
-    * Hibernate Validator
-    * Hibernate Search
-* Project Lombok
+    * Local
+    * Planned move to VPS soon!
 * Unit Testing
     * JUnit tests to cover all testable logic
-* IDE: IntelliJ IDEA
+* Tools & IDE
+    * IntelliJ IDEA (Java)
+    * Visual Studio Code (Angular
+    * GitHub (Version Control)
+* Tech I'd like to explore in the future
+  * Amazon Rekognition
+  * Alternitive Nutrition Databases
+  * Hibernate Validator
+  * Hibernate Search
+  * Project Lombok
+  * Many More *These are just a few
 
 ### Design
 

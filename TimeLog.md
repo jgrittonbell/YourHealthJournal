@@ -73,3 +73,6 @@
 | 5/09/25 | Updated the FoodEntry and FoodResponse to cover all the attributes to the food entity           |     2 |       |   217 |
 | 5/10/25 | Live peer review with Alison Fait                                                               |     2 |       |   219 |
 | 5/10/25 | Frontend development along with working on the user flow                                        |     8 |       |   227 |
+| 5/11/25 | Frontend development along with working on Food Journal                                         |     4 |       |   231 |
+| 5/11/25 | Responding to Slack and GitHub Issues                                                           |     1 |       |   232 |
+| 5/11/25 | Updating ProjectPlan/ReadMe and planning out remaining semester as best I can!                  |     2 |       |   234 |
