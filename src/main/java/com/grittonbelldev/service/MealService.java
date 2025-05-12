@@ -86,6 +86,16 @@ public class MealService {
             throw new WebApplicationException("User not found", Response.Status.NOT_FOUND);
         }
 
+        // Validate required meal fields
+        if (dto.getMealName() == null || dto.getMealName().trim().isEmpty()) {
+            logger.warn("Missing required field: mealName");
+            throw new WebApplicationException("Meal name is required", Response.Status.BAD_REQUEST);
+        }
+        if (dto.getTimeEaten() == null) {
+            logger.warn("Missing required field: timeEaten");
+            throw new WebApplicationException("Time eaten is required", Response.Status.BAD_REQUEST);
+        }
+
         // Create and populate the new meal entity
         Meal meal = new Meal();
         meal.setUser(user);
@@ -100,43 +110,61 @@ public class MealService {
         if (dto.getFoods() != null) {
             logger.debug("Adding {} food entries to meal {}", dto.getFoods().size(), meal.getId());
 
-            for (FoodEntryDto fe : dto.getFoods()) {
+            for (FoodEntryDto foodDto : dto.getFoods()) {
+                // Validate required fields from Food and FoodMealJournal
+                if (foodDto.getServingSize() == null) {
+                    logger.warn("Missing required field: servingSize in food entry");
+                    throw new WebApplicationException("Serving size is required for each food", Response.Status.BAD_REQUEST);
+                }
+
+                if (foodDto.getFoodName() == null || foodDto.getFoodName().trim().isEmpty()) {
+                    logger.warn("Missing required field: foodName in food entry");
+                    throw new WebApplicationException("Food name is required for each food", Response.Status.BAD_REQUEST);
+                }
+
+                if (foodDto.getCalories() == null || foodDto.getFat() == null
+                        || foodDto.getProtein() == null || foodDto.getCarbs() == null) {
+                    logger.warn("Missing required nutrient values in food entry: {}", foodDto);
+                    throw new WebApplicationException("Calories, fat, protein, and carbs are required for each food", Response.Status.BAD_REQUEST);
+                }
+
                 Food food;
 
                 // If a foodId is provided, attempt to look up the existing Food
-                if (fe.getFoodId() != null) {
-                    food = foodDao.getById(fe.getFoodId());
+                if (foodDto.getFoodId() != null) {
+                    food = foodDao.getById(foodDto.getFoodId());
 
                     // If the foodId is invalid, return a 400 error
                     if (food == null) {
-                        logger.error("Food ID {} not found during meal creation", fe.getFoodId());
+                        logger.error("Food ID {} not found during meal creation", foodDto.getFoodId());
                         throw new WebApplicationException(
-                                "Food not found: " + fe.getFoodId(),
+                                "Food not found: " + foodDto.getFoodId(),
                                 Response.Status.BAD_REQUEST
                         );
                     }
 
-                    //TODO Add logic to search for existing foods to use before just creating a new one
+                    // TODO: Add logic to check for duplicate foods instead of just adding a new food each time
+
                 } else {
                     // If no foodId is provided, assume this is a new custom food and create it
                     logger.info("No foodId provided. Creating new food from entry.");
 
                     food = new Food();
-                    food.setFoodName(fe.getFoodName());
-                    food.setCalories(fe.getCalories());
-                    food.setProtein(fe.getProtein());
-                    food.setFat(fe.getFat());
-                    food.setCarbs(fe.getCarbs());
-                    food.setCholesterol(fe.getCholesterol());
-                    food.setSodium(fe.getSodium());
-                    food.setFiber(fe.getFiber());
-                    food.setSugar(fe.getSugar());
-                    food.setAddedSugar(fe.getAddedSugar());
-                    food.setVitaminD(fe.getVitaminD());
-                    food.setCalcium(fe.getCalcium());
-                    food.setIron(fe.getIron());
-                    food.setPotassium(fe.getPotassium());
-                    food.setNotes(fe.getNotes());
+                    food.setFoodName(foodDto.getFoodName());
+                    food.setCalories(foodDto.getCalories());
+                    food.setProtein(foodDto.getProtein());
+                    food.setFat(foodDto.getFat());
+                    food.setCarbs(foodDto.getCarbs());
+                    food.setCholesterol(foodDto.getCholesterol());
+                    food.setSodium(foodDto.getSodium());
+                    food.setFiber(foodDto.getFiber());
+                    food.setSugar(foodDto.getSugar());
+                    food.setAddedSugar(foodDto.getAddedSugar());
+                    food.setVitaminD(foodDto.getVitaminD());
+                    food.setCalcium(foodDto.getCalcium());
+                    food.setIron(foodDto.getIron());
+                    food.setPotassium(foodDto.getPotassium());
+                    food.setNotes(foodDto.getNotes());
 
                     // Save the newly created Food entry to the database
                     foodDao.insert(food);
@@ -144,7 +172,7 @@ public class MealService {
                 }
 
                 // Create a linking FoodMealJournal entry to associate the food with this meal
-                FoodMealJournal entry = new FoodMealJournal(meal, food, fe.getServingSize());
+                FoodMealJournal entry = new FoodMealJournal(meal, food, foodDto.getServingSize());
                 fmjDao.insert(entry);
             }
         }
@@ -173,6 +201,16 @@ public class MealService {
             throw new WebApplicationException("Meal not found", Response.Status.NOT_FOUND);
         }
 
+        // Validate required top-level fields
+        if (dto.getMealName() == null || dto.getMealName().trim().isEmpty()) {
+            logger.warn("Missing required field: mealName");
+            throw new WebApplicationException("Meal name is required", Response.Status.BAD_REQUEST);
+        }
+        if (dto.getTimeEaten() == null) {
+            logger.warn("Missing required field: timeEaten");
+            throw new WebApplicationException("Time eaten is required", Response.Status.BAD_REQUEST);
+        }
+
         // Update top-level fields
         mealToUpdate.setMealName(dto.getMealName());
         mealToUpdate.setTimeEaten(dto.getTimeEaten());
@@ -192,6 +230,24 @@ public class MealService {
             logger.debug("Processing {} foods from update DTO", dto.getFoods().size());
 
             for (FoodEntryDto foodDto : dto.getFoods()) {
+
+                // Validate required fields from Food and FoodMealJournal
+                if (foodDto.getServingSize() == null) {
+                    logger.warn("Missing required field: servingSize in food entry");
+                    throw new WebApplicationException("Serving size is required for each food", Response.Status.BAD_REQUEST);
+                }
+
+                if (foodDto.getFoodName() == null || foodDto.getFoodName().trim().isEmpty()) {
+                    logger.warn("Missing required field: foodName in food entry");
+                    throw new WebApplicationException("Food name is required for each food", Response.Status.BAD_REQUEST);
+                }
+
+                if (foodDto.getCalories() == null || foodDto.getFat() == null
+                        || foodDto.getProtein() == null || foodDto.getCarbs() == null) {
+                    logger.warn("Missing required nutrient values in food entry: {}", foodDto);
+                    throw new WebApplicationException("Calories, fat, protein, and carbs are required for each food", Response.Status.BAD_REQUEST);
+                }
+
                 Food linkedFood;
 
                 // Case 1: Existing food entry to be updated
