@@ -76,3 +76,5 @@
 | 5/11/25 | Frontend development along with working on Food Journal                                         |     4 |       |   231 |
 | 5/11/25 | Responding to Slack and GitHub Issues                                                           |     1 |       |   232 |
 | 5/11/25 | Updating ProjectPlan/ReadMe and planning out remaining semester as best I can!                  |     2 |       |   234 |
+| 5/12/25 | Frontend development added GlucoseJournal, Dashboard and connected Nutritionix endpoints        |     8 |       |   242 |
+| 5/13/25 | Frontend development Added Edit Profile and cleaned up UI                                       |     6 |       |   248 |

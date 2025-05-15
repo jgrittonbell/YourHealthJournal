@@ -21,6 +21,7 @@ import java.util.List;
  * Endpoints:
  * <ul>
  *     <li>GET    /api/meals           — list all meals for the authenticated user</li>
+ *     <li>GET    /api/meals/recent    — list meals from the last N days (default 30)</li>
  *     <li>GET    /api/meals/{id}      — get a single meal by ID if it belongs to the user</li>
  *     <li>POST   /api/meals           — create a new meal for the authenticated user</li>
  *     <li>PUT    /api/meals/{id}      — update an existing meal if it belongs to the user</li>
@@ -76,6 +77,29 @@ public class MealResource {
         logger.debug("Found {} meals for user {}", meals.size(), userId);
         return meals;
     }
+
+
+    /**
+     * GET /api/meals/recent
+     * Returns meals from the last {@code days} (default 30) for the authenticated user.
+     * <p>
+     * Used by the frontend to optimize performance and user experience by reducing
+     * large payloads when the user has months of meal history.
+     * </p>
+     *
+     * @param days Optional number of days to look back (default 30)
+     * @return List of meals from the last N days in DTO format
+     */
+    @GET
+    @Path("/recent")
+    public List<MealResponseDto> listRecentMeals(@QueryParam("days") @DefaultValue("30") int days) {
+        long userId = currentUserId();
+        logger.info("GET /api/meals/recent?days={} requested by user {}", days, userId);
+        List<MealResponseDto> meals = mealService.getMealsWithinDays(userId, days);
+        logger.debug("Found {} recent meals for user {}", meals.size(), userId);
+        return meals;
+    }
+
 
     /**
      * GET /api/meals/{id}
@@ -151,4 +175,6 @@ public class MealResource {
         mealService.deleteForUser(userId, id);
         logger.debug("Meal {} deleted for user {}", id, userId);
     }
+
+
 }

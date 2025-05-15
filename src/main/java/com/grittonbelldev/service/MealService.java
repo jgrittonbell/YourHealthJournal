@@ -8,6 +8,7 @@ import com.grittonbelldev.entity.FoodMealJournal;
 import com.grittonbelldev.entity.Meal;
 import com.grittonbelldev.entity.User;
 import com.grittonbelldev.persistence.GenericDAO;
+import com.grittonbelldev.persistence.MealDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,6 +34,8 @@ public class MealService {
     private final GenericDAO<FoodMealJournal> fmjDao = new GenericDAO<>(FoodMealJournal.class);
     private final GenericDAO<Food> foodDao = new GenericDAO<>(Food.class);
     private final GenericDAO<User> userDao = new GenericDAO<>(User.class);
+
+    private final MealDao customMealDao = new MealDao();
 
     /**
      * Returns a list of all meals owned by the given user.
@@ -331,6 +334,26 @@ public class MealService {
 
         mealDao.delete(meal);
         logger.debug("Meal {} deleted", mealId);
+    }
+
+
+
+    /**
+     * Retrieves a list of MealResponseDto objects for a given user,
+     * filtering to only include meals eaten within the last {@code days}.
+     * <p>
+     * This is used to reduce payload size and improve frontend performance
+     * by filtering older meal records from the response.
+     * </p>
+     *
+     * @param userId The internal database ID of the authenticated user
+     * @param days The number of days to look back (e.g., 30 for last 30 days)
+     * @return A list of MealResponseDto objects for recent meals
+     */
+    public List<MealResponseDto> getMealsWithinDays(Long userId, int days) {
+        return customMealDao.findMealsWithinDays(userId, days).stream()
+                .map(MealResponseDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
 

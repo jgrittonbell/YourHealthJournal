@@ -1,9 +1,12 @@
 package com.grittonbelldev.dto;
 
 import com.grittonbelldev.dto.FoodEntryDto;
+import com.grittonbelldev.entity.FoodMealJournal;
+import com.grittonbelldev.entity.Meal;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Response DTO for a meal, including its ID, name, time eaten,
@@ -106,4 +109,33 @@ public class MealResponseDto {
     public void setFoods(List<FoodEntryDto> foods) {
         this.foods = foods;
     }
+
+
+    /**
+     * Converts a Meal entity into a MealResponseDto.
+     *
+     * @param meal The Meal entity from the database
+     * @return A mapped MealResponseDto with embedded food data
+     */
+    public static MealResponseDto fromEntity(Meal meal) {
+        MealResponseDto dto = new MealResponseDto();
+        dto.setId(meal.getId());
+        dto.setMealName(meal.getMealName());
+        dto.setTimeEaten(meal.getTimeEaten());
+
+        if (meal.getFoodMealEntries() != null) {
+            dto.setFoods(
+                    meal.getFoodMealEntries().stream()
+                            .map(entry -> {
+                                FoodEntryDto foodDto = FoodEntryDto.fromEntity(entry.getFood());
+                                foodDto.setServingSize(entry.getServingSize()); // inject serving size
+                                return foodDto;
+                            })
+                            .collect(Collectors.toList())
+            );
+        }
+
+        return dto;
+    }
+
 }

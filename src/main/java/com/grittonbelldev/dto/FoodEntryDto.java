@@ -1,6 +1,7 @@
 package com.grittonbelldev.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.grittonbelldev.entity.Food;
 
 import javax.validation.constraints.NotNull;
 
@@ -425,4 +426,32 @@ public class FoodEntryDto {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    /**
+     * Maps a Food entity to a FoodEntryDto.
+     *
+     * @param food The Food entity from the database
+     * @return A corresponding FoodEntryDto for response use
+     */
+    public static FoodEntryDto fromEntity(Food food) {
+        FoodEntryDto dto = new FoodEntryDto();
+        dto.setFoodId(food.getId());
+        dto.setFoodName(food.getFoodName());
+        dto.setFat(food.getFat());
+        dto.setProtein(food.getProtein());
+        dto.setCarbs(food.getCarbs());
+        dto.setCalories(food.getCalories());
+        dto.setCholesterol(food.getCholesterol());
+        dto.setSodium(food.getSodium());
+        dto.setFiber(food.getFiber());
+        dto.setSugar(food.getSugar());
+        dto.setAddedSugar(food.getAddedSugar());
+        dto.setVitaminD(food.getVitaminD());
+        dto.setCalcium(food.getCalcium());
+        dto.setIron(food.getIron());
+        dto.setPotassium(food.getPotassium());
+        dto.setNotes(food.getNotes());
+        return dto;
+    }
+
 }
